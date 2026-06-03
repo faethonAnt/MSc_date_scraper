@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSc Deadlines — Study in Greece</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Inter',sans-serif;
+  font-size:13px;
+  background:#f8f8f7;
+  color:#1a1a1a;
+  min-height:100vh;
+}
+
+a{color:inherit;text-decoration:none}
+
+/* ── header ── */
+.hdr{
+  background:#fff;
+  border-bottom:1px solid #e8e8e6;
+  padding:0 32px;
+  height:56px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.hdr-title{font-size:15px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em}
+.hdr-sub{font-size:12px;color:#999;margin-left:2px}
+.hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+.btn{
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  font-weight:500;
+  padding:6px 14px;
+  border-radius:6px;
+  cursor:pointer;
+  border:1px solid #e0e0de;
+  background:#fff;
+  color:#444;
+  transition:border-color .12s,background .12s;
+}
+.btn:hover{border-color:#bbb;background:#fafaf9}
+.btn-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.btn-primary:hover{background:#333;border-color:#333}
+
+/* ── stats ── */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;
+  background:#e8e8e6;
+  border-bottom:1px solid #e8e8e6;
+}
+.stat{
+  background:#fff;
+  padding:20px 24px;
+}
+.stat-n{
+  font-size:28px;
+  font-weight:600;
+  line-height:1;
+  letter-spacing:-0.03em;
+  color:#1a1a1a;
+}
+.stat-n.green{color:#1a7a4a}
+.stat-n.red{color:#c0392b}
+.stat-n.orange{color:#d35400}
+.stat-l{
+  font-size:11px;
+  color:#999;
+  margin-top:4px;
+  letter-spacing:0.01em;
+}
+
+/* ── coverage ── */
+.cov{
+  background:#fff;
+  border-bottom:1px solid #e8e8e6;
+  padding:12px 32px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.cov-bar{
+  flex:1;
+  height:4px;
+  background:#f0f0ee;
+  border-radius:2px;
+  overflow:hidden;
+  display:flex;
+}
+.cb-found{background:#1a7a4a;transition:width .5s ease}
+.cb-missing{background:#e8e0d8;transition:width .5s ease}
+.cb-error{background:#e8c4b8;transition:width .5s ease}
+.cov-pct{font-size:12px;font-weight:500;color:#1a7a4a;min-width:36px;text-align:right}
+
+/* ── filters ── */
+.filters{
+  padding:12px 32px;
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+  background:#f8f8f7;
+  border-bottom:1px solid #e8e8e6;
+}
+
+input[type=text]{
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  background:#fff;
+  border:1px solid #e0e0de;
+  color:#1a1a1a;
+  padding:6px 12px;
+  border-radius:6px;
+  width:220px;
+  outline:none;
+}
+input[type=text]:focus{border-color:#999}
+input[type=text]::placeholder{color:#bbb}
+
+select{
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  background:#fff;
+  border:1px solid #e0e0de;
+  color:#1a1a1a;
+  padding:6px 10px;
+  border-radius:6px;
+  outline:none;
+  cursor:pointer;
+}
+select:focus{border-color:#999}
+
+.sep{width:1px;height:20px;background:#e0e0de;margin:0 4px}
+.count{margin-left:auto;font-size:11px;color:#bbb}
+
+/* ── table ── */
+.tbl-wrap{overflow-x:auto;padding:0 32px 48px}
+
+table{width:100%;border-collapse:collapse;min-width:980px}
+
+thead th{
+  font-size:11px;
+  font-weight:500;
+  color:#999;
+  text-align:left;
+  padding:10px 12px;
+  border-bottom:1px solid #e8e8e6;
+  white-space:nowrap;
+  cursor:pointer;
+  user-select:none;
+  letter-spacing:0.02em;
+  background:#f8f8f7;
+  position:sticky;
+  top:56px;
+}
+thead th:hover{color:#555}
+thead th.asc::after{content:' ↑';color:#1a1a1a}
+thead th.desc::after{content:' ↓';color:#1a1a1a}
+
+tbody tr{border-bottom:1px solid #f0f0ee;transition:background .08s}
+tbody tr:hover{background:#fafaf9}
+td{padding:10px 12px;vertical-align:top}
+
+.cell-uni{}
+.uni-name{font-weight:500;font-size:12px;line-height:1.35;color:#1a1a1a}
+.uni-dept{font-size:11px;color:#bbb;margin-top:2px;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.cell-prog{max-width:220px}
+.prog-name{font-size:12px;line-height:1.4;color:#1a1a1a}
+.tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.tag{
+  font-size:10px;
+  padding:2px 6px;
+  border-radius:4px;
+  border:1px solid #e8e8e6;
+  color:#888;
+  white-space:nowrap;
+  background:#fff;
+}
+.tag-city{border-color:#d4e8d4;color:#3a7a3a;background:#f4faf4}
+.tag-topic{border-color:#d4d4e8;color:#3a3a7a;background:#f4f4fa}
+
+.date{font-size:12px;font-weight:500;color:#1a1a1a;white-space:nowrap}
+.date.none{color:#e0e0de;font-weight:400}
+
+.badge{
+  display:inline-block;
+  font-size:10px;
+  font-weight:500;
+  padding:3px 8px;
+  border-radius:4px;
+  white-space:nowrap;
+  letter-spacing:0.01em;
+}
+.b-found  {background:#eef7f2;color:#1a7a4a;border:1px solid #c8e8d8}
+.b-open   {background:#eef7f2;color:#1a7a4a;border:1px solid #c8e8d8}
+.b-closed {background:#fdf2f2;color:#c0392b;border:1px solid #f0cccc}
+.b-rolling{background:#f0f4ff;color:#3a3a9a;border:1px solid #ccd4f0}
+.b-coming {background:#fff8ee;color:#c07a00;border:1px solid #f0ddb0}
+.b-missing{background:#fafaf9;color:#ccc;border:1px solid #ebebea}
+.b-error  {background:#fff8ee;color:#c07a00;border:1px solid #f0ddb0}
+
+.link-cell a{
+  font-size:11px;
+  color:#3a3a9a;
+  display:block;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:120px;
+}
+.link-cell a:hover{text-decoration:underline}
+
+.tuition{font-size:11px;color:#888;white-space:nowrap}
+.tuition.paid{color:#c07a00}
+
+.notes-cell{font-size:11px;color:#aaa;max-width:160px;line-height:1.4}
+
+/* ── pagination ── */
+.pag{
+  display:flex;
+  gap:4px;
+  justify-content:center;
+  padding:16px 32px 32px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+.pg{
+  font-family:'Inter',sans-serif;
+  font-size:11px;
+  padding:5px 10px;
+  border-radius:5px;
+  cursor:pointer;
+  border:1px solid #e0e0de;
+  background:#fff;
+  color:#888;
+}
+.pg:hover{border-color:#bbb;color:#444}
+.pg.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.pg:disabled{opacity:.35;cursor:default}
+.pg-dots{color:#ccc;font-size:11px;padding:0 4px}
+
+/* ── drop ── */
+#drop-area{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:calc(100vh - 56px);
+  padding:40px;
+}
+.drop-zone{
+  border:1px dashed #d0d0ce;
+  border-radius:12px;
+  padding:64px 48px;
+  text-align:center;
+  cursor:pointer;
+  max-width:480px;
+  width:100%;
+  background:#fff;
+  transition:border-color .15s,background .15s;
+}
+.drop-zone:hover,.drop-zone.over{border-color:#888;background:#fafaf9}
+.drop-icon{font-size:40px;margin-bottom:20px;opacity:.35}
+.drop-zone h2{font-size:16px;font-weight:600;margin-bottom:8px;color:#1a1a1a}
+.drop-zone p{font-size:12px;color:#bbb;line-height:1.6}
+
+.empty{text-align:center;padding:60px;font-size:12px;color:#bbb}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div>
+    <span class="hdr-title">MSc Application Deadlines</span>
+    <span class="hdr-sub" id="hdr-count"></span>
+  </div>
+  <div class="hdr-right">
+    <button class="btn" id="export-btn">Export CSV</button>
+    <label class="btn btn-primary" style="cursor:pointer">
+      Load results
+      <input type="file" accept=".json,.csv" id="file-input" style="display:none">
+    </label>
+  </div>
+</header>
+
+<div id="drop-area">
+  <div class="drop-zone" id="drop-zone">
+    <div class="drop-icon">📂</div>
+    <h2>Load your results</h2>
+    <p>Drop <strong>results/results.json</strong> here<br>or click "Load results" above</p>
+    <p style="margin-top:8px;color:#d0d0ce">Also accepts results.csv</p>
+  </div>
+</div>
+
+<div id="main-area" class="hidden">
+
+  <div class="stats" id="stats">
+    <div class="stat"><div class="stat-n" id="s-total">0</div><div class="stat-l">Programmes</div></div>
+    <div class="stat"><div class="stat-n green" id="s-found">0</div><div class="stat-l">Dates found</div></div>
+    <div class="stat"><div class="stat-n" id="s-missing" style="color:#aaa">0</div><div class="stat-l">No dates</div></div>
+    <div class="stat"><div class="stat-n orange" id="s-errors">0</div><div class="stat-l">Errors</div></div>
+    <div class="stat"><div class="stat-n green" id="s-pct">0%</div><div class="stat-l">Coverage</div></div>
+  </div>
+
+  <div class="cov">
+    <span style="font-size:11px;color:#bbb;white-space:nowrap">Coverage</span>
+    <div class="cov-bar">
+      <div class="cb-found" id="cb-f" style="width:0%"></div>
+      <div class="cb-missing" id="cb-m" style="width:0%"></div>
+      <div class="cb-error" id="cb-e" style="width:0%"></div>
+    </div>
+    <span class="cov-pct" id="cb-pct">0%</span>
+  </div>
+
+  <div class="filters">
+    <input type="text" id="q" placeholder="Search programme, university, city…">
+    <select id="f-status">
+      <option value="">All statuses</option>
+      <option value="found">Dates found</option>
+      <option value="open">Open</option>
+      <option value="closed">Closed</option>
+      <option value="rolling">Rolling</option>
+      <option value="coming_soon">Coming soon</option>
+      <option value="missing">No dates</option>
+      <option value="error">Errors</option>
+    </select>
+    <div class="sep"></div>
+    <select id="f-uni"><option value="">All universities</option></select>
+    <select id="f-topic"><option value="">All topics</option></select>
+    <select id="f-city"><option value="">All cities</option></select>
+    <div class="sep"></div>
+    <select id="f-sort">
+      <option value="university">Sort: University</option>
+      <option value="deadline">Sort: Deadline</option>
+      <option value="open_date">Sort: Open date</option>
+      <option value="name_en">Sort: Programme</option>
+      <option value="city">Sort: City</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th data-col="university">University</th>
+          <th data-col="name_en">Programme</th>
+          <th data-col="open_date">Opens</th>
+          <th data-col="deadline">Deadline</th>
+          <th data-col="intake">Intake</th>
+          <th data-col="application_status">Status</th>
+          <th data-col="tuition">Tuition</th>
+          <th>Apply</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <div class="empty hidden" id="empty">No results match your filters.</div>
+  </div>
+  <div class="pag" id="pag"></div>
+
+</div>
+
+<script>
+let all=[], filtered=[], sortCol='university', sortDir=1, page=1;
+const PAGE=50;
+
+function loadJSON(t){
+  try{
+    all=JSON.parse(t);
+    if(!Array.isArray(all)){alert('Expected a JSON array');return}
+    init();
+  }catch(e){alert('Parse error: '+e)}
+}
+
+function loadCSV(t){
+  const lines=t.trim().split('\n');
+  const h=csvRow(lines[0]);
+  all=lines.slice(1).map(l=>{
+    const v=csvRow(l),o={};
+    h.forEach((k,i)=>o[k.trim()]=(v[i]||'').trim());
+    return o;
+  }).filter(r=>r.name_en||r.university);
+  init();
+}
+
+function csvRow(line){
+  const r=[];let c='',q=false;
+  for(let i=0;i<line.length;i++){
+    if(line[i]==='"'){if(q&&line[i+1]==='"'){c+='"';i++;}else q=!q;}
+    else if(line[i]===','&&!q){r.push(c);c='';}
+    else c+=line[i];
+  }
+  r.push(c);return r;
+}
+
+function init(){
+  document.getElementById('drop-area').classList.add('hidden');
+  document.getElementById('main-area').classList.remove('hidden');
+  document.getElementById('hdr-count').textContent='— '+all.length+' programmes';
+  buildSelects();
+  updateStats();
+  applyFilters();
+}
+
+function buildSelects(){
+  const unis=[...new Set(all.map(r=>r.university).filter(Boolean))].sort();
+  const topics=[...new Set(all.flatMap(r=>(r.topics||'').split(';').map(t=>t.trim()).filter(Boolean)))].sort();
+  const cities=[...new Set(all.map(r=>r.city).filter(Boolean))].sort();
+  fill('f-uni',unis,'All universities');
+  fill('f-topic',topics,'All topics');
+  fill('f-city',cities,'All cities');
+}
+
+function fill(id,vals,ph){
+  const s=document.getElementById(id);
+  s.innerHTML=`<option value="">${ph}</option>`+vals.map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');
+}
+
+function updateStats(){
+  const n=all.length;
+  const f=all.filter(r=>r.found==='yes').length;
+  const e=all.filter(r=>r.scrape_status==='error').length;
+  const m=n-f-e;
+  const pct=n?Math.round(f/n*100):0;
+  document.getElementById('s-total').textContent=n;
+  document.getElementById('s-found').textContent=f;
+  document.getElementById('s-missing').textContent=m;
+  document.getElementById('s-errors').textContent=e;
+  document.getElementById('s-pct').textContent=pct+'%';
+  document.getElementById('cb-pct').textContent=pct+'%';
+  document.getElementById('cb-f').style.width=(f/n*100)+'%';
+  document.getElementById('cb-m').style.width=(m/n*100)+'%';
+  document.getElementById('cb-e').style.width=(e/n*100)+'%';
+}
+
+function applyFilters(){
+  const q=document.getElementById('q').value.toLowerCase();
+  const fs=document.getElementById('f-status').value;
+  const fu=document.getElementById('f-uni').value;
+  const ft=document.getElementById('f-topic').value;
+  const fc=document.getElementById('f-city').value;
+
+  filtered=all.filter(r=>{
+    const hay=[r.name_en,r.name_gr,r.university,r.department,r.city,r.notes,r.deadline].join(' ').toLowerCase();
+    if(q&&!hay.includes(q))return false;
+    if(fu&&r.university!==fu)return false;
+    if(fc&&r.city!==fc)return false;
+    if(ft&&!(r.topics||'').split(';').map(t=>t.trim()).includes(ft))return false;
+    if(fs){
+      if(fs==='found'&&r.found!=='yes')return false;
+      if(fs==='missing'&&(r.found==='yes'||r.scrape_status==='error'))return false;
+      if(fs==='error'&&r.scrape_status!=='error')return false;
+      if(['open','closed','rolling','coming_soon','not_mentioned'].includes(fs)&&r.application_status!==fs)return false;
+    }
+    return true;
+  });
+
+  filtered.sort((a,b)=>{
+    const va=(a[sortCol]||'').toLowerCase(),vb=(b[sortCol]||'').toLowerCase();
+    return va<vb?-sortDir:va>vb?sortDir:0;
+  });
+
+  page=1;
+  render();
+}
+
+function render(){
+  const start=(page-1)*PAGE;
+  const slice=filtered.slice(start,start+PAGE);
+  const tbody=document.getElementById('tbody');
+  const empty=document.getElementById('empty');
+
+  document.getElementById('count').textContent=filtered.length+' results';
+
+  if(!filtered.length){
+    tbody.innerHTML='';
+    empty.classList.remove('hidden');
+    document.getElementById('pag').innerHTML='';
+    return;
+  }
+  empty.classList.add('hidden');
+
+  tbody.innerHTML=slice.map(r=>{
+    const st=r.scrape_status==='error'?'error'
+            :r.scrape_status==='not_scraped'?'missing'
+            :r.found!=='yes'?'missing'
+            :r.application_status==='open'?'open'
+            :r.application_status==='closed'?'closed'
+            :r.application_status==='rolling'?'rolling'
+            :r.application_status==='coming_soon'?'coming'
+            :'found';
+
+    const stLabel={error:'Error',missing:'No dates',open:'Open',closed:'Closed',rolling:'Rolling',coming:'Coming soon',found:'Found'}[st]||st;
+    const stClass='b-'+st;
+
+    const topics=(r.topics||'').split(';').map(t=>t.trim()).filter(Boolean);
+    const topicTags=topics.slice(0,2).map(t=>`<span class="tag tag-topic">${esc(t)}</span>`).join('');
+
+    const applyLink=r.apply_url
+      ?`<a href="${esc(r.apply_url)}" target="_blank" title="${esc(r.apply_url)}">→ apply</a>`
+      :r.programme_url
+      ?`<a href="${esc(r.programme_url)}" target="_blank">→ website</a>`
+      :'<span style="color:#ddd">—</span>';
+
+    const tuitionCls=r.tuition&&r.tuition!=='Free'?'paid':'';
+
+    return `<tr>
+      <td class="cell-uni">
+        <div class="uni-name">${esc(r.university)}</div>
+        <div class="uni-dept" title="${esc(r.department)}">${esc(r.department)}</div>
+        <div style="margin-top:4px"><span class="tag tag-city">${esc(r.city)}</span></div>
+      </td>
+      <td class="cell-prog">
+        <div class="prog-name">${esc(r.name_en)}</div>
+        <div class="tags">
+          ${topicTags}
+          ${r.ects?`<span class="tag">${esc(r.ects)} ECTS</span>`:''}
+          ${r.semesters?`<span class="tag">${esc(r.semesters)} sem</span>`:''}
+        </div>
+      </td>
+      <td><span class="date${r.open_date?'':' none'}">${esc(r.open_date)||'—'}</span></td>
+      <td><span class="date${r.deadline?'':' none'}">${esc(r.deadline)||'—'}</span></td>
+      <td style="font-size:11px;color:#aaa;white-space:nowrap">${esc(r.intake)||'—'}</td>
+      <td><span class="badge ${stClass}">${stLabel}</span></td>
+      <td class="tuition ${tuitionCls}">${esc(r.tuition)||'—'}</td>
+      <td class="link-cell">${applyLink}</td>
+      <td class="notes-cell">${esc(r.notes)||''}</td>
+    </tr>`;
+  }).join('');
+
+  renderPag();
+}
+
+function renderPag(){
+  const tot=Math.ceil(filtered.length/PAGE);
+  const pag=document.getElementById('pag');
+  if(tot<=1){pag.innerHTML='';return}
+  let h=`<button class="pg" onclick="goPage(${page-1})" ${page===1?'disabled':''}>← Prev</button>`;
+  for(let i=1;i<=tot;i++){
+    if(i===1||i===tot||Math.abs(i-page)<=2){
+      h+=`<button class="pg${i===page?' on':''}" onclick="goPage(${i})">${i}</button>`;
+    }else if(Math.abs(i-page)===3){
+      h+=`<span class="pg-dots">…</span>`;
+    }
+  }
+  h+=`<button class="pg" onclick="goPage(${page+1})" ${page===tot?'disabled':''}>Next →</button>`;
+  pag.innerHTML=h;
+}
+
+window.goPage=function(n){
+  const tot=Math.ceil(filtered.length/PAGE);
+  if(n<1||n>tot)return;
+  page=n;render();
+  document.querySelector('.tbl-wrap').scrollIntoView({behavior:'smooth'});
+};
+
+function exportCSV(){
+  if(!filtered.length)return;
+  const keys=Object.keys(filtered[0]);
+  const rows=[keys.join(','),...filtered.map(r=>keys.map(k=>`"${(r[k]||'').toString().replace(/"/g,'""')}"`).join(','))];
+  const blob=new Blob([rows.join('\n')],{type:'text/csv'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='sig_deadlines.csv';
+  a.click();
+}
+
+function esc(s){
+  if(s==null)return'';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+document.getElementById('q').addEventListener('input',applyFilters);
+['f-status','f-uni','f-topic','f-city'].forEach(id=>document.getElementById(id).addEventListener('change',applyFilters));
+document.getElementById('f-sort').addEventListener('change',e=>{sortCol=e.target.value;applyFilters()});
+document.getElementById('export-btn').addEventListener('click',exportCSV);
+
+document.querySelectorAll('thead th[data-col]').forEach(th=>{
+  th.addEventListener('click',()=>{
+    const col=th.dataset.col;
+    if(sortCol===col)sortDir*=-1;
+    else{sortCol=col;sortDir=1}
+    document.querySelectorAll('thead th').forEach(t=>t.classList.remove('asc','desc'));
+    th.classList.add(sortDir===1?'asc':'desc');
+    document.getElementById('f-sort').value=col;
+    applyFilters();
+  });
+});
+
+document.getElementById('file-input').addEventListener('change',e=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>f.name.endsWith('.csv')?loadCSV(ev.target.result):loadJSON(ev.target.result);
+  r.readAsText(f);
+});
+
+const dz=document.getElementById('drop-zone');
+dz.addEventListener('click',()=>document.getElementById('file-input').click());
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over')});
+dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+dz.addEventListener('drop',e=>{
+  e.preventDefault();dz.classList.remove('over');
+  const f=e.dataTransfer.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=ev=>f.name.endsWith('.csv')?loadCSV(ev.target.result):loadJSON(ev.target.result);
+  r.readAsText(f);
+});
+</script>
+</body>
+</html>
