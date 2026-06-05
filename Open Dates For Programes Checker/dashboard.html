@@ -4,205 +4,79 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MSc Deadlines — Study in Greece</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-
-body{
-  font-family:'Inter',sans-serif;
-  font-size:13px;
-  background:#f8f8f7;
-  color:#1a1a1a;
-  min-height:100vh;
-}
-
+body{font-family:'Inter',sans-serif;font-size:13px;background:#f4f4f2;color:#1a1a1a;min-height:100vh}
 a{color:inherit;text-decoration:none}
 
-/* ── header ── */
-.hdr{
-  background:#fff;
-  border-bottom:1px solid #e8e8e6;
-  padding:0 32px;
-  height:56px;
-  display:flex;
-  align-items:center;
-  gap:16px;
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.hdr-title{font-size:15px;font-weight:600;color:#1a1a1a;letter-spacing:-0.01em}
-.hdr-sub{font-size:12px;color:#999;margin-left:2px}
+.hdr{background:#fff;border-bottom:1px solid #e5e5e3;padding:0 28px;height:52px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.hdr-logo{font-size:14px;font-weight:600;color:#1a1a1a;letter-spacing:-0.02em}
+.hdr-logo span{color:#888;font-weight:400}
 .hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center}
 
-.btn{
-  font-family:'Inter',sans-serif;
-  font-size:12px;
-  font-weight:500;
-  padding:6px 14px;
-  border-radius:6px;
-  cursor:pointer;
-  border:1px solid #e0e0de;
-  background:#fff;
-  color:#444;
-  transition:border-color .12s,background .12s;
-}
-.btn:hover{border-color:#bbb;background:#fafaf9}
+.btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:5px 12px;border-radius:6px;cursor:pointer;border:1px solid #e0e0de;background:#fff;color:#555;transition:all .12s}
+.btn:hover{border-color:#bbb;background:#fafafa}
 .btn-primary{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 .btn-primary:hover{background:#333;border-color:#333}
 
-/* ── stats ── */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:1px;
-  background:#e8e8e6;
-  border-bottom:1px solid #e8e8e6;
-}
-.stat{
-  background:#fff;
-  padding:20px 24px;
-}
-.stat-n{
-  font-size:28px;
-  font-weight:600;
-  line-height:1;
-  letter-spacing:-0.03em;
-  color:#1a1a1a;
-}
-.stat-n.green{color:#1a7a4a}
-.stat-n.red{color:#c0392b}
-.stat-n.orange{color:#d35400}
-.stat-l{
-  font-size:11px;
-  color:#999;
-  margin-top:4px;
-  letter-spacing:0.01em;
-}
+.stats-row{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:#e5e5e3;border-bottom:1px solid #e5e5e3}
+.stat{background:#fff;padding:16px 20px}
+.stat-n{font-size:24px;font-weight:600;line-height:1;letter-spacing:-0.03em}
+.stat-n.g{color:#1a7a4a}
+.stat-n.r{color:#c0392b}
+.stat-n.o{color:#c07a00}
+.stat-l{font-size:11px;color:#aaa;margin-top:3px;letter-spacing:.01em}
 
-/* ── coverage ── */
-.cov{
-  background:#fff;
-  border-bottom:1px solid #e8e8e6;
-  padding:12px 32px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-.cov-bar{
-  flex:1;
-  height:4px;
-  background:#f0f0ee;
-  border-radius:2px;
-  overflow:hidden;
-  display:flex;
-}
-.cb-found{background:#1a7a4a;transition:width .5s ease}
-.cb-missing{background:#e8e0d8;transition:width .5s ease}
-.cb-error{background:#e8c4b8;transition:width .5s ease}
-.cov-pct{font-size:12px;font-weight:500;color:#1a7a4a;min-width:36px;text-align:right}
+.cov-bar-wrap{background:#fff;border-bottom:1px solid #e5e5e3;padding:10px 28px;display:flex;align-items:center;gap:12px}
+.cov-track{flex:1;height:3px;background:#eee;border-radius:2px;display:flex;overflow:hidden}
+.cov-f{background:#1a7a4a;transition:width .5s}
+.cov-m{background:#e8e0d8;transition:width .5s}
+.cov-e{background:#f0c8b8;transition:width .5s}
+.cov-pct{font-size:11px;font-weight:600;color:#1a7a4a;min-width:32px;text-align:right}
 
-/* ── filters ── */
-.filters{
-  padding:12px 32px;
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  align-items:center;
-  background:#f8f8f7;
-  border-bottom:1px solid #e8e8e6;
-}
+.filters{padding:10px 28px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:#fff;border-bottom:1px solid #e5e5e3}
+.filters input,.filters select{font-family:'Inter',sans-serif;font-size:12px;background:#f8f8f7;border:1px solid #e5e5e3;color:#1a1a1a;padding:5px 10px;border-radius:6px;outline:none}
+.filters input{width:200px}
+.filters input:focus,.filters select:focus{border-color:#999;background:#fff}
+.sep{width:1px;height:18px;background:#e5e5e3;margin:0 2px}
+.result-count{margin-left:auto;font-size:11px;color:#bbb}
 
-input[type=text]{
-  font-family:'Inter',sans-serif;
-  font-size:12px;
-  background:#fff;
-  border:1px solid #e0e0de;
-  color:#1a1a1a;
-  padding:6px 12px;
-  border-radius:6px;
-  width:220px;
-  outline:none;
-}
-input[type=text]:focus{border-color:#999}
-input[type=text]::placeholder{color:#bbb}
+.tbl-wrap{padding:16px 28px 48px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:960px}
 
-select{
-  font-family:'Inter',sans-serif;
-  font-size:12px;
-  background:#fff;
-  border:1px solid #e0e0de;
-  color:#1a1a1a;
-  padding:6px 10px;
-  border-radius:6px;
-  outline:none;
-  cursor:pointer;
-}
-select:focus{border-color:#999}
-
-.sep{width:1px;height:20px;background:#e0e0de;margin:0 4px}
-.count{margin-left:auto;font-size:11px;color:#bbb}
-
-/* ── table ── */
-.tbl-wrap{overflow-x:auto;padding:0 32px 48px}
-
-table{width:100%;border-collapse:collapse;min-width:980px}
-
-thead th{
-  font-size:11px;
-  font-weight:500;
-  color:#999;
-  text-align:left;
-  padding:10px 12px;
-  border-bottom:1px solid #e8e8e6;
-  white-space:nowrap;
-  cursor:pointer;
-  user-select:none;
-  letter-spacing:0.02em;
-  background:#f8f8f7;
-  position:sticky;
-  top:56px;
-}
+thead th{font-size:10px;font-weight:500;color:#aaa;text-align:left;padding:8px 10px;border-bottom:1px solid #e5e5e3;white-space:nowrap;cursor:pointer;user-select:none;letter-spacing:.04em;text-transform:uppercase;background:#f4f4f2;position:sticky;top:0;z-index:10}
 thead th:hover{color:#555}
 thead th.asc::after{content:' ↑';color:#1a1a1a}
 thead th.desc::after{content:' ↓';color:#1a1a1a}
 
-tbody tr{border-bottom:1px solid #f0f0ee;transition:background .08s}
+tbody tr{border-bottom:1px solid #eeeeec;transition:background .08s}
 tbody tr:hover{background:#fafaf9}
-td{padding:10px 12px;vertical-align:top}
+td{padding:10px 10px;vertical-align:top;background:#fff}
 
-.cell-uni{}
-.uni-name{font-weight:500;font-size:12px;line-height:1.35;color:#1a1a1a}
-.uni-dept{font-size:11px;color:#bbb;margin-top:2px;max-width:170px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.uni-name{font-weight:500;font-size:12px;color:#1a1a1a;line-height:1.3}
+.uni-dept{font-size:11px;color:#ccc;margin-top:2px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.city-tag{display:inline-block;margin-top:4px;font-size:10px;padding:2px 6px;border-radius:4px;background:#f0f4ff;color:#3a3a9a;border:1px solid #dde4f8}
 
-.cell-prog{max-width:220px}
-.prog-name{font-size:12px;line-height:1.4;color:#1a1a1a}
-.tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
-.tag{
-  font-size:10px;
-  padding:2px 6px;
-  border-radius:4px;
-  border:1px solid #e8e8e6;
-  color:#888;
-  white-space:nowrap;
-  background:#fff;
-}
-.tag-city{border-color:#d4e8d4;color:#3a7a3a;background:#f4faf4}
-.tag-topic{border-color:#d4d4e8;color:#3a3a7a;background:#f4f4fa}
+.prog-name{font-size:12px;line-height:1.4;color:#1a1a1a;max-width:210px}
+.prog-tags{display:flex;flex-wrap:wrap;gap:3px;margin-top:4px}
+.ptag{font-size:10px;padding:2px 6px;border-radius:4px;border:1px solid #e5e5e3;color:#888;background:#fafaf9;white-space:nowrap}
+.ptag-topic{border-color:#dde4f8;color:#3a3a9a;background:#f0f4ff}
 
-.date{font-size:12px;font-weight:500;color:#1a1a1a;white-space:nowrap}
-.date.none{color:#e0e0de;font-weight:400}
-
-.badge{
+/* date cells — this is the key change */
+.date-cell{min-width:100px}
+.date-val{font-size:12px;font-weight:600;color:#1a1a1a;line-height:1.3;white-space:normal}
+.date-val.has-date{
+  background:#eef7f2;
+  color:#1a7a4a;
+  padding:4px 8px;
+  border-radius:5px;
+  border:1px solid #c8e8d8;
   display:inline-block;
-  font-size:10px;
-  font-weight:500;
-  padding:3px 8px;
-  border-radius:4px;
-  white-space:nowrap;
-  letter-spacing:0.01em;
 }
+.date-val.no-date{color:#ddd;font-weight:400;font-size:11px}
+
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:3px 8px;border-radius:4px;white-space:nowrap;letter-spacing:.01em}
 .b-found  {background:#eef7f2;color:#1a7a4a;border:1px solid #c8e8d8}
 .b-open   {background:#eef7f2;color:#1a7a4a;border:1px solid #c8e8d8}
 .b-closed {background:#fdf2f2;color:#c0392b;border:1px solid #f0cccc}
@@ -211,68 +85,24 @@ td{padding:10px 12px;vertical-align:top}
 .b-missing{background:#fafaf9;color:#ccc;border:1px solid #ebebea}
 .b-error  {background:#fff8ee;color:#c07a00;border:1px solid #f0ddb0}
 
-.link-cell a{
-  font-size:11px;
-  color:#3a3a9a;
-  display:block;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  max-width:120px;
-}
-.link-cell a:hover{text-decoration:underline}
-
+.apply-link a{font-size:11px;color:#3a3a9a;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:110px}
+.apply-link a:hover{text-decoration:underline}
 .tuition{font-size:11px;color:#888;white-space:nowrap}
-.tuition.paid{color:#c07a00}
+.tuition.paid{color:#c07a00;font-weight:500}
+.notes-cell{font-size:11px;color:#bbb;max-width:150px;line-height:1.4}
 
-.notes-cell{font-size:11px;color:#aaa;max-width:160px;line-height:1.4}
-
-/* ── pagination ── */
-.pag{
-  display:flex;
-  gap:4px;
-  justify-content:center;
-  padding:16px 32px 32px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-.pg{
-  font-family:'Inter',sans-serif;
-  font-size:11px;
-  padding:5px 10px;
-  border-radius:5px;
-  cursor:pointer;
-  border:1px solid #e0e0de;
-  background:#fff;
-  color:#888;
-}
+.pag{display:flex;gap:4px;justify-content:center;padding:16px 28px 32px;align-items:center;flex-wrap:wrap}
+.pg{font-family:'Inter',sans-serif;font-size:11px;padding:5px 10px;border-radius:5px;cursor:pointer;border:1px solid #e0e0de;background:#fff;color:#888}
 .pg:hover{border-color:#bbb;color:#444}
 .pg.on{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
 .pg:disabled{opacity:.35;cursor:default}
 .pg-dots{color:#ccc;font-size:11px;padding:0 4px}
 
-/* ── drop ── */
-#drop-area{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:calc(100vh - 56px);
-  padding:40px;
-}
-.drop-zone{
-  border:1px dashed #d0d0ce;
-  border-radius:12px;
-  padding:64px 48px;
-  text-align:center;
-  cursor:pointer;
-  max-width:480px;
-  width:100%;
-  background:#fff;
-  transition:border-color .15s,background .15s;
-}
+#drop-area{display:flex;align-items:center;justify-content:center;min-height:calc(100vh - 52px);padding:40px}
+.drop-zone{border:1px dashed #d0d0ce;border-radius:12px;padding:60px 48px;text-align:center;cursor:pointer;max-width:440px;width:100%;background:#fff;transition:border-color .15s,background .15s}
 .drop-zone:hover,.drop-zone.over{border-color:#888;background:#fafaf9}
-.drop-icon{font-size:40px;margin-bottom:20px;opacity:.35}
-.drop-zone h2{font-size:16px;font-weight:600;margin-bottom:8px;color:#1a1a1a}
+.drop-icon{font-size:36px;margin-bottom:18px;opacity:.3}
+.drop-zone h2{font-size:15px;font-weight:600;margin-bottom:6px}
 .drop-zone p{font-size:12px;color:#bbb;line-height:1.6}
 
 .empty{text-align:center;padding:60px;font-size:12px;color:#bbb}
@@ -283,8 +113,7 @@ td{padding:10px 12px;vertical-align:top}
 
 <header class="hdr">
   <div>
-    <span class="hdr-title">MSc Application Deadlines</span>
-    <span class="hdr-sub" id="hdr-count"></span>
+    <span class="hdr-logo">MSc Deadlines <span>— Study in Greece</span></span>
   </div>
   <div class="hdr-right">
     <button class="btn" id="export-btn">Export CSV</button>
@@ -300,26 +129,26 @@ td{padding:10px 12px;vertical-align:top}
     <div class="drop-icon">📂</div>
     <h2>Load your results</h2>
     <p>Drop <strong>results/results.json</strong> here<br>or click "Load results" above</p>
-    <p style="margin-top:8px;color:#d0d0ce">Also accepts results.csv</p>
+    <p style="margin-top:6px;color:#d0d0ce;font-size:11px">Also accepts results.csv</p>
   </div>
 </div>
 
 <div id="main-area" class="hidden">
 
-  <div class="stats" id="stats">
+  <div class="stats-row">
     <div class="stat"><div class="stat-n" id="s-total">0</div><div class="stat-l">Programmes</div></div>
-    <div class="stat"><div class="stat-n green" id="s-found">0</div><div class="stat-l">Dates found</div></div>
+    <div class="stat"><div class="stat-n g" id="s-found">0</div><div class="stat-l">Dates found</div></div>
     <div class="stat"><div class="stat-n" id="s-missing" style="color:#aaa">0</div><div class="stat-l">No dates</div></div>
-    <div class="stat"><div class="stat-n orange" id="s-errors">0</div><div class="stat-l">Errors</div></div>
-    <div class="stat"><div class="stat-n green" id="s-pct">0%</div><div class="stat-l">Coverage</div></div>
+    <div class="stat"><div class="stat-n o" id="s-errors">0</div><div class="stat-l">Errors</div></div>
+    <div class="stat"><div class="stat-n g" id="s-pct">0%</div><div class="stat-l">Coverage</div></div>
   </div>
 
-  <div class="cov">
+  <div class="cov-bar-wrap">
     <span style="font-size:11px;color:#bbb;white-space:nowrap">Coverage</span>
-    <div class="cov-bar">
-      <div class="cb-found" id="cb-f" style="width:0%"></div>
-      <div class="cb-missing" id="cb-m" style="width:0%"></div>
-      <div class="cb-error" id="cb-e" style="width:0%"></div>
+    <div class="cov-track">
+      <div class="cov-f" id="cb-f" style="width:0%"></div>
+      <div class="cov-m" id="cb-m" style="width:0%"></div>
+      <div class="cov-e" id="cb-e" style="width:0%"></div>
     </div>
     <span class="cov-pct" id="cb-pct">0%</span>
   </div>
@@ -348,7 +177,7 @@ td{padding:10px 12px;vertical-align:top}
       <option value="name_en">Sort: Programme</option>
       <option value="city">Sort: City</option>
     </select>
-    <span class="count" id="count"></span>
+    <span class="result-count" id="count"></span>
   </div>
 
   <div class="tbl-wrap">
@@ -410,7 +239,6 @@ function csvRow(line){
 function init(){
   document.getElementById('drop-area').classList.add('hidden');
   document.getElementById('main-area').classList.remove('hidden');
-  document.getElementById('hdr-count').textContent='— '+all.length+' programmes';
   buildSelects();
   updateStats();
   applyFilters();
@@ -474,8 +302,7 @@ function applyFilters(){
     return va<vb?-sortDir:va>vb?sortDir:0;
   });
 
-  page=1;
-  render();
+  page=1;render();
 }
 
 function render(){
@@ -505,39 +332,46 @@ function render(){
             :'found';
 
     const stLabel={error:'Error',missing:'No dates',open:'Open',closed:'Closed',rolling:'Rolling',coming:'Coming soon',found:'Found'}[st]||st;
-    const stClass='b-'+st;
 
     const topics=(r.topics||'').split(';').map(t=>t.trim()).filter(Boolean);
-    const topicTags=topics.slice(0,2).map(t=>`<span class="tag tag-topic">${esc(t)}</span>`).join('');
+    const topicTags=topics.slice(0,2).map(t=>`<span class="ptag ptag-topic">${esc(t)}</span>`).join('');
 
     const applyLink=r.apply_url
-      ?`<a href="${esc(r.apply_url)}" target="_blank" title="${esc(r.apply_url)}">→ apply</a>`
+      ?`<a href="${esc(r.apply_url)}" target="_blank" title="${esc(r.apply_url)}">Apply →</a>`
       :r.programme_url
-      ?`<a href="${esc(r.programme_url)}" target="_blank">→ website</a>`
+      ?`<a href="${esc(r.programme_url)}" target="_blank">Website →</a>`
       :'<span style="color:#ddd">—</span>';
 
     const tuitionCls=r.tuition&&r.tuition!=='Free'?'paid':'';
 
+    const deadlineHtml=r.deadline
+      ?`<span class="date-val has-date">${esc(r.deadline)}</span>`
+      :`<span class="date-val no-date">—</span>`;
+
+    const openHtml=r.open_date
+      ?`<span class="date-val has-date">${esc(r.open_date)}</span>`
+      :`<span class="date-val no-date">—</span>`;
+
     return `<tr>
-      <td class="cell-uni">
+      <td>
         <div class="uni-name">${esc(r.university)}</div>
         <div class="uni-dept" title="${esc(r.department)}">${esc(r.department)}</div>
-        <div style="margin-top:4px"><span class="tag tag-city">${esc(r.city)}</span></div>
+        <span class="city-tag">${esc(r.city)}</span>
       </td>
-      <td class="cell-prog">
+      <td>
         <div class="prog-name">${esc(r.name_en)}</div>
-        <div class="tags">
+        <div class="prog-tags">
           ${topicTags}
-          ${r.ects?`<span class="tag">${esc(r.ects)} ECTS</span>`:''}
-          ${r.semesters?`<span class="tag">${esc(r.semesters)} sem</span>`:''}
+          ${r.ects?`<span class="ptag">${esc(r.ects)} ECTS</span>`:''}
+          ${r.semesters?`<span class="ptag">${esc(r.semesters)} sem</span>`:''}
         </div>
       </td>
-      <td><span class="date${r.open_date?'':' none'}">${esc(r.open_date)||'—'}</span></td>
-      <td><span class="date${r.deadline?'':' none'}">${esc(r.deadline)||'—'}</span></td>
-      <td style="font-size:11px;color:#aaa;white-space:nowrap">${esc(r.intake)||'—'}</td>
-      <td><span class="badge ${stClass}">${stLabel}</span></td>
+      <td class="date-cell">${openHtml}</td>
+      <td class="date-cell">${deadlineHtml}</td>
+      <td style="font-size:11px;color:#bbb;white-space:nowrap">${esc(r.intake)||'—'}</td>
+      <td><span class="badge b-${st}">${stLabel}</span></td>
       <td class="tuition ${tuitionCls}">${esc(r.tuition)||'—'}</td>
-      <td class="link-cell">${applyLink}</td>
+      <td class="apply-link">${applyLink}</td>
       <td class="notes-cell">${esc(r.notes)||''}</td>
     </tr>`;
   }).join('');
@@ -551,11 +385,10 @@ function renderPag(){
   if(tot<=1){pag.innerHTML='';return}
   let h=`<button class="pg" onclick="goPage(${page-1})" ${page===1?'disabled':''}>← Prev</button>`;
   for(let i=1;i<=tot;i++){
-    if(i===1||i===tot||Math.abs(i-page)<=2){
+    if(i===1||i===tot||Math.abs(i-page)<=2)
       h+=`<button class="pg${i===page?' on':''}" onclick="goPage(${i})">${i}</button>`;
-    }else if(Math.abs(i-page)===3){
+    else if(Math.abs(i-page)===3)
       h+=`<span class="pg-dots">…</span>`;
-    }
   }
   h+=`<button class="pg" onclick="goPage(${page+1})" ${page===tot?'disabled':''}>Next →</button>`;
   pag.innerHTML=h;
@@ -575,7 +408,7 @@ function exportCSV(){
   const blob=new Blob([rows.join('\n')],{type:'text/csv'});
   const a=document.createElement('a');
   a.href=URL.createObjectURL(blob);
-  a.download='sig_deadlines.csv';
+  a.download='msc_deadlines.csv';
   a.click();
 }
 

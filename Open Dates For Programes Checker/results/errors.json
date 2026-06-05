@@ -1,0 +1,44 @@
+[
+  {
+    "prog_id": "996",
+    "url": "https://mahep-upatras.gr/en/",
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/\nCall log:\n  - navigating to \"https://mahep-upatras.gr/en/\", waiting until \"domcontentloaded\"\n",
+    "scraped_at": "2026-06-04T11:58:44.179918+00:00"
+  },
+  {
+    "prog_id": "1343",
+    "url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/sag",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"January 14th 2026\", \"application_deadline\": \"June 30th 2026\", \"intake_semester\": \"Academic Year 2026-27\", \"apply_button_url\": \"https://apply.maich.gr\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Online applications for the academic year 2026-2027 are open from January 14th 2026 to June 30th 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-04T12:07:04.288512+00:00"
+  },
+  {
+    "prog_id": "1644",
+    "url": "http://olympicmaster.uop.gr/",
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/\nCall log:\n  - navigating to \"http://olympicmaster.uop.gr/\", waiting until \"domcontentloaded\"\n",
+    "scraped_at": "2026-06-04T12:16:50.749820+00:00"
+  },
+  {
+    "prog_id": "996",
+    "url": "https://mahep-upatras.gr/en/",
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/\nCall log:\n  - navigating to \"https://mahep-upatras.gr/en/\", waiting until \"domcontentloaded\"\n",
+    "scraped_at": "2026-06-04T13:23:52.781571+00:00"
+  },
+  {
+    "prog_id": "1492",
+    "url": "https://europeanbusiness.law.auth.gr/",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"NA\", \"application_deadline\": \"NA\", \"intake_semester\": \"NA\", \"apply_button_url\": \"https://europeanbusiness.law.auth.gr/applyonline/\", \"has_dates_on_page\": true, \"application_status\": \"not_mentioned\", \"notes\": \"NA\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-04T13:25:00.325630+00:00"
+  },
+  {
+    "prog_id": "1343",
+    "url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/sag",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"January 14th 2026\", \"application_deadline\": \"June 30th 2026\", \"intake_semester\": \"Academic Year 2026-27\", \"apply_button_url\": \"https://apply.maich.gr\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-04T13:25:45.872877+00:00"
+  },
+  {
+    "prog_id": "1644",
+    "url": "http://olympicmaster.uop.gr/",
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/\nCall log:\n  - navigating to \"http://olympicmaster.uop.gr/\", waiting until \"domcontentloaded\"\n",
+    "scraped_at": "2026-06-04T13:29:01.818455+00:00"
+  }
+]

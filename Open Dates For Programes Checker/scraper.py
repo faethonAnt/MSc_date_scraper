@@ -19,6 +19,7 @@ import signal
 import pdfplumber
 import io
 from datetime import datetime, timezone
+from docx import Document
 from pathlib import Path
 from urllib.parse import urlparse, urljoin
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -35,6 +36,7 @@ DEFAULT_CSV     = "programmes-api_msc-programmes.csv"
 DEFAULT_MODEL   = "openai/gpt-4.1-nano"
 OUTPUT_DIR      = Path("results")
 OUTPUT_DIR.mkdir(exist_ok=True)
+ERRORS_JSON = OUTPUT_DIR / "errors.json"
 
 PASS1_JSON      = OUTPUT_DIR / "pass1_results.json"
 PASS2_JSON      = OUTPUT_DIR / "pass2_results.json"
@@ -43,21 +45,107 @@ RESULTS_CSV     = OUTPUT_DIR / "results.csv"
 LOG_FILE        = OUTPUT_DIR / "scraper.log"
 
 MAX_RETRIES     = 3
+MAX_RETRIES_PER_DOMAIN = 20
+MAX_SITEMAP_ATTEMPTS = 15
+MAX_SUFFIX_ATTEMPTS = 15
 RETRY_DELAY     = 4
 REQUEST_DELAY   = 2.0
 DEFAULT_WORKERS = 3
 
 # Common admissions/application paths
 SUBPAGE_SUFFIXES = [
-    "/admissions", "/apply", "/applications", "/how-to-apply",
-    "/prospective-students", "/entry-requirements", "/registration",
-    "/apply-now", "/application-form", "/application-process",
-    "/how-to-apply", "/fees-and-funding", "/scholarships",
-    "/open-days", "/intake", "/deadlines", "/dates",
-    "/postgraduate", "/postgraduate-admissions",
-    "/msc", "/masters", "/graduate",
-    "/αιτησεις", "/εγγραφες", "/υποβολη-αιτησης",
-    "/αιτηση", "/εγγραφη", "/προθεσμιες",
+    # English
+    "/admissions", "/admission", "/apply", "/apply-now", "/applications", "/application",
+    "/application-form", "/application-process", "/application-portal",
+    "/how-to-apply", "/how-to-apply-for", "/apply-here",
+    "/prospective-students", "/prospective", "/future-students",
+    "/entry-requirements", "/requirements", "/eligibility",
+    "/registration", "/register", "/enroll", "/enrolment", "/enrollment",
+    "/postgraduate", "/postgraduate-admissions", "/postgraduate-applications",
+    "/masters", "/msc", "/graduate", "/graduate-admissions",
+    "/fees-and-funding", "/funding", "/scholarships", "/scholarship",
+    "/deadlines", "/dates", "/intake", "/open-days", "/academic-calendar",
+    "/announcements", "/news", "/calls", "/announcement", "/call",
+    "/news-events", "/news-and-events", "/latest-news",
+    "/events", "/updates", "/notices", "/notice",
+    "/open-calls", "/call-for-applications", "/call-for-interest",
+
+    # Greek (with accents)
+    "/αιτηση", "/αίτηση", "/αιτησεις", "/αιτήσεις",
+    "/εγγραφη", "/εγγραφή", "/εγγραφες", "/εγγραφές",
+    "/προθεσμια", "/προθεσμία", "/προθεσμιες", "/προθεσμίες",
+    "/προκηρυξη", "/προκήρυξη", "/προκηρυξεις", "/προκηρύξεις",
+    "/ανακοινωση", "/ανακοίνωση", "/ανακοινωσεις", "/ανακοινώσεις",
+    "/υποβολη-αιτησης", "/υποβολή-αίτησης",
+    "/μεταπτυχιακο", "/μεταπτυχιακό",
+    "/μεταπτυχιακα", "/μεταπτυχιακά",
+    "/εισαγωγη", "/εισαγωγή",
+    "/υποψηφιοι", "/υποψήφιοι",
+    "/νεα", "/νέα", "/εκδηλωσεις", "/εκδηλώσεις",
+    "/ενδιαφερον", "/ενδιαφέρον",
+    "/προσκληση", "/πρόσκληση",
+
+    # Greeklish
+    "/aitisi", "/aitisi-eggrafi", "/aithsh", "/aithseis",
+    "/eggrafi", "/eggrafes", "/egrafes", "/eggrafe",
+    "/foitisi", "/foitites", "/foithsh", "/phoitisi", "/phitisi", "/fitiths",
+    "/metaptixiako", "/metaptixiaka", "/metaptyxiako", "/metaptyxiaka",
+    "/prokiriksi", "/prokiryxi", "/prokiriksh",
+    "/anakoinosi", "/anakoinoseis", "/anakoinwsh",
+    "/prothesmia", "/prothesmies",
+    "/eisagogi", "/eisagwgh",
+    "/ypopsifioi", "/ypopsifioi-foitites", "/nea", "/anakoinoseis", "/anakoinwseis",
+    "/prokirixeis", "/prokiryxeis",
+    "/ekdiloseis", "/prosklisi",
+]
+
+PDF_KEYWORDS = [
+    # English
+    "apply", "application", "applications", "admission", "admissions",
+    "deadline", "deadlines", "dates", "open", "opening", "intake",
+    "brochure", "prospectus", "announcement", "call", "calls",
+    "registration", "enroll", "enrolment", "requirements", "eligibility",
+    "scholarship", "funding", "academic-calendar","admission procedure", "admission calendar", "applications are open",
+    "application calls", "application period", "application submission",
+    "call for admission", "application deadline", "application for admission",
+    "new application deadline", "application deadline extension",
+    "online application", "extended deadline", "applications are now open",
+    "applications until", "announcement for applications",
+    "applications opening date", "application closing date",
+    "application deadline until", "opening of applications",
+    "new call", "deadline for submitting applications",
+    "deadline for applications",
+
+    # Greek (with accents)
+    "αιτηση", "αίτηση", "αιτησεις", "αιτήσεις",
+    "εγγραφη", "εγγραφή", "εγγραφες", "εγγραφές",
+    "προθεσμια", "προθεσμία", "προκηρυξη", "προκήρυξη",
+    "ανακοινωση", "ανακοίνωση", "μεταπτυχιακο", "μεταπτυχιακό",
+    "υποβολη", "υποβολή", "εισαγωγη", "εισαγωγή", "προκήρυξη αιτήσεων", "υποβολή αίτησης",
+    "προθεσμία υποβολής αιτήσεων",
+    "παράταση προθεσμίας υποβολής αιτήσεων",
+    "νέα παράταση προθεσμίας υποβολής αιτήσεων",
+    "πρόσκληση εκδήλωσης ενδιαφέροντος",
+
+    # Greeklish
+    "aitisi", "aithsh", "aithseis", "eggrafi", "eggrafes",
+    "foitisi", "foithsh", "phoitisi", "phitisi", "fitiths",
+    "metaptixiako", "metaptyxiako", "prokiriksi", "prokiryxi",
+    "anakoinosi", "anakoinwsh", "prothesmia", "eisagogi", "eisagwgh",
+]
+
+ANNOUNCEMENT_KEYWORDS = [
+    # English
+    "call for applications", "call for admission", "application deadline",
+    "deadline extension", "extended deadline", "applications open",
+    "applications are open", "applications now open", "admission announcement",
+    "new deadline", "application period", "intake",
+    # Greek
+    "προκήρυξη", "προκηρυξη", "παράταση", "παραταση",
+    "αιτήσεις", "αιτησεις", "υποβολή αίτησης", "υποβολη αιτησης",
+    "ανακοίνωση", "ανακοινωση",
+    # Greeklish
+    "prokiriksi", "prokiryxi", "paratasi", "anakoinosi",
 ]
 
 # Logging
@@ -96,7 +184,7 @@ Return ONLY a valid JSON object. No markdown, no code fences, no explanation.
 
 {
   "application_open_date": "Date when applications open, any format found, or null",
-  "application_deadline": "Application deadline / closing date. If multiple rounds, list all as one string. Or null.",
+  "application_deadline": "Application deadline / closing date. Look for dates in ANY format including prose sentences like 'submit by 31st August 2026' or 'applications accepted until March 2026'. If multiple rounds, list all as one string. Or null.",
   "intake_semester": "e.g. Fall 2025, September 2025, Academic Year 2025-26, or null",
   "apply_button_url": "The full absolute URL of any Apply / Apply Now / Apply Here / Start Application / Admissions button or link. Resolve relative URLs using the page domain. Return null if none found.",
   "has_dates_on_page": true,
@@ -109,6 +197,8 @@ Rules:
 - application_status values: open, closed, rolling, coming_soon, not_mentioned
 - For apply_button_url look for <a> tags with text: Apply, Apply Now, Apply Here, Start Application, Εγγραφή, Αίτηση, Υποβολή Αίτησης. If URL is relative prepend the page domain.
 - Return null for any field with no data. Never return "NA" or "N/A".
+- Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
+- has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
 """
 
 PASS2_PROMPT = """
@@ -117,7 +207,7 @@ Return ONLY a valid JSON object. No markdown, no code fences, no explanation.
 
 {
   "application_open_date": "Date when applications open or null",
-  "application_deadline": "Application deadline or null",
+  "application_deadline": "Application deadline. Look for dates in ANY format including prose sentences like 'submit by 31st August 2026' or 'applications accepted until March 2026'. Or null.",
   "intake_semester": "e.g. Fall 2025 or null",
   "portal_name": "Portal system name: Apply Texas / Slate / Embark / Common App / custom / or null",
   "requires_login": true,
@@ -129,6 +219,9 @@ Rules:
 - requires_login must be boolean true if page is a login wall or auth redirect, otherwise false.
 - Look for: deadline, opens, closes, due date, submit by, Προθεσμία, Αιτήσεις.
 - Return null for any field with no data. Never return "NA" or "N/A".
+- Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
+- has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
+
 """
 
 # CSV loading
@@ -217,13 +310,23 @@ def strip_json_fences(text: str) -> str:
 
 def unwrap_content(raw: dict) -> dict:
     """Some model responses are nested under 'content'."""
-    if isinstance(raw, dict) and set(raw.keys()) <= {"content"} and "content" in raw:
+    if isinstance(raw, dict) and "content" in raw and len(raw) == 1:
         content = raw["content"]
         if isinstance(content, str):
             try:
-                return json.loads(strip_json_fences(content))
-            except Exception:
-                pass
+                cleaned = strip_json_fences(content)
+                # fix unescaped inner quotes if needed
+                return json.loads(cleaned)
+            except json.JSONDecodeError:
+                # try extracting just the JSON object
+                match = re.search(r'\{.*\}', content, re.DOTALL)
+                if match:
+                    try:
+                        return json.loads(match.group())
+                    except Exception:
+                        pass
+        elif isinstance(content, dict):
+            return content
     return raw
 
 
@@ -272,7 +375,12 @@ def scrape_url(url: str, prompt: str, graph_config: dict, SmartScraperGraph) -> 
             log.warning(f"[attempt {attempt}/{MAX_RETRIES}] Error on {url}: {e}")
 
         if attempt < MAX_RETRIES:
-            time.sleep(RETRY_DELAY * attempt)
+            if "429" in str(last_error) or "rate_limit" in str(last_error):
+                wait = 60
+                log.info(f"  Rate limit hit, waiting {wait}s before retry...")
+                time.sleep(wait)
+            else:
+                time.sleep(RETRY_DELAY * attempt)
 
     log.error(f"FAILED after {MAX_RETRIES} attempts: {url} — {last_error}")
     return {"status": "error", "error": last_error}
@@ -284,16 +392,37 @@ def try_subpages(base_url: str, prompt: str, graph_config: dict, SmartScraperGra
 
     sitemap_urls = fetch_sitemap_urls(base_url)
     suffix_urls = [base.rstrip("/") + s for s in SUBPAGE_SUFFIXES]
-    
+
     all_urls = list(dict.fromkeys(sitemap_urls + suffix_urls))
+
+    sitemap_count = 0
+    suffix_count = 0
+    total_count = 0
 
     for url in all_urls:
         if _shutdown:
             break
         if url == base_url:
             continue
+        if total_count >= MAX_RETRIES_PER_DOMAIN:
+            log.info(f"  Domain cap reached for {base}, stopping")
+            break
+
+        is_sitemap_url = url in sitemap_urls
+        if is_sitemap_url and sitemap_count >= MAX_SITEMAP_ATTEMPTS:
+            continue
+        if not is_sitemap_url and suffix_count >= MAX_SUFFIX_ATTEMPTS:
+            continue
+
         log.info(f"  Trying sub-page: {url}")
         result = scrape_url(url, prompt, graph_config, SmartScraperGraph)
+
+        if is_sitemap_url:
+            sitemap_count += 1
+        else:
+            suffix_count += 1
+        total_count += 1
+
         if result.get("status") == "ok" and result.get("has_dates_on_page") is True:
             log.info(f"  Found dates on sub-page: {url}")
             result["found_on_subpage"] = url
@@ -302,7 +431,7 @@ def try_subpages(base_url: str, prompt: str, graph_config: dict, SmartScraperGra
 
     return {}
 
-#raw_html
+#RAW_HTML_HELPERS
 def fetch_html(url: str) -> str | None:
     try:
         headers = {"User-Agent": "Mozilla/5.0 (compatible; MScScraper/1.0)"}
@@ -347,26 +476,39 @@ def fetch_sitemap_urls(base_url: str) -> list:
         return []
     
 def find_pdf_links(html: str, base_url: str) -> list:
-    keywords = [
-        # English
-        "apply", "application", "admission", "deadline", "dates",
-        "open", "brochure", "prospectus", "announcement", "call",
-        # Greek
-        "αιτηση", "αιτήση", "αιτησεις", "αιτήσεις", "εγγραφη",
-        "εγγραφή", "εγγραφες", "εγγραφές", "προθεσμια", "προθεσμία",
-        "ανακοινωση", "ανακοίνωση", "προκηρυξη", "προκήρυξη"
-    ]
+    keywords = PDF_KEYWORDS
     try:
         soup = BeautifulSoup(html, "html.parser")
         links = []
         for a in soup.find_all("a", href=True):
             href = a["href"].strip()
-            if href.lower().endswith(".pdf"):
+            if href.lower().endswith(".pdf") or href.lower().endswith(".docx"):
                 absolute = urljoin(base_url, href)
-                links.append(absolute)
+                link_text = a.get_text().lower()
+                href_lower = href.lower()
+                if any(k in href_lower or k in link_text for k in keywords):
+                    links.append(absolute)
         return links[:5]
     except Exception as e:
         log.warning(f"find_pdf_links failed: {e}")
+        return []
+    
+def find_announcement_links(html: str, base_url: str) -> list:
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        links = []
+        for a in soup.find_all("a", href=True):
+            text = a.get_text().strip().lower()
+            href = a["href"].strip()
+            if not href or href.startswith("#"):
+                continue
+            if any(k in text for k in ANNOUNCEMENT_KEYWORDS):
+                absolute = urljoin(base_url, href)
+                if absolute not in links:
+                    links.append(absolute)
+        return links[:5]
+    except Exception as e:
+        log.warning(f"find_announcement_links failed: {e}")
         return []
     
 def extract_pdf_text(url: str) -> str | None:
@@ -382,37 +524,114 @@ def extract_pdf_text(url: str) -> str | None:
     except Exception as e:
         log.warning(f"extract_pdf_text failed for {url}: {e}")
         return None
+    
+def extract_date_contexts(html: str) -> str | None:
+    try:
+        # Strip tags to get plain text
+        soup = BeautifulSoup(html, "html.parser")
+        text = soup.get_text(separator="\n")
+
+        date_pattern = re.compile(
+            r'\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b'
+            r'|\b\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b'
+            r'|\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b'
+            r'|\b\d{4}-\d{2}-\d{2}\b',
+            re.IGNORECASE
+        )
+
+        context_keywords = [
+            "deadline", "application", "admission", "apply", "open", "closing",
+            "submit", "registration", "intake", "start date",
+            "προθεσμία", "προθεσμια", "αιτήσεις", "αιτησεις",
+            "υποβολή", "υποβολη", "εγγραφή", "εγγραφη",
+        ]
+
+        lines = text.split("\n")
+        chunks = []
+        for i, line in enumerate(lines):
+            line = line.strip()
+            if not line:
+                continue
+            has_date = bool(date_pattern.search(line))
+            has_keyword = any(k in line.lower() for k in context_keywords)
+            if has_date or has_keyword:
+                # grab surrounding lines for context
+                start = max(0, i - 2)
+                end = min(len(lines), i + 3)
+                chunk = "\n".join(l.strip() for l in lines[start:end] if l.strip())
+                if chunk not in chunks:
+                    chunks.append(chunk)
+
+        return "\n---\n".join(chunks)[:3000] if chunks else None
+
+    except Exception as e:
+        log.warning(f"extract_date_contexts failed: {e}")
+        return None
 
 # Workers
-
 def worker_pass1(args):
     idx, total, prog, prompt, graph_config, SmartScraperGraph = args
     if _shutdown:
         return {"prog_id": prog["id"], "status": "cancelled", "scraped_at": now_utc()}
 
     log.info(f"[Pass1 {idx}/{total}] {prog['university']} — {prog['name_en'][:55]}")
-    
+
     # Fetch raw HTML first
     html = fetch_html(prog["url"])
-    
-    result = scrape_url(prog["url"], prompt, graph_config, SmartScraperGraph)
 
-    # If no dates found, check PDF links on the page
+    # Try targeted date context extraction first
+    structured = extract_date_contexts(html) if html else None
+    if structured:
+        log.info(f"  Found date context blocks, scraping directly")
+        result = scrape_url(
+            f"data:text/plain,{structured}",
+            prompt, graph_config, SmartScraperGraph
+        )
+        if result.get("has_dates_on_page") is not True:
+            # fallback to full page
+            result = scrape_url(prog["url"], prompt, graph_config, SmartScraperGraph)
+    else:
+        result = scrape_url(prog["url"], prompt, graph_config, SmartScraperGraph)
+    # Detect external apply portal
+    apply_url = result.get("apply_button_url")
+    if apply_url and urlparse(apply_url).netloc != urlparse(prog["url"]).netloc:
+        log.info(f"  External portal detected: {apply_url}")
+        result["external_portal"] = apply_url
+
+    # If no dates found, check document links (PDF/DOCX) on the page
     if html and result.get("status") == "ok" and result.get("has_dates_on_page") is not True:
-        pdf_links = find_pdf_links(html, prog["url"])
-        for pdf_url in pdf_links:
-            log.info(f"  Trying PDF: {pdf_url}")
-            pdf_text = extract_pdf_text(pdf_url)
-            if pdf_text:
-                pdf_result = scrape_url(
-                    f"data:text/plain,{pdf_text}",
+        doc_links = find_pdf_links(html, prog["url"])
+        for doc_url in doc_links:
+            log.info(f"  Trying document: {doc_url}")
+            if doc_url.lower().endswith(".docx"):
+                doc_text = extract_docx_text(doc_url)
+            else:
+                doc_text = extract_pdf_text(doc_url)
+            if doc_text:
+                doc_result = scrape_url(
+                    f"data:text/plain,{doc_text}",
                     prompt, graph_config, SmartScraperGraph
                 )
-                if pdf_result.get("has_dates_on_page") is True:
-                    log.info(f"  Found dates in PDF: {pdf_url}")
-                    pdf_result["found_in_pdf"] = pdf_url
-                    result = pdf_result
+                if doc_result.get("has_dates_on_page") is True:
+                    log.info(f"  Found dates in document: {doc_url}")
+                    doc_result["found_in_pdf"] = doc_url
+                    result = doc_result
                     break
+
+    # If still no dates, follow announcement links on the page
+    if html and result.get("status") == "ok" and result.get("has_dates_on_page") is not True:
+        announcement_links = find_announcement_links(html, prog["url"])
+        for ann_url in announcement_links:
+            if _shutdown:
+                break
+            log.info(f"  Trying announcement: {ann_url}")
+            ann_result = scrape_url(ann_url, prompt, graph_config, SmartScraperGraph)
+            if ann_result.get("has_dates_on_page") is True:
+                log.info(f"  Found dates in announcement: {ann_url}")
+                ann_result["found_in_announcement"] = ann_url
+                result = ann_result
+                break
+            time.sleep(1.0)
 
     # No useful date info found, check sitemap and subpages
     if (result.get("status") == "ok"
@@ -427,11 +646,16 @@ def worker_pass1(args):
     time.sleep(REQUEST_DELAY)
     return result
 
-
 def worker_pass2(args):
     idx, total, prog_id, source_url, apply_url, prompt, graph_config, SmartScraperGraph = args
     if _shutdown:
         return {"prog_id": prog_id, "status": "cancelled", "scraped_at": now_utc()}
+
+    # If external portal, try sitemap first to find a better entry page
+    sitemap_hits = fetch_sitemap_urls(apply_url)
+    if sitemap_hits:
+        log.info(f"  External portal sitemap found {len(sitemap_hits)} relevant pages")
+        apply_url = sitemap_hits[0]
 
     log.info(f"[Pass2 {idx}/{total}] {apply_url[:80]}")
     result = scrape_url(apply_url, prompt, graph_config, SmartScraperGraph)
@@ -507,7 +731,7 @@ def run_pass2(pass1_results, prog_map, graph_config, SmartScraperGraph, workers,
         (i+1, len(candidates),
          r["prog_id"],
          prog_map.get(r["prog_id"], {}).get("url", ""),
-         r["apply_button_url"],
+         r.get("external_portal") or r["apply_button_url"],
          PASS2_PROMPT, graph_config, SmartScraperGraph)
         for i, r in enumerate(candidates)
     ]
@@ -549,10 +773,25 @@ def extract_date_from_notes(notes: str) -> str | None:
     m = DATE_RE.search(notes)
     return m.group().strip() if m else None
 
-# Merge and export
 
+def best_record(records):
+    return max(records, key=lambda r: (
+        r.get("has_dates_on_page") is True,
+        bool(r.get("application_deadline")),
+        bool(r.get("application_open_date")),
+        bool(r.get("notes")),
+    ))
+
+# Merge and export
 def merge(programmes, pass1, pass2):
-    p1_map = {r["prog_id"]: r for r in pass1}
+    
+    p1_map = {}
+    for r in pass1:
+        pid = r["prog_id"]
+        if pid not in p1_map:
+            p1_map[pid] = r
+        else:
+            p1_map[pid] = best_record([p1_map[pid], r])
     p2_map = {r["prog_id"]: r for r in pass2}
 
     rows = []
@@ -575,6 +814,7 @@ def merge(programmes, pass1, pass2):
                 deadline = extracted
 
         found = "yes" if (deadline or open_date) else "no"
+        found_in_announcement = p1.get("found_in_announcement") or ""
 
         rows.append({
             "id":                  pid,
@@ -603,6 +843,7 @@ def merge(programmes, pass1, pass2):
             "portal":              p2.get("portal_name") or "",
             "requires_login":      str(p2.get("requires_login", "")).lower(),
             "found":               found,
+            "found_in_announcement": found_in_announcement,
             "scrape_status":       p1.get("status", "not_scraped"),
             "pass2_status":        p2.get("status", "skipped"),
             "scraped_at":          p1.get("scraped_at", ""),
@@ -652,8 +893,22 @@ def save_json(data, path):
         json.dump(data, f, indent=2, ensure_ascii=False)
     log.info(f"Saved {len(data)} records -> {path}")
 
-# Command-line options
+def save_errors(pass1_results, prog_map):
+    errors = [
+        {
+            "prog_id":   r.get("prog_id"),
+            "url":       prog_map.get(r.get("prog_id"), {}).get("url", ""),
+            "error":     r.get("error"),
+            "scraped_at": r.get("scraped_at"),
+        }
+        for r in pass1_results
+        if r.get("status") == "error"
+    ]
+    with open(ERRORS_JSON, "w", encoding="utf-8") as f:
+        json.dump(errors, f, indent=2, ensure_ascii=False)
+    log.info(f"Errors -> {ERRORS_JSON} ({len(errors)} records)")
 
+# Command-line options
 def parse_args():
     p = argparse.ArgumentParser(description="Study in Greece MSc dates scraper")
     p.add_argument("--csv",              default=DEFAULT_CSV)
@@ -662,19 +917,21 @@ def parse_args():
     p.add_argument("--workers",          type=int, default=DEFAULT_WORKERS)
     p.add_argument("--pass2-only",       action="store_true")
     p.add_argument("--include-archived", action="store_false", dest="active_only")
-    p.add_argument("--limit",type=int, default=None)
+    p.add_argument("--limit", type=int, default=None)
+    p.add_argument("--offset", type=int, default=0)
+    p.add_argument("--missing-only", action="store_true")
     p.set_defaults(active_only=True)
     return p.parse_args()
 
 # Main run
-
 def main():
     args = parse_args()
 
-    programmes = load_programmes(args.csv, args.active_only)
+    all_programmes = load_programmes(args.csv, args.active_only)
+    programmes = all_programmes[args.offset:]
     if args.limit:
         programmes = programmes[:args.limit]
-    prog_map   = {p["id"]: p for p in programmes}
+    prog_map = {p["id"]: p for p in all_programmes}
 
     graph_config      = get_graph_config(args.model)
     SmartScraperGraph = import_scraper()
@@ -682,7 +939,22 @@ def main():
     log.info(f"Programmes : {len(programmes)} | Workers : {args.workers} | Model: {args.model}")
 
     existing_p1 = load_json_safe(PASS1_JSON)
+
+    p1_by_id = {}
+    for r in existing_p1:
+        pid = r["prog_id"]
+        if pid not in p1_by_id:
+            p1_by_id[pid] = r
+        else:
+            p1_by_id[pid] = best_record([p1_by_id[pid], r])
+    existing_p1 = list(p1_by_id.values())
     resume_ids  = {r["prog_id"] for r in existing_p1} if args.resume else set()
+    
+    if args.missing_only:
+        existing_results = load_json_safe(RESULTS_JSON)
+        found_ids = {r["id"] for r in existing_results if r.get("found") == "yes"}
+        programmes = [p for p in programmes if p["id"] not in found_ids]
+        log.info(f"--missing-only: {len(programmes)} programmes without dates")
 
     if not args.pass2_only:
         new_p1 = run_pass1(programmes, graph_config, SmartScraperGraph, args.workers, resume_ids)
@@ -690,8 +962,9 @@ def main():
         save_json(all_p1, PASS1_JSON)
         if _shutdown:
             log.info("Saved partial results. Run with --resume to continue.")
-            rows = merge(programmes, all_p1, load_json_safe(PASS2_JSON))
+            rows = merge(all_programmes, all_p1, load_json_safe(PASS2_JSON))
             export(rows)
+            save_errors(all_p1, prog_map)
             sys.exit(0)
     else:
         all_p1 = existing_p1
@@ -707,8 +980,9 @@ def main():
     all_p2      = existing_p2 + new_p2
     save_json(all_p2, PASS2_JSON)
 
-    rows = merge(programmes, all_p1, all_p2)
+    rows = merge(all_programmes, all_p1, all_p2)
     export(rows)
+    save_errors(all_p1, prog_map)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scraper Errors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;font-size:13px;background:#f8f8f7;color:#1a1a1a;min-height:100vh}
+a{color:inherit;text-decoration:none}
+
+.hdr{background:#fff;border-bottom:1px solid #e8e8e6;padding:0 32px;height:56px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
+.hdr-title{font-size:15px;font-weight:600;color:#c0392b;letter-spacing:-0.01em}
+.hdr-sub{font-size:12px;color:#999;margin-left:2px}
+.hdr-right{margin-left:auto;display:flex;gap:8px;align-items:center}
+
+.btn{font-family:'Inter',sans-serif;font-size:12px;font-weight:500;padding:6px 14px;border-radius:6px;cursor:pointer;border:1px solid #e0e0de;background:#fff;color:#444;transition:border-color .12s,background .12s}
+.btn:hover{border-color:#bbb;background:#fafaf9}
+.btn-primary{background:#c0392b;color:#fff;border-color:#c0392b}
+.btn-primary:hover{background:#a93226;border-color:#a93226}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e8e8e6;border-bottom:1px solid #e8e8e6}
+.stat{background:#fff;padding:20px 24px}
+.stat-n{font-size:28px;font-weight:600;line-height:1;letter-spacing:-0.03em;color:#1a1a1a}
+.stat-n.red{color:#c0392b}
+.stat-l{font-size:11px;color:#999;margin-top:4px}
+
+.filters{padding:14px 32px;background:#fff;border-bottom:1px solid #e8e8e6;display:flex;gap:10px}
+.filters input,.filters select{font-family:'Inter',sans-serif;font-size:12px;padding:6px 10px;border:1px solid #e0e0de;border-radius:6px;background:#fff;color:#1a1a1a;outline:none}
+.filters input{flex:1}
+.filters input:focus,.filters select:focus{border-color:#999}
+
+.drop-zone{margin:60px auto;max-width:480px;border:2px dashed #ddd;border-radius:12px;padding:60px 40px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s}
+.drop-zone:hover,.drop-zone.over{border-color:#c0392b;background:#fdecea}
+.drop-icon{font-size:40px;margin-bottom:16px}
+.drop-zone h2{font-size:16px;font-weight:600;margin-bottom:8px}
+.drop-zone p{color:#999;font-size:13px;line-height:1.6}
+
+.hidden{display:none!important}
+
+.tbl-wrap{padding:24px 32px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+thead{background:#1a1a1a;color:#fff}
+th{padding:10px 14px;text-align:left;font-size:11px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+td{padding:10px 14px;border-bottom:1px solid #f0f0ee;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fdecea}
+
+.error-msg{color:#c0392b;font-size:12px;word-break:break-word;max-width:500px}
+.url-cell a{color:#2980b9;font-size:12px;word-break:break-all}
+.time-cell{font-size:11px;color:#999;white-space:nowrap}
+.prog-id{font-weight:500;font-size:12px}
+
+.error-tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:500;margin-bottom:4px}
+.tag-429{background:#fde8d8;color:#c0392b}
+.tag-timeout{background:#fef9e7;color:#d35400}
+.tag-dns{background:#f9ebf9;color:#8e44ad}
+.tag-json{background:#eaf4fb;color:#2980b9}
+.tag-other{background:#f0f0f0;color:#555}
+
+.no-results{text-align:center;padding:60px;color:#aaa}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div>
+    <span class="hdr-title">Scraper Error Report</span>
+    <span class="hdr-sub" id="hdr-count"></span>
+  </div>
+  <div class="hdr-right">
+    <label class="btn btn-primary" style="cursor:pointer">
+      Load errors.json
+      <input type="file" accept=".json" id="file-input" style="display:none">
+    </label>
+  </div>
+</header>
+
+<div id="drop-area">
+  <div class="drop-zone" id="drop-zone">
+    <div class="drop-icon">🔍</div>
+    <h2>Load your error report</h2>
+    <p>Drop <strong>results/errors.json</strong> here<br>or click "Load errors.json" above</p>
+  </div>
+</div>
+
+<div id="main-area" class="hidden">
+  <div class="stats">
+    <div class="stat"><div class="stat-n red" id="s-total">0</div><div class="stat-l">Total Errors</div></div>
+    <div class="stat"><div class="stat-n" id="s-429" style="color:#d35400">0</div><div class="stat-l">Rate Limit (429)</div></div>
+    <div class="stat"><div class="stat-n" id="s-dns" style="color:#8e44ad">0</div><div class="stat-l">Unreachable Sites</div></div>
+  </div>
+
+  <div class="filters">
+    <input type="text" id="q" placeholder="Search programme ID, URL or error message…" oninput="applyFilters()">
+    <select id="f-type" onchange="applyFilters()">
+      <option value="">All error types</option>
+      <option value="429">Rate limit (429)</option>
+      <option value="timeout">Timeout</option>
+      <option value="dns">DNS / Unreachable</option>
+      <option value="json">JSON parse error</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Programme ID</th>
+          <th>URL</th>
+          <th>Error</th>
+          <th>Scraped At</th>
+        </tr>
+      </thead>
+      <tbody id="table-body"></tbody>
+    </table>
+    <div class="no-results hidden" id="no-results">No errors match your search.</div>
+  </div>
+</div>
+
+<script>
+let allErrors = [];
+
+function classifyError(msg) {
+  if (!msg) return "other";
+  const m = msg.toLowerCase();
+  if (m.includes("429") || m.includes("rate_limit")) return "429";
+  if (m.includes("timeout") || m.includes("timed out")) return "timeout";
+  if (m.includes("err_name_not_resolved") || m.includes("name or service not known") || m.includes("nodename nor servname")) return "dns";
+  if (m.includes("json")) return "json";
+  return "other";
+}
+
+function errorTag(type) {
+  const labels = { "429": "Rate Limit", timeout: "Timeout", dns: "DNS Error", json: "JSON Error", other: "Other" };
+  return `<span class="error-tag tag-${type}">${labels[type]}</span>`;
+}
+
+function renderTable(data) {
+  const tbody = document.getElementById("table-body");
+  if (data.length === 0) {
+    tbody.innerHTML = "";
+    document.getElementById("no-results").classList.remove("hidden");
+    return;
+  }
+  document.getElementById("no-results").classList.add("hidden");
+  tbody.innerHTML = data.map(e => {
+    const type = classifyError(e.error);
+    const time = e.scraped_at ? e.scraped_at.replace("T", " ").split(".")[0] : "";
+    return `
+      <tr>
+        <td class="prog-id">${e.prog_id || ""}</td>
+        <td class="url-cell"><a href="${e.url}" target="_blank">${e.url || ""}</a></td>
+        <td class="error-msg">${errorTag(type)}<br>${e.error || ""}</td>
+        <td class="time-cell">${time}</td>
+      </tr>`;
+  }).join("");
+}
+
+function applyFilters() {
+  const q = document.getElementById("q").value.toLowerCase();
+  const type = document.getElementById("f-type").value;
+  const filtered = allErrors.filter(e => {
+    const matchQ = !q ||
+      (e.prog_id || "").toLowerCase().includes(q) ||
+      (e.url || "").toLowerCase().includes(q) ||
+      (e.error || "").toLowerCase().includes(q);
+    const matchType = !type || classifyError(e.error) === type;
+    return matchQ && matchType;
+  });
+  renderTable(filtered);
+}
+
+function loadData(text) {
+  try {
+    allErrors = JSON.parse(text);
+    document.getElementById("drop-area").classList.add("hidden");
+    document.getElementById("main-area").classList.remove("hidden");
+    document.getElementById("hdr-count").textContent = `${allErrors.length} errors`;
+    document.getElementById("s-total").textContent = allErrors.length;
+    document.getElementById("s-429").textContent = allErrors.filter(e => classifyError(e.error) === "429").length;
+    document.getElementById("s-dns").textContent = allErrors.filter(e => classifyError(e.error) === "dns").length;
+    renderTable(allErrors);
+  } catch {
+    alert("Could not parse errors.json — make sure it is a valid JSON file.");
+  }
+}
+
+document.getElementById("file-input").addEventListener("change", e => {
+  const f = e.target.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => loadData(ev.target.result);
+  r.readAsText(f);
+});
+
+const dz = document.getElementById("drop-zone");
+dz.addEventListener("click", () => document.getElementById("file-input").click());
+dz.addEventListener("dragover", e => { e.preventDefault(); dz.classList.add("over"); });
+dz.addEventListener("dragleave", () => dz.classList.remove("over"));
+dz.addEventListener("drop", e => {
+  e.preventDefault(); dz.classList.remove("over");
+  const f = e.dataTransfer.files[0]; if (!f) return;
+  const r = new FileReader();
+  r.onload = ev => loadData(ev.target.result);
+  r.readAsText(f);
+});
+</script>
+</body>
+</html>
