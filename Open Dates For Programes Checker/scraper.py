@@ -49,8 +49,10 @@ MAX_RETRIES_PER_DOMAIN = 20
 MAX_SITEMAP_ATTEMPTS = 15
 MAX_SUFFIX_ATTEMPTS = 15
 RETRY_DELAY     = 4
-REQUEST_DELAY   = 2.0
+REQUEST_DELAY   = 1.0
 DEFAULT_WORKERS = 3
+
+_sitemap_cache: dict = {}
 
 # Common admissions/application paths
 SUBPAGE_SUFFIXES = [
@@ -160,6 +162,11 @@ logging.basicConfig(
     ],
 )
 log = logging.getLogger(__name__)
+logging.getLogger("scrapegraphai").setLevel(logging.ERROR)
+logging.getLogger("playwright").setLevel(logging.ERROR)
+logging.getLogger("httpx").setLevel(logging.ERROR)
+logging.getLogger("httpcore").setLevel(logging.ERROR)
+#logging.getLogger("openai").setLevel(logging.ERROR)
 
 # Shutdown handling
 
@@ -331,9 +338,11 @@ def unwrap_content(raw: dict) -> dict:
 
 
 def clean_result(raw: dict) -> dict:
-    """Convert placeholder values to None."""
+    """Convert placeholder values to None and normalize lists to strings."""
     cleaned = {}
     for k, v in raw.items():
+        if isinstance(v, list):
+            v = ", ".join(str(i) for i in v if i)
         if isinstance(v, str) and v.strip().upper() in ("NA", "N/A", "NONE", "NULL", ""):
             cleaned[k] = None
         else:
@@ -427,7 +436,7 @@ def try_subpages(base_url: str, prompt: str, graph_config: dict, SmartScraperGra
             log.info(f"  Found dates on sub-page: {url}")
             result["found_on_subpage"] = url
             return result
-        time.sleep(1.0)
+        time.sleep(0.5)
 
     return {}
 
@@ -449,8 +458,11 @@ def fetch_sitemap_urls(base_url: str) -> list:
     
     keywords = ["apply", "admission", "deadline", "application", "dates", "registration", "enroll", "αιτηση", "αιτήση", "εγγραφη", "εγγραφή", "προθεσμια", "προθεσμία", "προκηρυξη", "προκήρυξη"]
     
+    if sitemap_url in _sitemap_cache:
+        return _sitemap_cache[sitemap_url]
     html = fetch_html(sitemap_url)
     if not html:
+        _sitemap_cache[sitemap_url] = []
         return []
     
     try:
@@ -469,10 +481,12 @@ def fetch_sitemap_urls(base_url: str) -> list:
                 all_urls.append(loc)
         
         filtered = [u for u in all_urls if any(k in u.lower() for k in keywords)]
+        _sitemap_cache[sitemap_url] = filtered[:10]
         return filtered[:10]
-    
+
     except Exception as e:
         log.warning(f"fetch_sitemap_urls failed for {base_url}: {e}")
+        _sitemap_cache[sitemap_url] = []
         return []
     
 def find_pdf_links(html: str, base_url: str) -> list:
@@ -525,10 +539,23 @@ def extract_pdf_text(url: str) -> str | None:
         log.warning(f"extract_pdf_text failed for {url}: {e}")
         return None
     
+def extract_docx_text(url: str) -> str | None:
+    try:
+        headers = {"User-Agent": "Mozilla/5.0 (compatible; MScScraper/1.0)"}
+        response = requests.get(url, timeout=15, headers=headers)
+        response.raise_for_status()
+        doc = Document(io.BytesIO(response.content))
+        text = "\n".join(para.text for para in doc.paragraphs if para.text.strip())
+        return text[:3000] if text.strip() else None
+    except Exception as e:
+        log.warning(f"extract_docx_text failed for {url}: {e}")
+        return None
+
 def extract_date_contexts(html: str) -> str | None:
     try:
         # Strip tags to get plain text
         soup = BeautifulSoup(html, "html.parser")
+
         text = soup.get_text(separator="\n")
 
         date_pattern = re.compile(
@@ -562,6 +589,7 @@ def extract_date_contexts(html: str) -> str | None:
                 if chunk not in chunks:
                     chunks.append(chunk)
 
+        chunks.sort(key=lambda c: date_relevance_score(c), reverse=True)
         return "\n---\n".join(chunks)[:3000] if chunks else None
 
     except Exception as e:
@@ -773,10 +801,32 @@ def extract_date_from_notes(notes: str) -> str | None:
     m = DATE_RE.search(notes)
     return m.group().strip() if m else None
 
+# To more accurately find relevant dates 
+def date_relevance_score(text) -> int:
+    if not text:
+        return 0
+    if isinstance(text, list):
+        text = " ".join(str(t) for t in text)
+    text = str(text)
+    years = re.findall(r'\b(20\d{2})\b', text)
+    if not years:
+        return 0
+    max_year = max(int(y) for y in years)
+    if max_year >= 2026:
+        return 3
+    elif max_year == 2025:
+        return 2
+    elif max_year >= 2023:
+        return 1
+    return 0
 
+## BEST RECORDS CHANGED 1900
 def best_record(records):
     return max(records, key=lambda r: (
+        bool(r.get("found_in_pdf")),
         r.get("has_dates_on_page") is True,
+        date_relevance_score(r.get("application_deadline") or ""),
+        date_relevance_score(r.get("application_open_date") or ""),
         bool(r.get("application_deadline")),
         bool(r.get("application_open_date")),
         bool(r.get("notes")),
@@ -792,7 +842,7 @@ def merge(programmes, pass1, pass2):
             p1_map[pid] = r
         else:
             p1_map[pid] = best_record([p1_map[pid], r])
-    p2_map = {r["prog_id"]: r for r in pass2}
+    p2_map = {r["prog_id"]: r for r in pass2 if r.get("prog_id")}
 
     rows = []
     for prog in programmes:
@@ -800,8 +850,19 @@ def merge(programmes, pass1, pass2):
         p1  = p1_map.get(pid, {})
         p2  = p2_map.get(pid, {})
 
-        deadline   = p1.get("application_deadline")  or p2.get("application_deadline")
-        open_date  = p1.get("application_open_date") or p2.get("application_open_date")
+        # Prefer PDF-sourced dates as they are more reliable than HTML
+        if p1.get("found_in_pdf"):
+            deadline  = p1.get("application_deadline") or p2.get("application_deadline")
+            open_date = p1.get("application_open_date") or p2.get("application_open_date")
+        else:
+            deadline  = max(
+                [p1.get("application_deadline"), p2.get("application_deadline")],
+                key=lambda d: date_relevance_score(d or "")
+            ) or None
+            open_date = max(
+                [p1.get("application_open_date"), p2.get("application_open_date")],
+                key=lambda d: date_relevance_score(d or "")
+            ) or None
         intake     = p1.get("intake_semester")        or p2.get("intake_semester")
         app_status = p1.get("application_status")     or p2.get("application_status") or "not_mentioned"
         apply_url  = p1.get("apply_button_url")       or p2.get("apply_url") or ""
@@ -920,6 +981,7 @@ def parse_args():
     p.add_argument("--limit", type=int, default=None)
     p.add_argument("--offset", type=int, default=0)
     p.add_argument("--missing-only", action="store_true")
+    p.add_argument("--ids", type=str, default=None)
     p.set_defaults(active_only=True)
     return p.parse_args()
 
@@ -956,6 +1018,12 @@ def main():
         programmes = [p for p in programmes if p["id"] not in found_ids]
         log.info(f"--missing-only: {len(programmes)} programmes without dates")
 
+    if args.ids:
+        target_ids = set(args.ids.split(","))
+        existing_p1 = [r for r in existing_p1 if r.get("prog_id") not in target_ids]
+        programmes = [p for p in all_programmes if p["id"] in target_ids]
+        log.info(f"--ids: targeting {len(programmes)} specific programmes")
+
     if not args.pass2_only:
         new_p1 = run_pass1(programmes, graph_config, SmartScraperGraph, args.workers, resume_ids)
         all_p1 = existing_p1 + new_p1
@@ -975,7 +1043,7 @@ def main():
         sys.exit(1)
 
     existing_p2 = load_json_safe(PASS2_JSON)
-    done_p2_ids = {r["prog_id"] for r in existing_p2}
+    done_p2_ids = {r["prog_id"] for r in existing_p2 if r.get("prog_id")}
     new_p2      = run_pass2(all_p1, prog_map, graph_config, SmartScraperGraph, args.workers, done_p2_ids)
     all_p2      = existing_p2 + new_p2
     save_json(all_p2, PASS2_JSON)
