@@ -45,7 +45,7 @@ RESULTS_CSV     = OUTPUT_DIR / "results.csv"
 LOG_FILE        = OUTPUT_DIR / "scraper.log"
 
 MAX_RETRIES     = 3
-MAX_RETRIES_PER_DOMAIN = 20
+MAX_RETRIES_PER_DOMAIN = 15
 MAX_SITEMAP_ATTEMPTS = 15
 MAX_SUFFIX_ATTEMPTS = 15
 RETRY_DELAY     = 4
@@ -59,6 +59,41 @@ DOMAIN_ANNOUNCEMENT_HUBS = {
 }
 
 _hub_cache: dict = {}
+
+# ---- date regex patterns ----
+
+_MONTHS_EN = r"(?:January|February|March|April|May|June|July|August|September|October|November|December)"
+_MONTHS_EN_SHORT = r"(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)"
+_MONTHS_GR = (
+    r"(?:Ιανουαρίου|Φεβρουαρίου|Μαρτίου|Απριλίου|Μαΐου|Μαίου|Ιουνίου|"
+    r"Ιουλίου|Αυγούστου|Σεπτεμβρίου|Οκτωβρίου|Νοεμβρίου|Δεκεμβρίου|"
+    r"Ιανουάριος|Φεβρουάριος|Μάρτιος|Απρίλιος|Μάιος|Μαϊος|Ιούνιος|"
+    r"Ιούλιος|Αύγουστος|Σεπτέμβριος|Οκτώβριος|Νοέμβριος|Δεκέμβριος|"
+    r"ιανουαρίου|φεβρουαρίου|μαρτίου|απριλίου|μαΐου|μαίου|ιουνίου|"
+    r"ιουλίου|αυγούστου|σεπτεμβρίου|οκτωβρίου|νοεμβρίου|δεκεμβρίου)"
+)
+
+DATE_PATTERNS = [
+    rf'\b\d{{1,2}}[/\-\.]\d{{1,2}}[/\-\.]\d{{2,4}}\b',        # 15/06/2025 or 15-06-25
+    rf'\b\d{{4}}[/\-\.]\d{{1,2}}[/\-\.]\d{{1,2}}\b',           # 2025-06-15
+    rf'\b\d{{1,2}}\s+{_MONTHS_EN}\s+\d{{4}}\b',                 # 15 June 2025
+    rf'\b{_MONTHS_EN}\s+\d{{1,2}},?\s+\d{{4}}\b',               # June 15, 2025
+    rf'\b\d{{1,2}}\s+{_MONTHS_EN_SHORT}\.?\s+\d{{4}}\b',        # 15 Jun 2025
+    rf'\b\d{{1,2}}(?:st|nd|rd|th)\s+(?:of\s+)?{_MONTHS_EN}\s+\d{{4}}\b',  # 15th of June 2025
+    rf'\b\d{{1,2}}\s+{_MONTHS_GR}\s+\d{{4}}\b',                 # 15 Ιουνίου 2025
+    rf'\b{_MONTHS_GR}\s+\d{{4}}\b',                              # Ιούνιος 2025
+]
+
+DATE_RE = re.compile("|".join(DATE_PATTERNS), re.IGNORECASE)
+
+# keywords that signal a date is application-related
+CONTEXT_KEYWORDS = [
+    "deadline", "προθεσμ", "application", "αιτησ", "αίτησ", "αιτήσε",
+    "submit", "υποβολ", "open", "close", "📅", "έως", "εως", "μέχρι",
+    "until", "by", "due", "from", "start", "begin", "end",
+    "εγγραφ", "registration", "admission", "call", "πρόσκλ", "προσκλ",
+    "ανακοίν", "ανακοιν", "apply", "intake", "semester",
+]
 
 # Common admissions/application paths
 SUBPAGE_SUFFIXES = [
@@ -156,6 +191,11 @@ ANNOUNCEMENT_KEYWORDS = [
     "prokiriksi", "prokiryxi", "paratasi", "anakoinosi",
 ]
 
+DEADLINE_CSS_CLASSES = [
+    "ew-deadline-text", "deadline", "application-deadline",
+    "closing-date", "submission-deadline",
+]
+
 # Logging
 
 logging.basicConfig(
@@ -212,8 +252,6 @@ Rules:
 - Return null for any field with no data. Never return "NA" or "N/A".
 - Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
 - has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
-- Today's year is 2026. Strongly prefer dates from 2026 or later. Only return older dates if absolutely no 2026 or later dates exist anywhere on the page.
-- Prefer the most recent announcement or call for applications if multiple years appear on the page.
 """
 
 PASS2_PROMPT = """
@@ -236,8 +274,6 @@ Rules:
 - Return null for any field with no data. Never return "NA" or "N/A".
 - Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
 - has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
-- Today's year is 2026. Strongly prefer dates from 2026 or later. Only return older dates if absolutely no 2026 or later dates exist anywhere on the page.
-- Prefer the most recent announcement or call for applications if multiple years appear on the page.
 
 """
 
@@ -371,6 +407,8 @@ def scrape_url(url: str, prompt: str, graph_config: dict, SmartScraperGraph) -> 
 
             if isinstance(raw, dict):
                 raw = unwrap_content(raw)
+                if raw is None:
+                    raise ValueError("unwrap_content returned None")
                 if list(raw.keys()) == ["result"] and isinstance(raw.get("result"), dict):
                     raw = raw["result"]
                 raw = clean_result(raw)
@@ -417,6 +455,7 @@ def try_subpages(base_url: str, prompt: str, graph_config: dict, SmartScraperGra
     sitemap_count = 0
     suffix_count = 0
     total_count = 0
+    consecutive_failures = 0
 
     for url in all_urls:
         if _shutdown:
@@ -425,6 +464,9 @@ def try_subpages(base_url: str, prompt: str, graph_config: dict, SmartScraperGra
             continue
         if total_count >= MAX_RETRIES_PER_DOMAIN:
             log.info(f"  Domain cap reached for {base}, stopping")
+            break
+        if consecutive_failures >= 5:
+            log.info(f"  Too many consecutive failures for {base}, giving up")
             break
 
         is_sitemap_url = url in sitemap_urls
@@ -446,6 +488,10 @@ def try_subpages(base_url: str, prompt: str, graph_config: dict, SmartScraperGra
             log.info(f"  Found dates on sub-page: {url}")
             result["found_on_subpage"] = url
             return result
+        if result.get("status") == "error":
+            consecutive_failures += 1
+        else:
+            consecutive_failures = 0
         time.sleep(0.5)
 
     return {}
@@ -561,37 +607,100 @@ def extract_docx_text(url: str) -> str | None:
         log.warning(f"extract_docx_text failed for {url}: {e}")
         return None
 
+def extract_dates_with_context(text: str, source_label: str) -> list[dict]:
+    results = []
+    seen_dates = set()
+    lines = text.split("\n")
+
+    for i, line in enumerate(lines):
+        for match in DATE_RE.finditer(line):
+            raw = match.group().strip()
+            if raw in seen_dates:
+                continue
+            seen_dates.add(raw)
+
+            # grab surrounding lines for context
+            start = max(0, i - 2)
+            end = min(len(lines), i + 3)
+            context = " ".join(lines[start:end]).strip()
+
+            ctx_lower = context.lower()
+            has_keyword = any(k in ctx_lower for k in CONTEXT_KEYWORDS)
+
+            results.append({
+                "raw": raw,
+                "context": context[:300],
+                "source": source_label,
+                "has_keyword": has_keyword,
+            })
+
+    return results
+
+def validate_dates(dates: list[dict]) -> list[dict]:
+    from dateutil import parser as dateparser
+    valid = []
+    for d in dates:
+        try:
+            parsed = dateparser.parse(d["raw"], dayfirst=True, fuzzy=False)
+            if parsed is None:
+                continue
+            if parsed.year < 2024 or parsed.year > 2027:
+                continue
+            d["parsed_iso"] = parsed.strftime("%Y-%m-%d")
+            d["year"] = parsed.year
+            valid.append(d)
+        except Exception:
+            continue  # discard unparseable strings
+    return valid
+
+
+def build_date_list(prog: dict, dates: list[dict]) -> str:
+    header = f"TARGET PROGRAMME: {prog['name_en']}"
+    if prog.get("name_gr"):
+        header += f" / {prog['name_gr']}"
+    header += "\n\nDATES FOUND:\n"
+
+    lines = []
+    for i, d in enumerate(dates, 1):
+        keyword_flag = " [KEYWORD MATCH]" if d.get("has_keyword") else ""
+        lines.append(
+            f"{i}. \"{d['raw']}\" — context: \"{d['context']}\" — "
+            f"source: {d['source']}{keyword_flag}"
+        )
+
+    return header + "\n".join(lines)
+
+
 def extract_date_contexts(html: str) -> str | None:
+    """Extract date-adjacent and keyword-adjacent lines from raw HTML."""
     try:
         soup = BeautifulSoup(html, "html.parser")
         text = soup.get_text(separator="\n")
 
-        date_pattern = re.compile(
-            r'\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b'
-            r'|\b\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b'
-            r'|\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b'
-            r'|\b\d{4}-\d{2}-\d{2}\b'
-            r'|\b\d{1,2}\s+(?:Ιανουαρίου|Φεβρουαρίου|Μαρτίου|Απριλίου|Μαΐου|Ιουνίου|Ιουλίου|Αυγούστου|Σεπτεμβρίου|Οκτωβρίου|Νοεμβρίου|Δεκεμβρίου)\s+\d{4}\b'
-            r'|\b(?:Ιανουάριος|Φεβρουάριος|Μάρτιος|Απρίλιος|Μάιος|Ιούνιος|Ιούλιος|Αύγουστος|Σεπτέμβριος|Οκτώβριος|Νοέμβριος|Δεκέμβριος)\s+\d{4}\b',
-            re.IGNORECASE
-        )
+        context_keywords = [
+            "deadline", "application", "admission", "apply", "open", "closing",
+            "submit", "registration", "intake", "start date",
+            "προθεσμία", "προθεσμια", "αιτήσεις", "αιτησεις",
+            "υποβολή", "υποβολη", "εγγραφή", "εγγραφη",
+        ]
 
         lines = text.split("\n")
         chunks = []
         seen = set()
-
         for i, line in enumerate(lines):
-            if not date_pattern.search(line):
+            line_s = line.strip()
+            if not line_s:
                 continue
-            start = max(0, i - 2)
-            end = min(len(lines), i + 3)
-            chunk = "\n".join(l.strip() for l in lines[start:end] if l.strip())
-            if chunk and chunk not in seen:
-                seen.add(chunk)
-                chunks.append(chunk)
-
+            has_date = bool(DATE_RE.search(line_s))
+            has_keyword = any(k in line_s.lower() for k in context_keywords)
+            if has_date or has_keyword:
+                start = max(0, i - 2)
+                end = min(len(lines), i + 3)
+                chunk = "\n".join(l.strip() for l in lines[start:end] if l.strip())
+                if chunk and chunk not in seen:
+                    seen.add(chunk)
+                    chunks.append(chunk)
         return "\n---\n".join(chunks)[:3000] if chunks else None
-
     except Exception as e:
         log.warning(f"extract_date_contexts failed: {e}")
         return None
@@ -619,25 +728,37 @@ def worker_pass1(args):
             result["found_in_announcement"] = hub_url
             return result
         log.info(f"  Domain hub: {hub_url}")
-        hub_result = scrape_url(hub_url, prompt, graph_config, SmartScraperGraph)
+        hub_html = fetch_html(hub_url)
+        hub_url_to_scrape = hub_url
+        if hub_html:
+            ann_links = find_announcement_links(hub_html, hub_url)
+            if ann_links:
+                log.info(f"  Following hub announcement: {ann_links[0]}")
+                hub_url_to_scrape = ann_links[0]
+        hub_result = scrape_url(hub_url_to_scrape, prompt, graph_config, SmartScraperGraph)
         if hub_result.get("has_dates_on_page") is True:
-            hub_result["found_in_announcement"] = hub_url
+            hub_result["found_in_announcement"] = hub_url_to_scrape
             _hub_cache[hub_url] = hub_result
             result = hub_result.copy()
             result["prog_id"] = prog["id"]
             result["scraped_at"] = now_utc()
             return result
 
-    # Try targeted date context extraction first
-    structured = extract_date_contexts(html) if html else None
-    if structured:
-        log.info(f"  Found date context blocks, scraping directly")
-        result = scrape_url(
-            f"data:text/plain,{structured}",
-            prompt, graph_config, SmartScraperGraph
-        )
+    # Extract and filter dates, then send structured list to AI
+    if html:
+        soup_text = BeautifulSoup(html, "html.parser").get_text(separator="\n")
+        raw_dates = extract_dates_with_context(soup_text, prog["url"])
+        valid_dates = validate_dates(raw_dates)
+        keyword_dates = [d for d in valid_dates if d.get("has_keyword")]
+        dates_to_use = keyword_dates if keyword_dates else valid_dates
+    else:
+        dates_to_use = []
+
+    if dates_to_use:
+        log.info(f"  Found {len(dates_to_use)} valid dates, building structured list")
+        date_list = build_date_list(prog, dates_to_use)
+        result = scrape_url(f"data:text/plain,{date_list}", prompt, graph_config, SmartScraperGraph)
         if result.get("has_dates_on_page") is not True:
-            # fallback to full page
             result = scrape_url(prog["url"], prompt, graph_config, SmartScraperGraph)
     else:
         result = scrape_url(prog["url"], prompt, graph_config, SmartScraperGraph)
@@ -807,15 +928,6 @@ def run_pass2(pass1_results, prog_map, graph_config, SmartScraperGraph, workers,
     return results
 
 # Date extraction
-
-DATE_PATTERNS = [
-    r'\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b',
-    r'\b\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b',
-    r'\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b',
-    r'\b\d{1,2}(?:st|nd|rd|th)\s+(?:of\s+)?(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b',
-]
-DATE_RE = re.compile("|".join(DATE_PATTERNS), re.IGNORECASE)
-
 def extract_date_from_notes(notes: str) -> str | None:
     if not notes:
         return None
