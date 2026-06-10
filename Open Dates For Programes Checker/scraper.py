@@ -54,6 +54,12 @@ DEFAULT_WORKERS = 3
 
 _sitemap_cache: dict = {}
 
+DOMAIN_ANNOUNCEMENT_HUBS = {
+    "eap.gr": "https://www.eap.gr/en/tag/invitation-en/",
+}
+
+_hub_cache: dict = {}
+
 # Common admissions/application paths
 SUBPAGE_SUFFIXES = [
     # English
@@ -186,7 +192,7 @@ def now_utc() -> str:
 # Extraction prompts
 
 PASS1_PROMPT = """
-You are extracting structured admissions data from a university MSc programme webpage.
+You are extracting structured admissions data from a university MSc programme webpage. 
 Return ONLY a valid JSON object. No markdown, no code fences, no explanation.
 
 {
@@ -206,6 +212,8 @@ Rules:
 - Return null for any field with no data. Never return "NA" or "N/A".
 - Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
 - has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
+- Today's year is 2026. Strongly prefer dates from 2026 or later. Only return older dates if absolutely no 2026 or later dates exist anywhere on the page.
+- Prefer the most recent announcement or call for applications if multiple years appear on the page.
 """
 
 PASS2_PROMPT = """
@@ -228,6 +236,8 @@ Rules:
 - Return null for any field with no data. Never return "NA" or "N/A".
 - Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
 - has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
+- Today's year is 2026. Strongly prefer dates from 2026 or later. Only return older dates if absolutely no 2026 or later dates exist anywhere on the page.
+- Prefer the most recent announcement or call for applications if multiple years appear on the page.
 
 """
 
@@ -553,43 +563,33 @@ def extract_docx_text(url: str) -> str | None:
 
 def extract_date_contexts(html: str) -> str | None:
     try:
-        # Strip tags to get plain text
         soup = BeautifulSoup(html, "html.parser")
-
         text = soup.get_text(separator="\n")
 
         date_pattern = re.compile(
             r'\b\d{1,2}[\/\-\.]\d{1,2}[\/\-\.]\d{2,4}\b'
             r'|\b\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{4}\b'
             r'|\b(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2},?\s+\d{4}\b'
-            r'|\b\d{4}-\d{2}-\d{2}\b',
+            r'|\b\d{4}-\d{2}-\d{2}\b'
+            r'|\b\d{1,2}\s+(?:Ιανουαρίου|Φεβρουαρίου|Μαρτίου|Απριλίου|Μαΐου|Ιουνίου|Ιουλίου|Αυγούστου|Σεπτεμβρίου|Οκτωβρίου|Νοεμβρίου|Δεκεμβρίου)\s+\d{4}\b'
+            r'|\b(?:Ιανουάριος|Φεβρουάριος|Μάρτιος|Απρίλιος|Μάιος|Ιούνιος|Ιούλιος|Αύγουστος|Σεπτέμβριος|Οκτώβριος|Νοέμβριος|Δεκέμβριος)\s+\d{4}\b',
             re.IGNORECASE
         )
 
-        context_keywords = [
-            "deadline", "application", "admission", "apply", "open", "closing",
-            "submit", "registration", "intake", "start date",
-            "προθεσμία", "προθεσμια", "αιτήσεις", "αιτησεις",
-            "υποβολή", "υποβολη", "εγγραφή", "εγγραφη",
-        ]
-
         lines = text.split("\n")
         chunks = []
-        for i, line in enumerate(lines):
-            line = line.strip()
-            if not line:
-                continue
-            has_date = bool(date_pattern.search(line))
-            has_keyword = any(k in line.lower() for k in context_keywords)
-            if has_date or has_keyword:
-                # grab surrounding lines for context
-                start = max(0, i - 2)
-                end = min(len(lines), i + 3)
-                chunk = "\n".join(l.strip() for l in lines[start:end] if l.strip())
-                if chunk not in chunks:
-                    chunks.append(chunk)
+        seen = set()
 
-        chunks.sort(key=lambda c: date_relevance_score(c), reverse=True)
+        for i, line in enumerate(lines):
+            if not date_pattern.search(line):
+                continue
+            start = max(0, i - 2)
+            end = min(len(lines), i + 3)
+            chunk = "\n".join(l.strip() for l in lines[start:end] if l.strip())
+            if chunk and chunk not in seen:
+                seen.add(chunk)
+                chunks.append(chunk)
+
         return "\n---\n".join(chunks)[:3000] if chunks else None
 
     except Exception as e:
@@ -606,6 +606,27 @@ def worker_pass1(args):
 
     # Fetch raw HTML first
     html = fetch_html(prog["url"])
+
+    # Check for domain-specific announcement hub (e.g. EAP posts all dates centrally)
+    prog_domain = urlparse(prog["url"]).netloc
+    hub_url = next((v for k, v in DOMAIN_ANNOUNCEMENT_HUBS.items() if k in prog_domain), None)
+    if hub_url:
+        if hub_url in _hub_cache:
+            log.info(f"  Hub cache hit: {hub_url}")
+            result = _hub_cache[hub_url].copy()
+            result["prog_id"] = prog["id"]
+            result["scraped_at"] = now_utc()
+            result["found_in_announcement"] = hub_url
+            return result
+        log.info(f"  Domain hub: {hub_url}")
+        hub_result = scrape_url(hub_url, prompt, graph_config, SmartScraperGraph)
+        if hub_result.get("has_dates_on_page") is True:
+            hub_result["found_in_announcement"] = hub_url
+            _hub_cache[hub_url] = hub_result
+            result = hub_result.copy()
+            result["prog_id"] = prog["id"]
+            result["scraped_at"] = now_utc()
+            return result
 
     # Try targeted date context extraction first
     structured = extract_date_contexts(html) if html else None

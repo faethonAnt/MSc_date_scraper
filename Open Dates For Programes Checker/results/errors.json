@@ -1,74 +1,80 @@
 [
   {
-    "prog_id": "1841",
-    "url": "https://matba.aegean.gr/",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"1st of February 2026\", \"application_deadline\": \"NA\", \"intake_semester\": \"NA\", \"apply_button_url\": \"https://matba.aegean.gr/how-to-apply/\", \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"The program started on 1st February 2026. No specific application deadline is mentioned, indicating that applications are likely not open yet or the deadline is not provided.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:13:09.334532+00:00"
+    "prog_id": "996",
+    "url": "https://mahep-upatras.gr/en/",
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/\nCall log:\n  - navigating to \"https://mahep-upatras.gr/en/\", waiting until \"domcontentloaded\"\n",
+    "scraped_at": "2026-06-10T06:45:00.163096+00:00"
   },
   {
-    "prog_id": "1952",
-    "url": "https://eminent-master.eu/",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": \"1st of March 2026\", \"intake_semester\": null, \"apply_button_url\": \"https://eminent-master.eu/apply-now/\", \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:13:21.672913+00:00"
+    "prog_id": "1182",
+    "url": "https://www.dept.aueb.gr/msc-isfm",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"April 1st 2025\", \"application_deadline\": null, \"intake_semester\": \"September 2026\", \"apply_button_url\": \"https://e-graduate.applications.aueb.gr/?lang=en_GR\", \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"NA\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T06:48:25.431671+00:00"
+  },
+  {
+    "prog_id": "1334",
+    "url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/enm",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"January 14th 2026\", \"application_deadline\": \"June 30th 2026\", \"intake_semester\": \"Academic Year 2026-27\", \"apply_button_url\": \"https://apply.maich.gr\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T06:50:33.370237+00:00"
+  },
+  {
+    "prog_id": "1594",
+    "url": "http://en.philosophymaster.philosophy.uoa.gr/",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": null, \"intake_semester\": null, \"apply_button_url\": null, \"has_dates_on_page\": false, \"application_status\": \\\"not_mentioned\\\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T06:55:47.678533+00:00"
+  },
+  {
+    "prog_id": "1602",
+    "url": "https://mscs.uoc.gr/forensic-med/",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"null\", \"application_deadline\": \"second round of applications for the academic year 2026-27, link available: https://mscs.uoc.gr/forensic-med/wp-content/uploads/sites/8/2026/03/Call-for-Applications-2026-2027_Extension_DIAVGEIA.pdf\", \"intake_semester\": \"October 2026\", \"apply_button_url\": null, \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"Second round of applications for 2026-27 are open.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T06:56:43.495298+00:00"
+  },
+  {
+    "prog_id": "1653",
+    "url": "https://llm-int.law.duth.gr/",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"5 March 2026\", \"application_deadline\": \"28 June 2026\", \"intake_semester\": \"2026-2027\", \"apply_button_url\": \"https://llm-int.law.duth.gr/apply-now-2/\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"The application deadline has been extended until June 28, 2026, and the application period is from 5 March 2026 to 31 May 2026. The status is currently open for applications.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T06:57:19.085277+00:00"
+  },
+  {
+    "prog_id": "1644",
+    "url": "http://olympicmaster.uop.gr/",
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/\nCall log:\n  - navigating to \"http://olympicmaster.uop.gr/\", waiting until \"domcontentloaded\"\n",
+    "scraped_at": "2026-06-10T06:57:44.613710+00:00"
+  },
+  {
+    "prog_id": "1683",
+    "url": "https://ds4health.uoi.gr/",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"5 Oct 2026\", \"application_deadline\": \"NA\", \"intake_semester\": \"Fall 2026\", \"apply_button_url\": \"https://ds4health.uoi.gr/apply\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Currently Accepting applications\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T06:58:30.186009+00:00"
   },
   {
     "prog_id": "996",
     "url": "https://mahep-upatras.gr/en/",
     "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/\nCall log:\n  - navigating to \"https://mahep-upatras.gr/en/\", waiting until \"domcontentloaded\"\n",
-    "scraped_at": "2026-06-09T09:14:33.397667+00:00"
+    "scraped_at": "2026-06-10T07:26:08.850753+00:00"
   },
   {
-    "prog_id": "1020",
-    "url": "http://mse.ntua.gr/?lang=en",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": null, \"intake_semester\": null, \"apply_button_url\": null, \"has_dates_on_page\": false, \"application_status\": \\\"not_mentioned\\\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:14:43.741333+00:00"
+    "prog_id": "1088",
+    "url": "https://grad.materials.uoc.gr/",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": null, \"intake_semester\": \"October and February each year\", \"apply_button_url\": \"https://www.uoc.gr/en/apply.html\", \"has_dates_on_page\": true, \"application_status\": \"not_mentioned\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T07:26:33.740548+00:00"
   },
   {
-    "prog_id": "1111",
-    "url": "http://dsit.di.uoa.gr/",
-    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_CONNECTION_REFUSED at http://dsit.di.uoa.gr/\nCall log:\n  - navigating to \"http://dsit.di.uoa.gr/\", waiting until \"domcontentloaded\"\n",
-    "scraped_at": "2026-06-09T09:15:56.595995+00:00"
+    "prog_id": "1182",
+    "url": "https://www.dept.aueb.gr/msc-isfm",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"12-03-2025\", \"application_deadline\": \"Not explicitly mentioned\", \"intake_semester\": \"September 2026\", \"apply_button_url\": \"https://e-graduate.applications.aueb.gr/?lang=en_GR\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Next intake is September 2026, application is currently open.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T07:27:12.994389+00:00"
   },
   {
-    "prog_id": "1236",
-    "url": "http://hcimaster.upatras.gr/",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"September 2026\", \"application_deadline\": \"unspecified\", \"intake_semester\": \"June 2026\", \"apply_button_url\": null, \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"Applications open in September 2026 for the next intake in June 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:18:22.053136+00:00"
-  },
-  {
-    "prog_id": "1344",
-    "url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/hob",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"January 14th 2026\", \"application_deadline\": \"June 30th 2026\", \"intake_semester\": \"Academic Year 2026-27\", \"apply_button_url\": \"https://apply.maich.gr\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026.\"}\" }\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:21:46.928614+00:00"
-  },
-  {
-    "prog_id": "1583",
-    "url": "https://we-team.education/",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": \"none found\", \"intake_semester\": null, \"apply_button_url\": \\\"https://we-team.education/apply-now/\\\", \"has_dates_on_page\": false, \"application_status\": \\\"not_mentioned\\\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:25:10.970256+00:00"
-  },
-  {
-    "prog_id": "1650",
-    "url": "https://www.mred.tuc.gr/el/spoydes/metaptychiakes-spoydes/biosimes-technologies-energeiakon-poron-kai-proton-ylon",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"NA\", \"application_deadline\": \"June 30, 2026\", \"intake_semester\": \"Fall semester 2026-27\", \"apply_button_url\": \"https://e-graduate.tuc.gr/jMScApplication\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Applications are open for Fall semester 2026-27 admissions cycle. Personal interviews will be conducted online after invitation from the Graduate Committee. Early applications allow requesting an earlier interview.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:27:11.272933+00:00"
-  },
-  {
-    "prog_id": "1649",
-    "url": "https://www.med.uth.gr/msc.vascularultrasound/",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": \"up to 31st May 2026\", \"intake_semester\": \"September 2026\", \"apply_button_url\": \"https://www.med.uth.gr/msc.vascularultrasound/call-for-applications-deadlines/\", \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"Application deadline is 31st May 2026; start date September 2026; applications are accepted until May 31, 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:27:11.574456+00:00"
+    "prog_id": "1653",
+    "url": "https://llm-int.law.duth.gr/",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"5 March 2026\", \"application_deadline\": \"28 June 2026\", \"intake_semester\": \"2026-2027\", \"apply_button_url\": \"https://llm-int.law.duth.gr/apply-now-2/\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Deadline extended until June 28, 2026. Applications are for the academic year 2026-2027.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "scraped_at": "2026-06-10T07:29:33.116517+00:00"
   },
   {
     "prog_id": "1644",
     "url": "http://olympicmaster.uop.gr/",
     "error": "Failed to scrape after 1 attempts: Page.goto: Timeout 30000ms exceeded.\nCall log:\n  - navigating to \"http://olympicmaster.uop.gr/\", waiting until \"domcontentloaded\"\n",
-    "scraped_at": "2026-06-09T09:28:13.390173+00:00"
-  },
-  {
-    "prog_id": "9",
-    "url": "https://strategic-marketing.econ.auth.gr/",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"NA\", \"application_deadline\": \"February 25, 2026\", \"intake_semester\": \"Spring Semester 2025-26\", \"apply_button_url\": \"https://strategic-marketing.econ.auth.gr/apply-now/\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"The application deadline is February 25, 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-09T09:30:20.705278+00:00"
+    "scraped_at": "2026-06-10T07:30:18.917135+00:00"
   }
 ]
