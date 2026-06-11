@@ -926,10 +926,19 @@ def run_pass1(programmes, graph_config, SmartScraperGraph, workers, resume_ids):
 
 # Pass 2
 
+def _needs_pass2(r: dict) -> bool:
+    """True if pass2 should follow the apply URL for this pass1 result."""
+    if r.get("has_dates_on_page") is not True:
+        return True
+    # Dates found but deadline is still missing — apply page may have more detail
+    if not r.get("application_deadline"):
+        return True
+    return False
+
 def run_pass2(pass1_results, prog_map, graph_config, SmartScraperGraph, workers, done_ids):
     candidates = [
         r for r in pass1_results
-        if r.get("has_dates_on_page") is not True
+        if _needs_pass2(r)
         and str(r.get("apply_button_url") or "").startswith("http")
         and r.get("status") == "ok"
         and r.get("prog_id") not in done_ids
