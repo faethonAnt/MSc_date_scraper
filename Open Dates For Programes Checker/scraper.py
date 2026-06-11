@@ -47,7 +47,7 @@ LOG_FILE        = OUTPUT_DIR / "scraper.log"
 MAX_RETRIES     = 3
 MAX_RETRIES_PER_DOMAIN = 15
 MAX_SITEMAP_ATTEMPTS = 15
-MAX_SUFFIX_ATTEMPTS = 15
+MAX_SUFFIX_ATTEMPTS = 50
 RETRY_DELAY     = 4
 REQUEST_DELAY   = 1.0
 DEFAULT_WORKERS = 3
@@ -98,7 +98,8 @@ CONTEXT_KEYWORDS = [
 # Common admissions/application paths
 SUBPAGE_SUFFIXES = [
     # English
-    "/admissions", "/admission", "/apply", "/apply-now", "/applications", "/application",
+    "/category/announcements", "/category/news", "/category/calls",
+    "/category/admission", "/category/applications","/admissions", "/admission", "/apply", "/apply-now", "/applications", "/application",
     "/application-form", "/application-process", "/application-portal",
     "/how-to-apply", "/how-to-apply-for", "/apply-here",
     "/prospective-students", "/prospective", "/future-students",
@@ -112,6 +113,8 @@ SUBPAGE_SUFFIXES = [
     "/news-events", "/news-and-events", "/latest-news",
     "/events", "/updates", "/notices", "/notice",
     "/open-calls", "/call-for-applications", "/call-for-interest",
+    "/category/announcements", "/category/news", "/category/calls",
+    "/category/admission", "/category/applications",
 
     # Greek (with accents)
     "/αιτηση", "/αίτηση", "/αιτησεις", "/αιτήσεις",
@@ -252,6 +255,8 @@ Rules:
 - Return null for any field with no data. Never return "NA" or "N/A".
 - Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
 - has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
+- Today is June 2026. Only extract dates that are in 2026 or later. Ignore any dates from 2025 or earlier.
+- When multiple dates exist, prioritise dates labelled as application open, deadline, closing date, or submission — NOT results announcements, events, or publication dates.
 """
 
 PASS2_PROMPT = """
@@ -273,7 +278,8 @@ Rules:
 - Look for: deadline, opens, closes, due date, submit by, Προθεσμία, Αιτήσεις.
 - Return null for any field with no data. Never return "NA" or "N/A".
 - Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
-- has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
+- Today is June 2026. Only extract dates that are in 2026 or later. Ignore any dates from 2025 or earlier.
+- When multiple dates exist, prioritise dates labelled as application open, deadline, closing date, or submission — NOT results announcements, events, or publication dates.
 
 """
 
@@ -429,6 +435,25 @@ def scrape_url(url: str, prompt: str, graph_config: dict, SmartScraperGraph) -> 
             log.warning(f"[attempt {attempt}/{MAX_RETRIES}] JSON error on {url}: {e}")
         except Exception as e:
             last_error = str(e)
+            # Try to recover valid JSON from LangChain "Invalid json output" errors
+            if "Invalid json output:" in last_error:
+                try:
+                    err = last_error.split("Invalid json output:", 1)[1].strip()
+                    err = err.split("\nFor troubleshooting")[0].strip()
+                    # Strip outer {"content": "..."} wrapper — inner JSON has unescaped quotes
+                    prefix = '{"content": "'
+                    if err.startswith(prefix):
+                        err = err[len(prefix):]
+                        if err.endswith('"}'):
+                            err = err[:-2]
+                    inner = json.loads(err)
+                    if isinstance(inner, dict):
+                        inner = clean_result(inner)
+                        inner["status"] = "ok"
+                        log.info(f"  Recovered JSON from error on {url}")
+                        return inner
+                except Exception:
+                    pass
             log.warning(f"[attempt {attempt}/{MAX_RETRIES}] Error on {url}: {e}")
 
         if attempt < MAX_RETRIES:
@@ -537,6 +562,11 @@ def fetch_sitemap_urls(base_url: str) -> list:
                 all_urls.append(loc)
         
         filtered = [u for u in all_urls if any(k in u.lower() for k in keywords)]
+        # Sort newest first — prefer URLs containing higher years (2026 > 2025 > 2022 etc.)
+        def _url_year(url):
+            years = re.findall(r'/(20\d{2})[-/]', url)
+            return max(int(y) for y in years) if years else 0
+        filtered.sort(key=_url_year, reverse=True)
         _sitemap_cache[sitemap_url] = filtered[:10]
         return filtered[:10]
 
@@ -644,7 +674,7 @@ def validate_dates(dates: list[dict]) -> list[dict]:
             parsed = dateparser.parse(d["raw"], dayfirst=True, fuzzy=False)
             if parsed is None:
                 continue
-            if parsed.year < 2024 or parsed.year > 2027:
+            if parsed.year < 2026 or parsed.year > 2027:
                 continue
             d["parsed_iso"] = parsed.strftime("%Y-%m-%d")
             d["year"] = parsed.year
@@ -669,7 +699,6 @@ def build_date_list(prog: dict, dates: list[dict]) -> str:
         )
 
     return header + "\n".join(lines)
-
 
 def extract_date_contexts(html: str) -> str | None:
     """Extract date-adjacent and keyword-adjacent lines from raw HTML."""
@@ -704,8 +733,18 @@ def extract_date_contexts(html: str) -> str | None:
     except Exception as e:
         log.warning(f"extract_date_contexts failed: {e}")
         return None
+    
 
 # Workers
+def has_current_dates(result: dict) -> bool:
+    """Returns True if result contains at least one date from 2026 or later."""
+    for field in ["application_deadline", "application_open_date", "notes"]:
+        val = result.get(field) or ""
+        years = re.findall(r'\b(20\d{2})\b', str(val))
+        if any(int(y) >= 2026 for y in years):
+            return True
+    return False
+
 def worker_pass1(args):
     idx, total, prog, prompt, graph_config, SmartScraperGraph = args
     if _shutdown:
@@ -758,7 +797,7 @@ def worker_pass1(args):
         log.info(f"  Found {len(dates_to_use)} valid dates, building structured list")
         date_list = build_date_list(prog, dates_to_use)
         result = scrape_url(f"data:text/plain,{date_list}", prompt, graph_config, SmartScraperGraph)
-        if result.get("has_dates_on_page") is not True:
+        if not (result.get("has_dates_on_page") is True and has_current_dates(result)):
             result = scrape_url(prog["url"], prompt, graph_config, SmartScraperGraph)
     else:
         result = scrape_url(prog["url"], prompt, graph_config, SmartScraperGraph)
@@ -769,7 +808,7 @@ def worker_pass1(args):
         result["external_portal"] = apply_url
 
     # If no dates found, check document links (PDF/DOCX) on the page
-    if html and result.get("status") == "ok" and result.get("has_dates_on_page") is not True:
+    if html and result.get("status") == "ok" and not (result.get("has_dates_on_page") is True and has_current_dates(result)):
         doc_links = find_pdf_links(html, prog["url"])
         for doc_url in doc_links:
             log.info(f"  Trying document: {doc_url}")
@@ -789,7 +828,7 @@ def worker_pass1(args):
                     break
 
     # If still no dates, follow announcement links on the page
-    if html and result.get("status") == "ok" and result.get("has_dates_on_page") is not True:
+    if html and result.get("status") == "ok" and not (result.get("has_dates_on_page") is True and has_current_dates(result)):
         announcement_links = find_announcement_links(html, prog["url"])
         for ann_url in announcement_links:
             if _shutdown:
@@ -805,7 +844,7 @@ def worker_pass1(args):
 
     # No useful date info found, check sitemap and subpages
     if (result.get("status") == "ok"
-            and result.get("has_dates_on_page") is not True
+            and not (result.get("has_dates_on_page") is True and has_current_dates(result))
             and not result.get("apply_button_url")):
         sub = try_subpages(prog["url"], prompt, graph_config, SmartScraperGraph)
         if sub.get("has_dates_on_page") is True:
@@ -821,11 +860,15 @@ def worker_pass2(args):
     if _shutdown:
         return {"prog_id": prog_id, "status": "cancelled", "scraped_at": now_utc()}
 
-    # If external portal, try sitemap first to find a better entry page
-    sitemap_hits = fetch_sitemap_urls(apply_url)
-    if sitemap_hits:
-        log.info(f"  External portal sitemap found {len(sitemap_hits)} relevant pages")
-        apply_url = sitemap_hits[0]
+    # If external portal (different domain), try sitemap first to find a better entry page
+    from urllib.parse import urlparse
+    src_domain  = urlparse(source_url).netloc.lstrip("www.")
+    apply_domain = urlparse(apply_url).netloc.lstrip("www.")
+    if apply_domain and apply_domain != src_domain:
+        sitemap_hits = fetch_sitemap_urls(apply_url)
+        if sitemap_hits:
+            log.info(f"  External portal sitemap found {len(sitemap_hits)} relevant pages")
+            apply_url = sitemap_hits[0]
 
     log.info(f"[Pass2 {idx}/{total}] {apply_url[:80]}")
     result = scrape_url(apply_url, prompt, graph_config, SmartScraperGraph)
@@ -1153,9 +1196,13 @@ def main():
 
     if args.ids:
         target_ids = set(args.ids.split(","))
-        existing_p1 = [r for r in existing_p1 if r.get("prog_id") not in target_ids]
+        # Only wipe pass1 cache for target IDs when actually re-running pass1
+        if not args.pass2_only:
+            existing_p1 = [r for r in existing_p1 if r.get("prog_id") not in target_ids]
         programmes = [p for p in all_programmes if p["id"] in target_ids]
         log.info(f"--ids: targeting {len(programmes)} specific programmes")
+    else:
+        target_ids = set()
 
     if not args.pass2_only:
         new_p1 = run_pass1(programmes, graph_config, SmartScraperGraph, args.workers, resume_ids)
@@ -1175,7 +1222,7 @@ def main():
         log.error("No pass1 results. Exiting.")
         sys.exit(1)
 
-    existing_p2 = load_json_safe(PASS2_JSON)
+    existing_p2 = [r for r in load_json_safe(PASS2_JSON) if r.get("prog_id") not in target_ids]
     done_p2_ids = {r["prog_id"] for r in existing_p2 if r.get("prog_id")}
     new_p2      = run_pass2(all_p1, prog_map, graph_config, SmartScraperGraph, args.workers, done_p2_ids)
     all_p2      = existing_p2 + new_p2
