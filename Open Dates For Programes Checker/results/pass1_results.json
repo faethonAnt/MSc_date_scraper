@@ -36,10 +36,17 @@
     "scraped_at": "2026-06-10T10:14:30.638128+00:00"
   },
   {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"Οκτώβριος 2025\", \"application_deadline\": \"NA\", \"intake_semester\": \"Fall 2025\", \"apply_button_url\": \"https://resuscitation.uniwa.gr/grammateia/apply/\", \"has_dates_on_page\": true, \"application_status\": \"not_mentioned\", \"notes\": \"NA\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "application_open_date": "01 Απριλίου 2026",
+    "application_deadline": "31 Ιουνίου 2026",
+    "intake_semester": "October 2024",
+    "apply_button_url": "https://resuscitation.uniwa.gr/en/secretariat/apply/",
+    "has_dates_on_page": true,
+    "application_status": "closed",
+    "notes": "Η προθεσμία για την υποβολή υποψηφιότητας έληξε. Applications closed",
+    "status": "ok",
+    "found_on_subpage": "https://resuscitation.uniwa.gr/grammateia/apply/",
     "prog_id": "1809",
-    "scraped_at": "2026-06-10T10:14:39.750146+00:00"
+    "scraped_at": "2026-06-10T11:44:38.460613+00:00"
   },
   {
     "application_open_date": null,
@@ -66,10 +73,16 @@
     "scraped_at": "2026-06-10T10:14:52.424276+00:00"
   },
   {
-    "content": "application_open_date: null, application_deadline: null, intake_semester: null, apply_button_url: null, has_dates_on_page: false, application_status: not_mentioned, notes: null",
+    "application_open_date": "27.03.2025",
+    "application_deadline": null,
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": null,
     "status": "ok",
     "prog_id": "1936",
-    "scraped_at": "2026-06-10T10:14:52.872100+00:00"
+    "scraped_at": "2026-06-10T11:48:07.833325+00:00"
   },
   {
     "application_open_date": "30/01/2026",
@@ -134,16 +147,16 @@
     "scraped_at": "2026-06-10T10:15:49.876480+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
+    "application_open_date": "7-11-2025",
+    "application_deadline": "7-11-2025",
     "intake_semester": null,
     "apply_button_url": null,
-    "has_dates_on_page": false,
+    "has_dates_on_page": true,
     "application_status": "not_mentioned",
     "notes": null,
     "status": "ok",
     "prog_id": "1808",
-    "scraped_at": "2026-06-10T10:16:03.378522+00:00"
+    "scraped_at": "2026-06-10T11:48:08.001878+00:00"
   },
   {
     "application_open_date": null,
@@ -189,10 +202,10 @@
     "apply_button_url": null,
     "has_dates_on_page": true,
     "application_status": "not_mentioned",
-    "notes": null,
+    "notes": "No specific application dates, deadlines or application status information provided.",
     "status": "ok",
     "prog_id": "1020",
-    "scraped_at": "2026-06-10T10:16:24.182668+00:00"
+    "scraped_at": "2026-06-10T12:22:59.187384+00:00"
   },
   {
     "application_open_date": "05/04/2021",
@@ -225,16 +238,17 @@
     "scraped_at": "2026-06-10T10:16:33.929113+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
+    "application_open_date": "2026-04-01",
+    "application_deadline": "2026-07-31",
+    "intake_semester": "2026-2027",
+    "apply_button_url": "https://energy.des-unipi.gr/application-form-msc-energy-strategy-law-and-economics/",
     "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
+    "application_status": "open",
+    "notes": "Applications are for the academic year 2026-2027, with specific calls and documents linked. The exact open and deadline dates are inferred from the context of the call for applications 2026-2027.",
     "status": "ok",
+    "found_in_announcement": "https://energy.des-unipi.gr/plirofories/en-call-for-applications/",
     "prog_id": "1043",
-    "scraped_at": "2026-06-10T10:16:38.773022+00:00"
+    "scraped_at": "2026-06-10T11:49:08.369118+00:00"
   },
   {
     "status": "error",
@@ -262,11 +276,11 @@
     "apply_button_url": "https://www.uoc.gr/en/apply.html",
     "has_dates_on_page": true,
     "application_status": "not_mentioned",
-    "notes": null,
+    "notes": "Applications are open for the program starting in October and February; no specific application deadline dates are provided.",
     "status": "ok",
     "external_portal": "https://www.uoc.gr/en/apply.html",
     "prog_id": "1088",
-    "scraped_at": "2026-06-10T10:17:07.309336+00:00"
+    "scraped_at": "2026-06-10T12:23:27.702189+00:00"
   },
   {
     "application_open_date": null,
@@ -306,36 +320,17 @@
     "scraped_at": "2026-06-10T10:17:13.173482+00:00"
   },
   {
-    "content": null,
+    "application_open_date": null,
+    "application_deadline": null,
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": null,
     "status": "ok",
+    "found_on_subpage": "https://www.imbb.forth.gr/future-students",
     "prog_id": "1075",
-    "scraped_at": "2026-06-10T10:17:14.793142+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1439",
-    "scraped_at": "2026-06-10T10:17:23.347343+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1444",
-    "scraped_at": "2026-06-10T10:17:26.170075+00:00"
+    "scraped_at": "2026-06-10T12:23:39.926298+00:00"
   },
   {
     "application_open_date": "Monday, June 1st, 2026",
@@ -362,32 +357,6 @@
     "scraped_at": "2026-06-10T10:17:28.465771+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": "No specific application dates, deadlines, or semester intake information found on the page.",
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1446",
-    "scraped_at": "2026-06-10T10:17:33.949315+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": "2025-26",
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": true,
-    "application_status": "open",
-    "notes": "Applications are open for the academic year 2025-26 and the submission link is provided.",
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1477",
-    "scraped_at": "2026-06-10T10:17:39.704881+00:00"
-  },
-  {
     "application_open_date": "Monday, May 4, 2026",
     "application_deadline": "Monday, June 15, 2026, at 13:00 CET",
     "intake_semester": "2026–2027",
@@ -398,19 +367,6 @@
     "status": "ok",
     "prog_id": "1470",
     "scraped_at": "2026-06-10T10:17:48.170449+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1478",
-    "scraped_at": "2026-06-10T10:17:49.522238+00:00"
   },
   {
     "application_open_date": "02/12/2025",
@@ -498,16 +454,17 @@
     "scraped_at": "2026-06-10T10:18:28.592086+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": "Academic Year 2026-2027",
-    "apply_button_url": null,
+    "application_open_date": "09/03/2026",
+    "application_deadline": "unknown",
+    "intake_semester": "Academic Year 2026-27",
+    "apply_button_url": "https://www.uoa.gr/apply_now",
     "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
+    "application_status": "coming_soon",
+    "notes": "Application open date is 09/03/2026; no specific application deadline provided; upcoming academic year 2026-27.",
     "status": "ok",
+    "external_portal": "https://www.uoa.gr/apply_now",
     "prog_id": "1501",
-    "scraped_at": "2026-06-10T10:18:29.175728+00:00"
+    "scraped_at": "2026-06-10T11:50:16.481918+00:00"
   },
   {
     "application_open_date": "The application period for September 2026 entry is now open!",
@@ -520,18 +477,6 @@
     "status": "ok",
     "prog_id": "1186",
     "scraped_at": "2026-06-10T10:18:32.114713+00:00"
-  },
-  {
-    "application_open_date": "16 September 2025",
-    "application_deadline": "30 January 2026",
-    "intake_semester": "Fall 2025",
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "open",
-    "notes": "Please note that the courses will start on Monday 06 October 2025.",
-    "status": "ok",
-    "prog_id": "1191",
-    "scraped_at": "2026-06-10T10:18:36.916014+00:00"
   },
   {
     "application_open_date": "January 12, 2026",
@@ -586,23 +531,29 @@
     "scraped_at": "2026-06-10T10:19:29.294167+00:00"
   },
   {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"September 2026\", \"application_deadline\": \"not specified\", \"intake_semester\": \"June 2026\", \"apply_button_url\": null, \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"Next intake is in June 2026 with applications opening in September 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "application_open_date": "September 2026",
+    "application_deadline": "applications accepted until June 2026",
+    "intake_semester": "June 2026",
+    "apply_button_url": "https://hcimaster.upatras.gr/wp-content/uploads/2025/11/HCIMASTERposter2025admissions.pptx.pdf",
+    "has_dates_on_page": true,
+    "application_status": "coming_soon",
+    "notes": "Next intake in June 2026, applications open in September 2026.",
+    "status": "ok",
     "prog_id": "1236",
-    "scraped_at": "2026-06-10T10:19:31.099787+00:00"
+    "scraped_at": "2026-06-10T12:23:51.820350+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": "Starts October each year",
+    "application_open_date": "June (around)",
+    "application_deadline": "not explicitly specified",
+    "intake_semester": "October each year",
     "apply_button_url": "https://www.physics.uoc.gr/en/masters",
     "has_dates_on_page": true,
     "application_status": "not_mentioned",
-    "notes": null,
+    "notes": "The application process begins around June with an open call, but specific application deadlines are not mentioned.",
     "status": "ok",
     "external_portal": "https://www.physics.uoc.gr/en/masters",
     "prog_id": "1271",
-    "scraped_at": "2026-06-10T10:19:34.563837+00:00"
+    "scraped_at": "2026-06-10T11:50:26.318478+00:00"
   },
   {
     "application_open_date": "July 2025",
@@ -782,10 +733,16 @@
     "scraped_at": "2026-06-10T10:21:00.339250+00:00"
   },
   {
-    "status": "error",
-    "error": "unwrap_content returned None",
+    "application_open_date": null,
+    "application_deadline": "31 August 2026 (non-Greek applicants), 15 September 2026 (Greek applicants)",
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": "Multiple application deadlines specified for different applicant groups.",
+    "status": "ok",
     "prog_id": "1289",
-    "scraped_at": "2026-06-10T10:21:13.316269+00:00"
+    "scraped_at": "2026-06-10T11:50:28.899417+00:00"
   },
   {
     "application_open_date": null,
@@ -812,10 +769,16 @@
     "scraped_at": "2026-06-10T10:21:29.694837+00:00"
   },
   {
-    "content": null,
+    "application_open_date": null,
+    "application_deadline": "26 August 2026",
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": null,
     "status": "ok",
     "prog_id": "1299",
-    "scraped_at": "2026-06-10T10:22:44.673841+00:00"
+    "scraped_at": "2026-06-10T11:50:37.030275+00:00"
   },
   {
     "application_open_date": null,
@@ -830,10 +793,16 @@
     "scraped_at": "2026-06-10T10:22:47.812908+00:00"
   },
   {
-    "content": null,
+    "application_open_date": null,
+    "application_deadline": "26 August 2026",
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": null,
     "status": "ok",
     "prog_id": "1294",
-    "scraped_at": "2026-06-10T10:22:49.319526+00:00"
+    "scraped_at": "2026-06-10T11:50:31.955249+00:00"
   },
   {
     "application_open_date": null,
@@ -944,10 +913,16 @@
     "scraped_at": "2026-06-10T10:23:21.519140+00:00"
   },
   {
-    "content": null,
+    "application_open_date": null,
+    "application_deadline": "26 August 2026",
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": null,
     "status": "ok",
     "prog_id": "1302",
-    "scraped_at": "2026-06-10T10:23:24.004646+00:00"
+    "scraped_at": "2026-06-10T11:50:48.643806+00:00"
   },
   {
     "application_open_date": null,
@@ -1019,16 +994,29 @@
     "scraped_at": "2026-06-10T10:24:33.250368+00:00"
   },
   {
-    "content": null,
+    "application_open_date": null,
+    "application_deadline": "31 August 2026, 15 September 2026",
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": "or until places are filled",
     "status": "ok",
     "prog_id": "1310",
-    "scraped_at": "2026-06-10T10:24:38.756840+00:00"
+    "scraped_at": "2026-06-10T11:50:39.529745+00:00"
   },
   {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"January 14th 2026\", \"application_deadline\": \"June 30th 2026\", \"intake_semester\": \"Academic Year 2026-27\", \"apply_button_url\": \"https://apply.maich.gr\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026.\"}\" }\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "application_open_date": "January 14th 2026",
+    "application_deadline": "June 30th 2026",
+    "intake_semester": "Academic Year 2026-27",
+    "apply_button_url": "https://apply.maich.gr",
+    "has_dates_on_page": true,
+    "application_status": "open",
+    "notes": "Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026.",
+    "status": "ok",
+    "external_portal": "https://apply.maich.gr",
     "prog_id": "1344",
-    "scraped_at": "2026-06-10T10:24:53.202125+00:00"
+    "scraped_at": "2026-06-10T12:23:55.233643+00:00"
   },
   {
     "status": "error",
@@ -1076,14 +1064,14 @@
     "application_open_date": null,
     "application_deadline": null,
     "intake_semester": null,
-    "apply_button_url": "https://foitites/aitiseis-eggrafa/aitisi-ypopsifiotitas/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
+    "apply_button_url": "https://morpheus.hmu.gr/application/new/1597",
+    "has_dates_on_page": true,
+    "application_status": "coming_soon",
+    "notes": "The program announces a call for expression of interest for the academic year 2026-2027 with application details provided, but no specific open or deadline dates are mentioned on the page.",
     "status": "ok",
-    "external_portal": "https://foitites/aitiseis-eggrafa/aitisi-ypopsifiotitas/",
+    "external_portal": "https://morpheus.hmu.gr/application/new/1597",
     "prog_id": "1387",
-    "scraped_at": "2026-06-10T10:25:33.193595+00:00"
+    "scraped_at": "2026-06-10T11:52:53.402424+00:00"
   },
   {
     "application_open_date": null,
@@ -1100,32 +1088,6 @@
   },
   {
     "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1408",
-    "scraped_at": "2026-06-10T10:25:46.316290+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1413",
-    "scraped_at": "2026-06-10T10:25:58.451023+00:00"
-  },
-  {
-    "application_open_date": null,
     "application_deadline": "24/08/2026 and 14/09/2026",
     "intake_semester": null,
     "apply_button_url": null,
@@ -1139,15 +1101,16 @@
   },
   {
     "application_open_date": null,
-    "application_deadline": null,
+    "application_deadline": "June 14th, 2023",
     "intake_semester": null,
     "apply_button_url": null,
     "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": "No specific application open date or deadline found on the page.",
+    "application_status": "coming_soon",
+    "notes": "The application deadline was extended to June 14th, 2023. No specific open date or current application status indicated.",
     "status": "ok",
+    "found_on_subpage": "https://masterneuroscience.gr/2024/05/31/extension-of-the-deadline-to-apply-to-athens-international-masters-programme-in-neurosciences/",
     "prog_id": "1395",
-    "scraped_at": "2026-06-10T10:26:00.041453+00:00"
+    "scraped_at": "2026-06-10T11:53:13.369389+00:00"
   },
   {
     "application_open_date": "February 1, 2026",
@@ -1384,15 +1347,15 @@
   },
   {
     "application_open_date": null,
-    "application_deadline": null,
+    "application_deadline": "submit by 31st August 2026",
     "intake_semester": null,
     "apply_button_url": null,
-    "has_dates_on_page": false,
+    "has_dates_on_page": true,
     "application_status": "not_mentioned",
-    "notes": "No specific application dates or deadlines found on the page.",
+    "notes": "Application deadline mentioned as 'submit by 31st August 2026'. No specific application open date or intake semester found. No direct apply button URL identified.",
     "status": "ok",
     "prog_id": "1519",
-    "scraped_at": "2026-06-10T10:28:21.198965+00:00"
+    "scraped_at": "2026-06-10T12:24:23.633565+00:00"
   },
   {
     "application_open_date": null,
@@ -1469,10 +1432,17 @@
     "scraped_at": "2026-06-10T10:30:12.083313+00:00"
   },
   {
-    "content": null,
+    "application_open_date": null,
+    "application_deadline": "Applications for the academic year 2025-26 are made throughout the year via email. No specific deadline date is provided.",
+    "intake_semester": null,
+    "apply_button_url": "https://aims.uniwa.gr/wp-content/uploads/sites/35/2025/02/MSc_APDEM_Application_Form_2025_Eng-1.pdf",
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": "Application deadline not specified; applications accepted throughout the year via email on a first-come, first-served basis.",
     "status": "ok",
+    "found_on_subpage": "https://aims.uniwa.gr/en/applications/applications",
     "prog_id": "1570",
-    "scraped_at": "2026-06-10T10:30:25.019413+00:00"
+    "scraped_at": "2026-06-10T12:24:46.639030+00:00"
   },
   {
     "application_open_date": "13/01/2025",
@@ -1549,15 +1519,15 @@
   },
   {
     "application_open_date": null,
-    "application_deadline": null,
+    "application_deadline": "COUNTDOWN: 00Days00Hours00Min00Sec",
     "intake_semester": null,
     "apply_button_url": "https://we-team.education/apply-now/",
     "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": "Counting down of the On-line Application closing, but no specific date found.",
+    "application_status": "open",
+    "notes": "The countdown suggests that the application is currently open and will close soon, but no specific open or deadline dates are provided.",
     "status": "ok",
     "prog_id": "1583",
-    "scraped_at": "2026-06-10T10:30:53.316181+00:00"
+    "scraped_at": "2026-06-10T11:54:48.140869+00:00"
   },
   {
     "application_open_date": null,
@@ -1573,10 +1543,16 @@
     "scraped_at": "2026-06-10T10:31:04.369706+00:00"
   },
   {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"13.05.2026\", \"application_deadline\": \"21 JUNE 2026\", \"intake_semester\": null, \"apply_button_url\": \"https://websites.auth.gr/appbio/wp-content/uploads/sites/168/2026/05/application-AppBio-EN-2026-27.doc\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"The programme is open for application submissions.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "application_open_date": "21 June 2026",
+    "application_deadline": "21 June 2026",
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "open",
+    "notes": null,
+    "status": "ok",
     "prog_id": "1576",
-    "scraped_at": "2026-06-10T10:31:08.201871+00:00"
+    "scraped_at": "2026-06-10T11:54:34.645580+00:00"
   },
   {
     "application_open_date": "2026-01-13",
@@ -1629,19 +1605,6 @@
     "scraped_at": "2026-06-10T10:31:37.841560+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1590",
-    "scraped_at": "2026-06-10T10:31:38.575096+00:00"
-  },
-  {
     "application_open_date": "05/06/2025",
     "application_deadline": "20/08/2024",
     "intake_semester": null,
@@ -1654,17 +1617,16 @@
     "scraped_at": "2026-06-10T10:31:43.267196+00:00"
   },
   {
-    "application_open_date": null,
+    "application_open_date": "October 2025",
     "application_deadline": null,
     "intake_semester": "October 2025",
-    "apply_button_url": "https://en.music.uoa.gr/fileadmin/depts/music.uoa.gr/www/uploads/ANAKOINOSEIS/2025-07/MA__32_in__32_BYZANTINE__32_MUSIC_info_2025.docx",
+    "apply_button_url": null,
     "has_dates_on_page": true,
     "application_status": "coming_soon",
-    "notes": "The program starts in October 2025 and the call for applications is linked, but no specific application opening date or deadline is explicitly mentioned on the page.",
+    "notes": "The program will start in October 2025 and there are specific prospect contacts provided. No explicit application deadline date is mentioned.",
     "status": "ok",
-    "external_portal": "https://en.music.uoa.gr/fileadmin/depts/music.uoa.gr/www/uploads/ANAKOINOSEIS/2025-07/MA__32_in__32_BYZANTINE__32_MUSIC_info_2025.docx",
     "prog_id": "1592",
-    "scraped_at": "2026-06-10T10:31:53.236838+00:00"
+    "scraped_at": "2026-06-10T11:55:27.233763+00:00"
   },
   {
     "application_open_date": null,
@@ -1781,10 +1743,16 @@
     "scraped_at": "2026-06-10T10:32:44.199554+00:00"
   },
   {
-    "status": "error",
-    "error": "Scraper returned None",
+    "application_open_date": "October each year",
+    "application_deadline": null,
+    "intake_semester": "October each year",
+    "apply_button_url": "https://mscs.uoc.gr/forensic-med/wp-content/uploads/2025/04/DIAVGEIA_Call-for-Applications-2025-26-EXTENSION.pdf",
+    "has_dates_on_page": true,
+    "application_status": "coming_soon",
+    "notes": "The application deadline/closing date is not explicitly mentioned, but applications open in October each year.",
+    "status": "ok",
     "prog_id": "1602",
-    "scraped_at": "2026-06-10T10:32:45.100733+00:00"
+    "scraped_at": "2026-06-10T12:25:31.604337+00:00"
   },
   {
     "application_open_date": null,
@@ -1811,16 +1779,17 @@
     "scraped_at": "2026-06-10T10:32:55.538650+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
+    "application_open_date": "28/11/2025",
+    "application_deadline": "06/03/2026",
+    "intake_semester": "August 2026",
     "apply_button_url": null,
     "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
+    "application_status": "open",
+    "notes": "The application open date is 28/11/2025, deadline is 06/03/2026, and enrolment starts in August 2026. The status is 'open' based on the open call for application submission date.",
     "status": "ok",
+    "found_on_subpage": "http://emmbiome.eu/important-dates/",
     "prog_id": "1651",
-    "scraped_at": "2026-06-10T10:32:59.780922+00:00"
+    "scraped_at": "2026-06-10T11:56:30.054372+00:00"
   },
   {
     "application_open_date": "5 March 2026",
@@ -1847,23 +1816,16 @@
     "scraped_at": "2026-06-10T10:33:13.427404+00:00"
   },
   {
-    "application_open_date": null,
+    "application_open_date": "Call for Expression of Interest for the Master\\'s Degree Program for the Academic Year 2026 - 2027",
     "application_deadline": null,
     "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
+    "apply_button_url": null,
     "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
+    "application_status": "coming_soon",
+    "notes": "The application opening date is specified, but no explicit deadline or specific intake semester is mentioned.",
     "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1654",
-    "scraped_at": "2026-06-10T10:33:16.413119+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": null, \"intake_semester\": null, \"apply_button_url\": null, \"has_dates_on_page\": true, \"application_status\": \"not_mentioned\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
     "prog_id": "1655",
-    "scraped_at": "2026-06-10T10:33:41.077471+00:00"
+    "scraped_at": "2026-06-10T11:56:50.417735+00:00"
   },
   {
     "application_open_date": "19 May 2026",
@@ -1933,10 +1895,10 @@
     "apply_button_url": null,
     "has_dates_on_page": true,
     "application_status": "not_mentioned",
-    "notes": null,
+    "notes": "Expected start 5 Oct 2026",
     "status": "ok",
     "prog_id": "1683",
-    "scraped_at": "2026-06-10T10:34:28.740450+00:00"
+    "scraped_at": "2026-06-10T12:26:00.383380+00:00"
   },
   {
     "application_open_date": "Applications are now open",
@@ -2050,10 +2012,17 @@
     "scraped_at": "2026-06-10T10:35:15.810987+00:00"
   },
   {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"08/11/2024\", \"application_deadline\": null, \"intake_semester\": null, \"apply_button_url\": \"https://admission/application_procedures\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"NA\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "application_open_date": "08/11/2024",
+    "application_deadline": null,
+    "intake_semester": "2026-27",
+    "apply_button_url": "https://admission/application_procedures",
+    "has_dates_on_page": true,
+    "application_status": "coming_soon",
+    "notes": "Application period for the academic year 2026-27 starts on 08/11/2024. No specific application closing date found.",
+    "status": "ok",
+    "external_portal": "https://admission/application_procedures",
     "prog_id": "1700",
-    "scraped_at": "2026-06-10T10:35:32.492018+00:00"
+    "scraped_at": "2026-06-10T11:57:37.570880+00:00"
   },
   {
     "application_open_date": null,
@@ -2080,22 +2049,28 @@
     "scraped_at": "2026-06-10T10:35:34.946261+00:00"
   },
   {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"April 30, 2026 (09.00 UTC+2 EET)\", \"application_deadline\": \"September 25, 2026 (14.00 UTC+2 EET)\", \"intake_semester\": \"2026-2027\", \"apply_button_url\": null, \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"The application submission is open from April 30, 2026, and the deadline is September 25, 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "application_open_date": null,
+    "application_deadline": "September 25, 2026",
+    "intake_semester": null,
+    "apply_button_url": null,
+    "has_dates_on_page": true,
+    "application_status": "not_mentioned",
+    "notes": "Application submission deadline: September 25, 2026 (14.00 UTC+2 EET).",
+    "status": "ok",
     "prog_id": "7",
-    "scraped_at": "2026-06-10T10:35:38.066584+00:00"
+    "scraped_at": "2026-06-10T11:57:25.759926+00:00"
   },
   {
     "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
+    "application_deadline": "January 12, 2026",
+    "intake_semester": "Spring 2026",
     "apply_button_url": null,
     "has_dates_on_page": true,
     "application_status": "not_mentioned",
     "notes": null,
     "status": "ok",
     "prog_id": "9",
-    "scraped_at": "2026-06-10T10:35:42.367227+00:00"
+    "scraped_at": "2026-06-10T11:57:34.355234+00:00"
   },
   {
     "application_open_date": "Monday 23 March 2026",
@@ -2146,10 +2121,17 @@
     "scraped_at": "2026-06-10T10:35:53.753263+00:00"
   },
   {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": null, \"intake_semester\": \"October of each year\", \"apply_button_url\": null, \"has_dates_on_page\": false, \"application_status\": \"not_mentioned\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "application_open_date": null,
+    "application_deadline": "Monday, March 23, 2026 for international applicants, Friday, June 26, 2026 for Greek applicants",
+    "intake_semester": "October 2025",
+    "apply_button_url": "https://apply.studyingreece.edu.gr/en/programmes/msc/23/details/geoinformatics",
+    "has_dates_on_page": true,
+    "application_status": "coming_soon",
+    "notes": "Results for international applicants will be announced in early April 2026; results for Greek applicants will be announced by the end of September 2026.",
+    "status": "ok",
+    "found_on_subpage": "http://geoinformatics.ntua.gr/admissions",
     "prog_id": "23",
-    "scraped_at": "2026-06-10T10:36:05.801348+00:00"
+    "scraped_at": "2026-06-10T11:57:39.993524+00:00"
   },
   {
     "application_open_date": "10/12/2025",
@@ -2167,17 +2149,17 @@
     "application_open_date": null,
     "application_deadline": null,
     "intake_semester": null,
-    "apply_button_url": "https://www.csd.uoc.gr/CSD/index.jsp?custom=admissions",
+    "apply_button_url": null,
     "has_dates_on_page": false,
     "application_status": "not_mentioned",
-    "notes": null,
+    "notes": "Information about application dates or deadlines is not provided on the page.",
     "status": "ok",
     "prog_id": "964",
-    "scraped_at": "2026-06-10T10:36:17.192938+00:00"
+    "scraped_at": "2026-06-10T12:27:11.014512+00:00"
   },
   {
     "application_open_date": null,
-    "application_deadline": null,
+    "application_deadline": "22 May 2026, 4 June 2026, 2 June 2026, 29 May 2026, 4/6/2026, 2/6/2026, 29/5/2026, 14/5/2026",
     "intake_semester": null,
     "apply_button_url": null,
     "has_dates_on_page": true,
@@ -2185,7 +2167,7 @@
     "notes": null,
     "status": "ok",
     "prog_id": "967",
-    "scraped_at": "2026-06-10T10:36:19.534397+00:00"
+    "scraped_at": "2026-06-10T12:26:15.671529+00:00"
   },
   {
     "application_open_date": "1/9/2025",
@@ -2201,17 +2183,17 @@
     "scraped_at": "2026-06-10T10:36:38.144074+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
+    "application_open_date": "30th September 2026",
+    "application_deadline": "until 30TH September 2026",
     "intake_semester": null,
-    "apply_button_url": "https://msc-biomed.edu.gr/application/",
+    "apply_button_url": "https://msc-biomed.edu.gr/el/aitisi/",
     "has_dates_on_page": true,
     "application_status": "open",
-    "notes": "The apply button is available at https://msc-biomed.edu.gr/application/ indicating that applications are currently open.",
+    "notes": "Postgraduate registrations until 30TH September 2026.",
     "status": "ok",
-    "found_on_subpage": "https://msc-biomed.edu.gr/application-form",
+    "found_on_subpage": "https://msc-biomed.edu.gr/el/postgraduate-registrations-due-date/",
     "prog_id": "8",
-    "scraped_at": "2026-06-10T10:36:52.575380+00:00"
+    "scraped_at": "2026-06-10T12:26:12.557912+00:00"
   },
   {
     "application_open_date": "2020-10-27",
@@ -2227,633 +2209,132 @@
     "scraped_at": "2026-06-10T10:38:13.756765+00:00"
   },
   {
-    "application_open_date": "01 Απριλίου 2026",
-    "application_deadline": "31 Ιουνίου 2026",
-    "intake_semester": "October 2024",
-    "apply_button_url": "https://resuscitation.uniwa.gr/en/secretariat/apply/",
-    "has_dates_on_page": true,
-    "application_status": "closed",
-    "notes": "Η προθεσμία για την υποβολή υποψηφιότητας έληξε. Applications closed",
-    "status": "ok",
-    "found_on_subpage": "https://resuscitation.uniwa.gr/grammateia/apply/",
-    "prog_id": "1809",
-    "scraped_at": "2026-06-10T11:44:38.460613+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1733",
-    "scraped_at": "2026-06-10T11:44:53.044332+00:00"
-  },
-  {
-    "application_open_date": "27.03.2025",
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1936",
-    "scraped_at": "2026-06-10T11:48:07.833325+00:00"
-  },
-  {
-    "application_open_date": "7-11-2025",
-    "application_deadline": "7-11-2025",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1808",
-    "scraped_at": "2026-06-10T11:48:08.001878+00:00"
-  },
-  {
-    "content": null,
-    "status": "ok",
-    "prog_id": "19",
-    "scraped_at": "2026-06-10T11:48:31.085195+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/\nCall log:\n  - navigating to \"https://mahep-upatras.gr/en/\", waiting until \"domcontentloaded\"\n",
-    "prog_id": "996",
-    "scraped_at": "2026-06-10T11:48:33.615020+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1020",
-    "scraped_at": "2026-06-10T11:48:44.222447+00:00"
-  },
-  {
-    "content": null,
-    "status": "ok",
-    "prog_id": "24",
-    "scraped_at": "2026-06-10T11:48:53.823953+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": "September 2022",
-    "apply_button_url": "https://www.emm-aces.org/apply/",
-    "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "Recruiting now for our next intake of ACES+ students starting in September 2022",
-    "status": "ok",
-    "external_portal": "https://www.emm-aces.org/apply/",
-    "prog_id": "1077",
-    "scraped_at": "2026-06-10T11:48:58.251922+00:00"
-  },
-  {
-    "application_open_date": "2026-04-01",
-    "application_deadline": "2026-07-31",
-    "intake_semester": "2026-2027",
-    "apply_button_url": "https://energy.des-unipi.gr/application-form-msc-energy-strategy-law-and-economics/",
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
     "has_dates_on_page": true,
     "application_status": "open",
-    "notes": "Applications are for the academic year 2026-2027, with specific calls and documents linked. The exact open and deadline dates are inferred from the context of the call for applications 2026-2027.",
+    "notes": "Applications shall be submitted exclusively electronically; applications for specific programs remain open until certain quotas are filled. Admission results will be announced on 29 July 2026.",
     "status": "ok",
-    "found_in_announcement": "https://energy.des-unipi.gr/plirofories/en-call-for-applications/",
-    "prog_id": "1043",
-    "scraped_at": "2026-06-10T11:49:08.369118+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": null, \"intake_semester\": null, \"apply_button_url\": \\\"https://www.uoc.gr/en/apply.html\\\", \"has_dates_on_page\": false, \"application_status\": \\\"not_mentioned\\\", \"notes\": null}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "prog_id": "1088",
-    "scraped_at": "2026-06-10T11:49:15.246535+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1439",
-    "scraped_at": "2026-06-10T11:49:25.567109+00:00"
-  },
-  {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1075",
-    "scraped_at": "2026-06-10T11:49:29.814708+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "Apply Now link points to https://dev.eap.gr/student-candidate/public/index/lang/en#/, but no specific deadline date is mentioned.",
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1444",
-    "scraped_at": "2026-06-10T11:49:30.179720+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1477",
-    "scraped_at": "2026-06-10T11:49:49.426029+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "submit by 31st August 2026",
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": true,
-    "application_status": "open",
-    "notes": "The application deadline is specified as 'submit by 31st August 2026'.",
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
+    "found_in_announcement": "https://www.eap.gr/en/2026/04/01/prosklisi-yia-tin-ekdilosi-endiapherontos-phitisis-se-9-proptikhiaka-1-idiko-programma-kai-60-metaptikhiaka-programmata-spoudon-yia-to-akadimaiko-etos-2026-2027/",
     "prog_id": "1446",
-    "scraped_at": "2026-06-10T11:49:50.807329+00:00"
+    "scraped_at": "2026-06-10T12:36:25.981427+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://europeanbusiness.law.auth.gr/applyonline/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": "No specific application open or deadline dates found on the page. The application link is provided, but no explicit dates or status are mentioned.",
-    "status": "ok",
-    "prog_id": "1492",
-    "scraped_at": "2026-06-10T11:49:52.894281+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "submit by 30 June 2024",
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#",
     "has_dates_on_page": true,
     "application_status": "open",
-    "notes": "The application deadline is specified as 'submit by 30 June 2024'.",
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications have been submitted respectively. Applications for other programmes with limited places are on a first-come, first-served basis. Admission results will be announced on 29 July 2026.",
     "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
+    "found_in_announcement": "https://www.eap.gr/en/2026/04/01/prosklisi-yia-tin-ekdilosi-endiapherontos-phitisis-se-9-proptikhiaka-1-idiko-programma-kai-60-metaptikhiaka-programmata-spoudon-yia-to-akadimaiko-etos-2026-2027/",
+    "prog_id": "1444",
+    "scraped_at": "2026-06-10T12:36:26.122216+00:00"
+  },
+  {
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
+    "has_dates_on_page": true,
+    "application_status": "open",
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications are submitted respectively. Applications exceeding available places are reserve and admitted first-come, first-served. Results announced on 29 July 2026.",
+    "status": "ok",
+    "found_in_announcement": "https://www.eap.gr/en/2026/04/01/prosklisi-yia-tin-ekdilosi-endiapherontos-phitisis-se-9-proptikhiaka-1-idiko-programma-kai-60-metaptikhiaka-programmata-spoudon-yia-to-akadimaiko-etos-2026-2027/",
+    "prog_id": "1439",
+    "scraped_at": "2026-06-10T12:36:26.211244+00:00"
+  },
+  {
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
+    "has_dates_on_page": true,
+    "application_status": "open",
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications are submitted respectively. Applications exceeding available places are reserve and admitted first-come, first-served. Results announced on 29 July 2026.",
+    "status": "ok",
+    "found_in_announcement": "https://www.eap.gr/en/tag/invitation-en/",
+    "prog_id": "1477",
+    "scraped_at": "2026-06-10T12:36:27.127199+00:00"
+  },
+  {
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
+    "has_dates_on_page": true,
+    "application_status": "open",
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications are submitted respectively. Applications exceeding available places are reserve and admitted first-come, first-served. Results announced on 29 July 2026.",
+    "status": "ok",
+    "found_in_announcement": "https://www.eap.gr/en/tag/invitation-en/",
     "prog_id": "1478",
-    "scraped_at": "2026-06-10T11:50:09.188812+00:00"
+    "scraped_at": "2026-06-10T12:36:27.132016+00:00"
   },
   {
-    "application_open_date": "09/03/2026",
-    "application_deadline": "unknown",
-    "intake_semester": "Academic Year 2026-27",
-    "apply_button_url": "https://www.uoa.gr/apply_now",
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
     "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "Application open date is 09/03/2026; no specific application deadline provided; upcoming academic year 2026-27.",
+    "application_status": "open",
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications are submitted respectively. Applications exceeding available places are reserve and admitted first-come, first-served. Results announced on 29 July 2026.",
     "status": "ok",
-    "external_portal": "https://www.uoa.gr/apply_now",
-    "prog_id": "1501",
-    "scraped_at": "2026-06-10T11:50:16.481918+00:00"
-  },
-  {
-    "application_open_date": "June (around)",
-    "application_deadline": "not explicitly specified",
-    "intake_semester": "October each year",
-    "apply_button_url": "https://www.physics.uoc.gr/en/masters",
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": "The application process begins around June with an open call, but specific application deadlines are not mentioned.",
-    "status": "ok",
-    "external_portal": "https://www.physics.uoc.gr/en/masters",
-    "prog_id": "1271",
-    "scraped_at": "2026-06-10T11:50:26.318478+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "31 August 2026 (non-Greek applicants), 15 September 2026 (Greek applicants)",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": "Multiple application deadlines specified for different applicant groups.",
-    "status": "ok",
-    "prog_id": "1289",
-    "scraped_at": "2026-06-10T11:50:28.899417+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"September 2026\", \"application_deadline\": \"null\", \"intake_semester\": \"June 2026\", \"apply_button_url\": \"https://hcimaster.upatras.gr/wp-content/uploads/2025/11/HCIMASTERposter2025admissions.pptx.pdf\", \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"Applications open in September 2026 for the next intake in June 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "prog_id": "1236",
-    "scraped_at": "2026-06-10T11:50:29.401986+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "26 August 2026",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1294",
-    "scraped_at": "2026-06-10T11:50:31.955249+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "26 August 2026",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1299",
-    "scraped_at": "2026-06-10T11:50:37.030275+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "31 August 2026, 15 September 2026",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": "or until places are filled",
-    "status": "ok",
-    "prog_id": "1310",
-    "scraped_at": "2026-06-10T11:50:39.529745+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1328",
-    "scraped_at": "2026-06-10T11:50:47.971422+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "26 August 2026",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1302",
-    "scraped_at": "2026-06-10T11:50:48.643806+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"January 14th 2026\", \"application_deadline\": \"June 30th 2026\", \"intake_semester\": \"Academic Year 2026-27\", \"apply_button_url\": \"https://apply.maich.gr\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Online applications open from January 14th 2026 to June 30th 2026 for the academic year 2026-2027.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "prog_id": "1343",
-    "scraped_at": "2026-06-10T11:51:13.522917+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": \"January 14th 2026\", \"application_deadline\": \"June 30th 2026\", \"intake_semester\": \"Academic Year 2026-2027\", \"apply_button_url\": \"https://apply.maich.gr\", \"has_dates_on_page\": true, \"application_status\": \"open\", \"notes\": \"Online applications for the academic year 2026-2027 are open from January 14th 2026 to June 30th 2026.\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "prog_id": "1344",
-    "scraped_at": "2026-06-10T11:51:34.657113+00:00"
-  },
-  {
-    "content": "application_open_date: 'January 14th 2026', application_deadline: 'June 30th 2026', intake_semester: 'Academic Year 2026-2027', apply_button_url: 'https://apply.maich.gr', has_dates_on_page: true, application_status: 'open', notes: 'Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026.'}",
-    "status": "ok",
-    "prog_id": "1333",
-    "scraped_at": "2026-06-10T11:52:34.618093+00:00"
-  },
-  {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1233",
-    "scraped_at": "2026-06-10T11:52:44.195098+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://morpheus.hmu.gr/application/new/1597",
-    "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "The program announces a call for expression of interest for the academic year 2026-2027 with application details provided, but no specific open or deadline dates are mentioned on the page.",
-    "status": "ok",
-    "external_portal": "https://morpheus.hmu.gr/application/new/1597",
-    "prog_id": "1387",
-    "scraped_at": "2026-06-10T11:52:53.402424+00:00"
-  },
-  {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1363",
-    "scraped_at": "2026-06-10T11:52:57.829161+00:00"
-  },
-  {
-    "content": "application_open_date: 'January 14th 2026', application_deadline: 'June 30th 2026', intake_semester: 'Academic year 2026-2027', apply_button_url: 'https://apply.maich.gr', has_dates_on_page: true, application_status: 'open', notes: 'Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026.'}",
-    "status": "ok",
-    "prog_id": "1345",
-    "scraped_at": "2026-06-10T11:52:59.832927+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "June 14th, 2023",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "The application deadline was extended to June 14th, 2023. No specific open date or current application status indicated.",
-    "status": "ok",
-    "found_on_subpage": "https://masterneuroscience.gr/2024/05/31/extension-of-the-deadline-to-apply-to-athens-international-masters-programme-in-neurosciences/",
-    "prog_id": "1395",
-    "scraped_at": "2026-06-10T11:53:13.369389+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "prog_id": "1413",
-    "scraped_at": "2026-06-10T11:53:19.881881+00:00"
-  },
-  {
-    "content": "{\n  \"application_open_date\": \"null\",\n  \"application_deadline\": \"submit by 31st August 2026 or applications accepted until March 2026\" or null,\n  \"intake_semester\": \"null\",\n  \"apply_button_url\": \"https://dev.eap.gr/student-candidate/public/index/lang/en#/\",\n  \"has_dates_on_page\": true,\n  \"application_status\": \"open\" or \"coming_soon\" or null,\n  \"notes\": \"The application deadlines indicate a final date of 31st August 2026 and possibly another deadline in March 2026.\"\n}",
-    "status": "ok",
+    "found_in_announcement": "https://www.eap.gr/en/tag/invitation-en/",
     "prog_id": "1408",
-    "scraped_at": "2026-06-10T11:54:27.147154+00:00"
+    "scraped_at": "2026-06-10T12:36:27.502894+00:00"
   },
   {
-    "application_open_date": "21 June 2026",
-    "application_deadline": "21 June 2026",
-    "intake_semester": null,
-    "apply_button_url": null,
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
     "has_dates_on_page": true,
     "application_status": "open",
-    "notes": null,
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications are submitted respectively. Applications exceeding available places are reserve and admitted first-come, first-served. Results announced on 29 July 2026.",
     "status": "ok",
-    "prog_id": "1576",
-    "scraped_at": "2026-06-10T11:54:34.645580+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "COUNTDOWN: 00Days00Hours00Min00Sec",
-    "intake_semester": null,
-    "apply_button_url": "https://we-team.education/apply-now/",
-    "has_dates_on_page": true,
-    "application_status": "open",
-    "notes": "The countdown suggests that the application is currently open and will close soon, but no specific open or deadline dates are provided.",
-    "status": "ok",
-    "prog_id": "1583",
-    "scraped_at": "2026-06-10T11:54:48.140869+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1519",
-    "scraped_at": "2026-06-10T11:55:11.503702+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "submit by 30.06.2024 or for certificates issued by 19.11.2019",
-    "intake_semester": null,
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": "The application deadline is implied to be June 30, 2024, based on language certificates date requirements. No specific opening date or intake semester is explicitly mentioned.",
-    "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
+    "found_in_announcement": "https://www.eap.gr/en/tag/invitation-en/",
     "prog_id": "1590",
-    "scraped_at": "2026-06-10T11:55:12.384061+00:00"
+    "scraped_at": "2026-06-10T12:36:28.052848+00:00"
   },
   {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1570",
-    "scraped_at": "2026-06-10T11:55:13.217659+00:00"
-  },
-  {
-    "application_open_date": "October 2025",
-    "application_deadline": null,
-    "intake_semester": "October 2025",
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "The program will start in October 2025 and there are specific prospect contacts provided. No explicit application deadline date is mentioned.",
-    "status": "ok",
-    "prog_id": "1592",
-    "scraped_at": "2026-06-10T11:55:27.233763+00:00"
-  },
-  {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1598",
-    "scraped_at": "2026-06-10T11:55:38.356263+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": \"second round of applications for the academic year 2026-27\", \"intake_semester\": \"October each year\", \"apply_button_url\": null, \"has_dates_on_page\": true, \"application_status\": \"coming_soon\", \"notes\": \"second round of applications for 2026-27 is now open\" }\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "prog_id": "1602",
-    "scraped_at": "2026-06-10T11:55:58.838171+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1593",
-    "scraped_at": "2026-06-10T11:56:08.134636+00:00"
-  },
-  {
-    "application_open_date": "28/11/2025",
-    "application_deadline": "06/03/2026",
-    "intake_semester": "August 2026",
-    "apply_button_url": null,
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
     "has_dates_on_page": true,
     "application_status": "open",
-    "notes": "The application open date is 28/11/2025, deadline is 06/03/2026, and enrolment starts in August 2026. The status is 'open' based on the open call for application submission date.",
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications are submitted respectively. Applications exceeding available places are reserve and admitted first-come, first-served. Results announced on 29 July 2026.",
     "status": "ok",
-    "found_on_subpage": "http://emmbiome.eu/important-dates/",
-    "prog_id": "1651",
-    "scraped_at": "2026-06-10T11:56:30.054372+00:00"
+    "found_in_announcement": "https://www.eap.gr/en/tag/invitation-en/",
+    "prog_id": "1413",
+    "scraped_at": "2026-06-10T12:36:28.055131+00:00"
   },
   {
-    "application_open_date": null,
-    "application_deadline": "submit by 31st August 2026",
-    "intake_semester": "2025-26 academic year",
-    "apply_button_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
+    "application_open_date": "1 April 2026",
+    "application_deadline": "30 June 2026, until 11:59 a.m.",
+    "intake_semester": "Academic Year 2026–2027",
+    "apply_button_url": "https://dev.eap.gr/student-candidate/public#/",
     "has_dates_on_page": true,
     "application_status": "open",
-    "notes": "The application deadline is specified as 'submit by 31st August 2026'.",
+    "notes": "Applications shall be submitted exclusively electronically. Applications for EAG and EAPS will remain open until 500 and 260 applications are submitted respectively. Applications exceeding available places are reserve and admitted first-come, first-served. Results announced on 29 July 2026.",
     "status": "ok",
-    "external_portal": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
+    "found_in_announcement": "https://www.eap.gr/en/tag/invitation-en/",
     "prog_id": "1654",
-    "scraped_at": "2026-06-10T11:56:42.155516+00:00"
+    "scraped_at": "2026-06-10T12:36:28.456893+00:00"
   },
   {
-    "application_open_date": "Call for Expression of Interest for the Master\\'s Degree Program for the Academic Year 2026 - 2027",
-    "application_deadline": null,
+    "application_open_date": "06 October 2025",
+    "application_deadline": "30 January 2026",
     "intake_semester": null,
     "apply_button_url": null,
     "has_dates_on_page": true,
     "application_status": "coming_soon",
-    "notes": "The application opening date is specified, but no explicit deadline or specific intake semester is mentioned.",
+    "notes": "Application deadline is January 30, 2026; courses start October 6, 2025.",
     "status": "ok",
-    "prog_id": "1655",
-    "scraped_at": "2026-06-10T11:56:50.417735+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/\nCall log:\n  - navigating to \"http://olympicmaster.uop.gr/\", waiting until \"domcontentloaded\"\n",
-    "prog_id": "1644",
-    "scraped_at": "2026-06-10T11:57:12.849952+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1669",
-    "scraped_at": "2026-06-10T11:57:14.349107+00:00"
-  },
-  {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1656",
-    "scraped_at": "2026-06-10T11:57:20.855748+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": "5 Oct 2026",
-    "apply_button_url": "https://ds4health.uoi.gr/apply",
-    "has_dates_on_page": true,
-    "application_status": "accepting applications",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1683",
-    "scraped_at": "2026-06-10T11:57:22.419473+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "September 25, 2026",
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": "Application submission deadline: September 25, 2026 (14.00 UTC+2 EET).",
-    "status": "ok",
-    "prog_id": "7",
-    "scraped_at": "2026-06-10T11:57:25.759926+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "January 12, 2026",
-    "intake_semester": "Spring 2026",
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "9",
-    "scraped_at": "2026-06-10T11:57:34.355234+00:00"
-  },
-  {
-    "application_open_date": "08/11/2024",
-    "application_deadline": null,
-    "intake_semester": "2026-27",
-    "apply_button_url": "https://admission/application_procedures",
-    "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "Application period for the academic year 2026-27 starts on 08/11/2024. No specific application closing date found.",
-    "status": "ok",
-    "external_portal": "https://admission/application_procedures",
-    "prog_id": "1700",
-    "scraped_at": "2026-06-10T11:57:37.570880+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://msc-biomed.edu.gr/application/",
-    "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "The exact start date and deadlines are not explicitly provided, but information about application start is linked and the program usually begins in the autumn semester.",
-    "status": "ok",
-    "prog_id": "8",
-    "scraped_at": "2026-06-10T11:57:38.267617+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "Monday, March 23, 2026 for international applicants, Friday, June 26, 2026 for Greek applicants",
-    "intake_semester": "October 2025",
-    "apply_button_url": "https://apply.studyingreece.edu.gr/en/programmes/msc/23/details/geoinformatics",
-    "has_dates_on_page": true,
-    "application_status": "coming_soon",
-    "notes": "Results for international applicants will be announced in early April 2026; results for Greek applicants will be announced by the end of September 2026.",
-    "status": "ok",
-    "found_on_subpage": "http://geoinformatics.ntua.gr/admissions",
-    "prog_id": "23",
-    "scraped_at": "2026-06-10T11:57:39.993524+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": "https://www.csd.uoc.gr/CSD/index.jsp?custom=admissions",
-    "has_dates_on_page": false,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "964",
-    "scraped_at": "2026-06-10T11:57:48.121008+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "apply_button_url": null,
-    "has_dates_on_page": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "967",
-    "scraped_at": "2026-06-10T11:57:54.593398+00:00"
+    "prog_id": "1191",
+    "scraped_at": "2026-06-10T13:08:02.032649+00:00"
   }
 ]

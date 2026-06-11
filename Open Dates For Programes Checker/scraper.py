@@ -179,7 +179,7 @@ PDF_KEYWORDS = [
 
 ANNOUNCEMENT_KEYWORDS = [
     # English
-    "call for applications", "call for admission", "application deadline",
+    "invitation","call-for-admission","call for applications", "call for admission", "application deadline",
     "deadline extension", "extended deadline", "applications open",
     "applications are open", "applications now open", "admission announcement",
     "new deadline", "application period", "intake",

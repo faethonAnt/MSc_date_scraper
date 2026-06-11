@@ -176,5 +176,13 @@
     "apply_url": "https://dev.eap.gr/student-candidate/public/index/lang/en#/",
     "source_url": "https://www.eap.gr/en/protection-of-cultural-heritage-and-monuments-of-nature-from-the-effects-of-climate-change/",
     "scraped_at": "2026-06-10T11:58:57.034988+00:00"
+  },
+  {
+    "status": "error",
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application\nCall log:\n  - navigating to \"https://admission/application\", waiting until \"domcontentloaded\"\n",
+    "prog_id": "1233",
+    "apply_url": "https://admission/application",
+    "source_url": "https://meditarch.arch.uoa.gr/",
+    "scraped_at": "2026-06-10T12:27:24.939697+00:00"
   }
 ]

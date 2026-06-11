@@ -6076,3 +6076,831 @@ Call log:
 14:58:58 [INFO] =======================================================
 
 14:58:58 [INFO] Errors -> results/errors.json (21 records)
+15:22:49 [INFO] Loaded 195 programmes from programmes-api_msc-programmes.csv
+15:22:49 [INFO] Programmes : 195 | Workers : 3 | Model: openai/gpt-4.1-nano
+15:22:49 [INFO] --missing-only: 34 programmes without dates
+15:22:49 [INFO] Pass 1: 34 programmes | 3 workers
+15:22:49 [INFO] [Pass1 1/34] University of Crete — Cutting Edge Technologies in Vision Sciences
+15:22:49 [INFO] [Pass1 2/34] National Technical University of Athens — Analysis and Design of Structures
+15:22:49 [INFO] [Pass1 3/34] National Technical University of Athens — MSc in Environment and Development
+15:22:50 [INFO] Starting scraping with playwright...
+15:22:50 [INFO] Starting scraping with playwright...
+15:22:52 [INFO]   Found 4 valid dates, building structured list
+15:22:52 [INFO] Content scraped
+15:22:52 [INFO] Content scraped
+15:22:54 [INFO]   Trying document: http://postgrad.structural.civil.ntua.gr/assets/files/digital_brochure_ADS_24.pdf
+15:22:55 [WARNING] fetch_html failed for http://postgrad.structural.civil.ntua.gr/sitemap.xml: 404 Client Error: Not Found for url: http://postgrad.structural.civil.ntua.gr/sitemap.xml
+15:22:55 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/admissions
+15:22:55 [INFO] Starting scraping with playwright...
+15:22:55 [INFO] Content scraped
+15:22:55 [INFO] [Pass1 4/34] University of Patras — Higher Education Policy: Theory and Praxis
+15:22:55 [INFO] [Pass1 5/34] National Technical University of Athens — Materials Science and Technology
+15:22:55 [WARNING] fetch_html failed for http://mse.ntua.gr/?lang=en: 403 Client Error: Forbidden for url: http://mse.ntua.gr/?lang=en
+15:22:55 [INFO] Starting scraping with playwright...
+15:22:56 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/admission
+15:22:56 [INFO] Starting scraping with playwright...
+15:22:56 [INFO] Content scraped
+15:22:58 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/apply
+15:22:58 [INFO] Starting scraping with playwright...
+15:22:58 [INFO] Content scraped
+15:22:58 [INFO] Content scraped
+15:22:59 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/apply-now
+15:22:59 [INFO] Starting scraping with playwright...
+15:23:00 [INFO] Content scraped
+15:23:00 [INFO] [Pass1 6/34] University of Crete — Molecular Biology-Biomedicine
+15:23:01 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/applications
+15:23:01 [INFO] Starting scraping with playwright...
+15:23:01 [INFO] Starting scraping with playwright...
+15:23:01 [INFO] Content scraped
+15:23:01 [INFO] Content scraped
+15:23:02 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/application
+15:23:02 [INFO] Starting scraping with playwright...
+15:23:02 [INFO] Content scraped
+15:23:02 [WARNING] fetch_sitemap_urls failed for https://www.imbb.forth.gr/mbb/index.php/en/: not well-formed (invalid token): line 9, column 23
+15:23:02 [INFO]   Trying sub-page: https://www.imbb.forth.gr/admissions
+15:23:02 [INFO] Starting scraping with playwright...
+15:23:03 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/application-form
+15:23:03 [INFO] Starting scraping with playwright...
+15:23:03 [INFO] Content scraped
+15:23:04 [INFO] Content scraped
+15:23:05 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/application-process
+15:23:05 [INFO] Starting scraping with playwright...
+15:23:05 [INFO] Content scraped
+15:23:05 [INFO]   Trying sub-page: https://www.imbb.forth.gr/admission
+15:23:05 [INFO] Starting scraping with playwright...
+15:23:06 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/application-portal
+15:23:06 [INFO] Starting scraping with playwright...
+15:23:06 [INFO] Content scraped
+15:23:06 [WARNING] fetch_html failed for https://mahep-upatras.gr/en/: HTTPSConnectionPool(host='mahep-upatras.gr', port=443): Max retries exceeded with url: /en/ (Caused by NameResolutionError("HTTPSConnection(host='mahep-upatras.gr', port=443): Failed to resolve 'mahep-upatras.gr' ([Errno 8] nodename nor servname provided, or not known)"))
+15:23:06 [INFO] Starting scraping with playwright...
+15:23:07 [ERROR] Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/
+Call log:
+  - navigating to "https://mahep-upatras.gr/en/", waiting until "domcontentloaded"
+
+15:23:07 [WARNING] [attempt 1/3] Error on https://mahep-upatras.gr/en/: Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/
+Call log:
+  - navigating to "https://mahep-upatras.gr/en/", waiting until "domcontentloaded"
+
+15:23:07 [INFO] Content scraped
+15:23:07 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/how-to-apply
+15:23:07 [INFO] Starting scraping with playwright...
+15:23:08 [INFO]   Trying sub-page: https://www.imbb.forth.gr/apply
+15:23:08 [INFO] Starting scraping with playwright...
+15:23:08 [INFO] Content scraped
+15:23:09 [INFO] Content scraped
+15:23:09 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/how-to-apply-for
+15:23:09 [INFO] Starting scraping with playwright...
+15:23:09 [INFO] Content scraped
+15:23:10 [INFO]   Trying sub-page: https://www.imbb.forth.gr/apply-now
+15:23:10 [INFO] Starting scraping with playwright...
+15:23:10 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/apply-here
+15:23:10 [INFO] Starting scraping with playwright...
+15:23:11 [INFO] Content scraped
+15:23:11 [INFO] Starting scraping with playwright...
+15:23:11 [ERROR] Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/
+Call log:
+  - navigating to "https://mahep-upatras.gr/en/", waiting until "domcontentloaded"
+
+15:23:11 [WARNING] [attempt 2/3] Error on https://mahep-upatras.gr/en/: Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/
+Call log:
+  - navigating to "https://mahep-upatras.gr/en/", waiting until "domcontentloaded"
+
+15:23:11 [INFO] Content scraped
+15:23:11 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/prospective-students
+15:23:12 [INFO] Starting scraping with playwright...
+15:23:12 [INFO] Content scraped
+15:23:12 [INFO]   Trying sub-page: https://www.imbb.forth.gr/applications
+15:23:12 [INFO] Starting scraping with playwright...
+15:23:13 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/prospective
+15:23:13 [INFO] Starting scraping with playwright...
+15:23:13 [INFO] Content scraped
+15:23:13 [INFO] Content scraped
+15:23:14 [INFO]   Trying sub-page: https://www.imbb.forth.gr/application
+15:23:14 [INFO] Starting scraping with playwright...
+15:23:14 [INFO]   Trying sub-page: http://postgrad.structural.civil.ntua.gr/future-students
+15:23:14 [INFO] Starting scraping with playwright...
+15:23:14 [INFO] Content scraped
+15:23:15 [INFO] Content scraped
+15:23:15 [INFO]   Domain cap reached for http://postgrad.structural.civil.ntua.gr, stopping
+15:23:16 [INFO]   Trying sub-page: https://www.imbb.forth.gr/application-form
+15:23:16 [INFO] Starting scraping with playwright...
+15:23:16 [INFO] [Pass1 7/34] University of Crete — Erasmus Mundus Joint Master Degree in Aquaculture, Envi
+15:23:17 [WARNING] fetch_html failed for https://emm-aces.org/?page_id=2326: 403 Client Error: Forbidden for url: https://emm-aces.org/?page_id=2326
+15:23:17 [INFO] Starting scraping with playwright...
+15:23:17 [INFO] Content scraped
+15:23:19 [INFO]   Trying sub-page: https://www.imbb.forth.gr/application-process
+15:23:19 [INFO] Starting scraping with playwright...
+15:23:19 [INFO] Starting scraping with playwright...
+15:23:19 [ERROR] Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/
+Call log:
+  - navigating to "https://mahep-upatras.gr/en/", waiting until "domcontentloaded"
+
+15:23:19 [WARNING] [attempt 3/3] Error on https://mahep-upatras.gr/en/: Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/
+Call log:
+  - navigating to "https://mahep-upatras.gr/en/", waiting until "domcontentloaded"
+
+15:23:19 [ERROR] FAILED after 3 attempts: https://mahep-upatras.gr/en/ — Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/
+Call log:
+  - navigating to "https://mahep-upatras.gr/en/", waiting until "domcontentloaded"
+
+15:23:19 [INFO] Content scraped
+15:23:20 [INFO] [Pass1 8/34] University of Crete — Materials Science and Engineering
+15:23:20 [INFO] Starting scraping with playwright...
+15:23:21 [INFO] Content scraped
+15:23:21 [INFO]   Trying sub-page: https://www.imbb.forth.gr/application-portal
+15:23:21 [INFO] Starting scraping with playwright...
+15:23:22 [WARNING] [attempt 1/3] Error on https://grad.materials.uoc.gr/: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": "October and February each year", "apply_button_url": "https://www.uoc.gr/en/apply.html", "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:22 [INFO] Content scraped
+15:23:22 [INFO] Content scraped
+15:23:23 [INFO]   External portal detected: https://www.emm-aces.org/apply/
+15:23:23 [INFO]   Trying sub-page: https://www.imbb.forth.gr/how-to-apply
+15:23:23 [INFO] Starting scraping with playwright...
+15:23:24 [INFO] [Pass1 9/34] Hellenic Open University — Master in Business Administration (MBA)
+15:23:24 [INFO] Content scraped
+15:23:25 [INFO]   Domain hub: https://www.eap.gr/en/tag/invitation-en/
+15:23:25 [INFO]   Trying sub-page: https://www.imbb.forth.gr/how-to-apply-for
+15:23:25 [INFO] Starting scraping with playwright...
+15:23:26 [INFO] Starting scraping with playwright...
+15:23:26 [INFO]   Following hub announcement: https://www.eap.gr/en/2026/04/01/prosklisi-yia-tin-ekdilosi-endiapherontos-phitisis-se-9-proptikhiaka-1-idiko-programma-kai-60-metaptikhiaka-programmata-spoudon-yia-to-akadimaiko-etos-2026-2027/
+15:23:26 [INFO] Starting scraping with playwright...
+15:23:26 [INFO] Content scraped
+15:23:26 [INFO] Content scraped
+15:23:27 [INFO]   External portal detected: https://www.uoc.gr/en/apply.html
+15:23:27 [INFO]   Trying sub-page: https://www.imbb.forth.gr/apply-here
+15:23:27 [INFO] Starting scraping with playwright...
+15:23:28 [INFO] Content scraped
+15:23:28 [INFO] Content scraped
+15:23:28 [INFO] [Pass1 10/34] Hellenic Open University — Protection of Cultural Heritage and Monuments of Nature
+15:23:29 [INFO] [Pass1 11/34] Aristotle University of Thessaloniki — European Business and Economic Law
+15:23:29 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:23:29 [INFO] [Pass1 12/34] National and Kapodistrian University of Athens — MA in Greek and Eastern Mediterranean Archaeology: From
+15:23:29 [INFO]   Trying sub-page: https://www.imbb.forth.gr/prospective-students
+15:23:29 [INFO] Starting scraping with playwright...
+15:23:30 [INFO] Starting scraping with playwright...
+15:23:30 [INFO] Content scraped
+15:23:31 [INFO] Content scraped
+15:23:32 [INFO]   Trying sub-page: https://www.imbb.forth.gr/prospective
+15:23:32 [INFO] Starting scraping with playwright...
+15:23:32 [INFO] Content scraped
+15:23:33 [INFO] [Pass1 13/34] University of Patras — Human - Computer Interaction
+15:23:33 [INFO] Starting scraping with playwright...
+15:23:33 [INFO] Starting scraping with playwright...
+15:23:34 [INFO] Content scraped
+15:23:35 [WARNING] [attempt 1/3] Error on http://hcimaster.upatras.gr/: Invalid json output: {"content": "{"application_open_date": "September 2026", "application_deadline": "June 2026", "intake_semester": "June 2026", "apply_button_url": "https://hcimaster.upatras.gr/wp-content/uploads/2025/11/HCIMASTERposter2025admissions.pptx.pdf", "has_dates_on_page": true, "application_status": "coming_soon", "notes": "Applications open in September 2026 for the intake starting in June 2026."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:37 [INFO] Content scraped
+15:23:38 [INFO]   Trying sub-page: https://www.imbb.forth.gr/future-students
+15:23:38 [INFO] Starting scraping with playwright...
+15:23:38 [INFO]   External portal detected: https://admission/application
+15:23:39 [INFO] Content scraped
+15:23:39 [INFO] Starting scraping with playwright...
+15:23:39 [INFO] [Pass1 14/34] University of Crete — Brain & Mind
+15:23:39 [INFO]   Found dates on sub-page: https://www.imbb.forth.gr/future-students
+15:23:40 [INFO] Content scraped
+15:23:40 [INFO] [Pass1 15/34] Mediterranean Agronomic Institute of Chania — Business Economics and Management
+15:23:41 [INFO] Starting scraping with playwright...
+15:23:41 [INFO]   Found 3 valid dates, building structured list
+15:23:41 [WARNING] [attempt 2/3] Error on http://hcimaster.upatras.gr/: Invalid json output: {"content": "{"application_open_date": "September 2026", "application_deadline": "NA", "intake_semester": "June 2026", "apply_button_url": "https://hcimaster.upatras.gr/wp-content/uploads/2025/11/HCIMASTERposter2025admissions.pptx.pdf", "has_dates_on_page": true, "application_status": "coming_soon", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:41 [INFO] Content scraped
+15:23:42 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/education/master_of_science_programmes/bem: Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-2027", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications are open from January 14th 2026 to June 30th 2026 for the academic year 2026-2027."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:43 [INFO] [Pass1 16/34] Mediterranean Agronomic Institute of Chania — Sustainable Agriculture
+15:23:43 [INFO] Starting scraping with playwright...
+15:23:44 [INFO] Content scraped
+15:23:45 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/education/master_of_science_programmes/sag: Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications open from January 14th 2026 to June 30th 2026 for the academic year 2026-2027."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:46 [INFO] Starting scraping with playwright...
+15:23:47 [INFO] Content scraped
+15:23:48 [WARNING] fetch_html failed for https://www.iamc.ciheam.org/sitemap.xml: 500 Server Error: Internal Server Error for url: https://www.iamc.ciheam.org/sitemap.xml
+15:23:48 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/admissions
+15:23:48 [INFO] Starting scraping with playwright...
+15:23:49 [INFO] Content scraped
+15:23:49 [INFO] Starting scraping with playwright...
+15:23:49 [INFO] Starting scraping with playwright...
+15:23:49 [INFO] Content scraped
+15:23:49 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/admissions: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:50 [INFO] Content scraped
+15:23:50 [WARNING] [attempt 2/3] Error on https://www.iamc.ciheam.org/education/master_of_science_programmes/sag: Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026."}" }
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:52 [INFO] [Pass1 17/34] Mediterranean Agronomic Institute of Chania — Horticultural Genetics and Biotechnology
+15:23:52 [INFO] Starting scraping with playwright...
+15:23:53 [INFO] Content scraped
+15:23:53 [INFO] Starting scraping with playwright...
+15:23:54 [INFO] Content scraped
+15:23:55 [INFO]   External portal detected: https://apply.maich.gr
+15:23:55 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/admission
+15:23:55 [INFO] Starting scraping with playwright...
+15:23:56 [INFO] Content scraped
+15:23:56 [INFO] [Pass1 18/34] Mediterranean Agronomic Institute of Chania — Food Quality and Chemistry of Natural Products
+15:23:56 [INFO] Starting scraping with playwright...
+15:23:56 [INFO] Content scraped
+15:23:57 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/admission: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:58 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/education/master_of_science_programmes/fqc: Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:23:58 [INFO] Starting scraping with playwright...
+15:23:59 [INFO] Content scraped
+15:24:01 [INFO] Starting scraping with playwright...
+15:24:01 [WARNING] [attempt 3/3] Error on https://www.iamc.ciheam.org/education/master_of_science_programmes/sag: Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:01 [ERROR] FAILED after 3 attempts: https://www.iamc.ciheam.org/education/master_of_science_programmes/sag — Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:01 [INFO] Content scraped
+15:24:02 [WARNING] [attempt 2/3] Error on https://www.iamc.ciheam.org/admission: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:02 [INFO] Starting scraping with playwright...
+15:24:02 [INFO] [Pass1 19/34] University of Macedonia — Human Rights and Migration Studies
+15:24:02 [INFO] Starting scraping with playwright...
+15:24:02 [INFO] Content scraped
+15:24:02 [INFO] Content scraped
+15:24:03 [WARNING] fetch_html failed for https://www.uom.gr/sitemap.xml: 404 Client Error: Not Found for url: https://www.uom.gr/sitemap.xml
+15:24:03 [INFO]   Trying sub-page: https://www.uom.gr/admissions
+15:24:03 [INFO] Starting scraping with playwright...
+15:24:03 [INFO] Content scraped
+15:24:04 [WARNING] [attempt 2/3] Error on https://www.iamc.ciheam.org/education/master_of_science_programmes/fqc: Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": \"https://apply.maich.gr\", "has_dates_on_page": true, "application_status": \"open\", "notes": \"Online applications for the academic year 2026-2027 will be open from January 14th 2026 to June 30th 2026\"}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:04 [INFO]   Trying sub-page: https://www.uom.gr/admission
+15:24:04 [INFO] Starting scraping with playwright...
+15:24:05 [INFO] Content scraped
+15:24:06 [INFO]   Trying sub-page: https://www.uom.gr/apply
+15:24:06 [INFO] Starting scraping with playwright...
+15:24:06 [INFO] Content scraped
+15:24:07 [INFO]   Trying sub-page: https://www.uom.gr/apply-now
+15:24:07 [INFO] Starting scraping with playwright...
+15:24:07 [INFO] Content scraped
+15:24:08 [INFO]   Trying sub-page: https://www.uom.gr/applications
+15:24:08 [INFO] Starting scraping with playwright...
+15:24:09 [INFO] Content scraped
+15:24:09 [WARNING] [attempt 1/3] Error on https://www.uom.gr/applications: unwrap_content returned None
+15:24:10 [INFO] Starting scraping with playwright...
+15:24:10 [INFO] Content scraped
+15:24:12 [INFO] Starting scraping with playwright...
+15:24:12 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/apply
+15:24:12 [INFO] Starting scraping with playwright...
+15:24:12 [INFO] Content scraped
+15:24:12 [INFO] Content scraped
+15:24:13 [INFO] Starting scraping with playwright...
+15:24:14 [WARNING] [attempt 3/3] Error on https://www.iamc.ciheam.org/education/master_of_science_programmes/fqc: Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications are open from January 14th 2026 to June 30th 2026 for the academic year 2026-2027."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:14 [ERROR] FAILED after 3 attempts: https://www.iamc.ciheam.org/education/master_of_science_programmes/fqc — Invalid json output: {"content": "{"application_open_date": "January 14th 2026", "application_deadline": "June 30th 2026", "intake_semester": "Academic Year 2026-27", "apply_button_url": "https://apply.maich.gr", "has_dates_on_page": true, "application_status": "open", "notes": "Online applications are open from January 14th 2026 to June 30th 2026 for the academic year 2026-2027."}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:14 [INFO] Content scraped
+15:24:14 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/apply-now
+15:24:14 [INFO] Starting scraping with playwright...
+15:24:14 [INFO] Content scraped
+15:24:15 [INFO]   Trying sub-page: https://www.uom.gr/application
+15:24:15 [INFO] Starting scraping with playwright...
+15:24:15 [INFO] [Pass1 20/34] Hellenic Mediterranean University — MSc in Informatics Engineering
+15:24:15 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/apply-now: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:15 [INFO] Content scraped
+15:24:16 [INFO]   Trying sub-page: https://www.uom.gr/application-form
+15:24:16 [INFO] Starting scraping with playwright...
+15:24:16 [INFO]   Found 1 valid dates, building structured list
+15:24:16 [INFO] Content scraped
+15:24:17 [INFO]   Trying sub-page: https://www.uom.gr/application-process
+15:24:17 [INFO] Starting scraping with playwright...
+15:24:18 [INFO] Content scraped
+15:24:18 [INFO] [Pass1 21/34] Hellenic Open University — MEd in Teaching of English as a Foreign Language/Intern
+15:24:19 [INFO]   Trying sub-page: https://www.uom.gr/application-portal
+15:24:19 [INFO] Starting scraping with playwright...
+15:24:19 [INFO] Starting scraping with playwright...
+15:24:19 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:24:19 [INFO] [Pass1 22/34] Hellenic Open University — Language Education for Refugees and Migrants
+15:24:19 [INFO] Content scraped
+15:24:19 [INFO] Content scraped
+15:24:20 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:24:20 [INFO] [Pass1 23/34] University of Crete — Neurosciences
+15:24:20 [INFO] Starting scraping with playwright...
+15:24:20 [INFO]   Trying sub-page: https://www.uom.gr/how-to-apply
+15:24:20 [INFO] Starting scraping with playwright...
+15:24:21 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/applications
+15:24:21 [INFO] Starting scraping with playwright...
+15:24:21 [INFO] Content scraped
+15:24:21 [INFO] Content scraped
+15:24:21 [INFO] Content scraped
+15:24:21 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/applications: unwrap_content returned None
+15:24:22 [INFO]   Trying sub-page: https://www.uom.gr/how-to-apply-for
+15:24:22 [INFO] Starting scraping with playwright...
+15:24:23 [INFO] Content scraped
+15:24:23 [INFO]   Trying sub-page: https://www.uom.gr/apply-here
+15:24:23 [INFO] Starting scraping with playwright...
+15:24:24 [INFO] Content scraped
+15:24:24 [INFO] [Pass1 24/34] University of West Attica — MSc Advanced Product Design Engineering & Manufacturing
+15:24:24 [INFO] Starting scraping with playwright...
+15:24:25 [INFO]   Trying sub-page: https://www.uom.gr/prospective-students
+15:24:25 [INFO] Starting scraping with playwright...
+15:24:25 [INFO] Content scraped
+15:24:25 [INFO] Content scraped
+15:24:25 [INFO] Starting scraping with playwright...
+15:24:26 [INFO] Content scraped
+15:24:26 [INFO]   Trying sub-page: https://www.uom.gr/prospective
+15:24:26 [INFO] Starting scraping with playwright...
+15:24:26 [INFO] Content scraped
+15:24:27 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/application
+15:24:27 [INFO] Starting scraping with playwright...
+15:24:27 [INFO]   Trying sub-page: https://www.uom.gr/future-students
+15:24:27 [INFO] Starting scraping with playwright...
+15:24:28 [INFO] Content scraped
+15:24:28 [INFO] Content scraped
+15:24:29 [INFO]   Domain cap reached for https://www.uom.gr, stopping
+15:24:29 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/application-form
+15:24:29 [INFO] Starting scraping with playwright...
+15:24:29 [INFO] Content scraped
+15:24:30 [INFO] [Pass1 25/34] University of the Aegean — MA in Management of Migratory and Refugee Flows in Euro
+15:24:30 [INFO] Starting scraping with playwright...
+15:24:31 [INFO] Content scraped
+15:24:31 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/application-process
+15:24:31 [INFO] Starting scraping with playwright...
+15:24:31 [INFO] Content scraped
+15:24:32 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/application-process: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:33 [INFO]   Trying sub-page: https://soc.aegean.gr/admissions
+15:24:33 [INFO] Starting scraping with playwright...
+15:24:35 [INFO] Content scraped
+15:24:36 [INFO] Starting scraping with playwright...
+15:24:36 [INFO] Content scraped
+15:24:37 [INFO]   Trying sub-page: https://soc.aegean.gr/admission
+15:24:37 [INFO] Starting scraping with playwright...
+15:24:38 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/application-portal
+15:24:38 [INFO] Starting scraping with playwright...
+15:24:38 [INFO] Content scraped
+15:24:38 [INFO] Content scraped
+15:24:40 [INFO]   Trying sub-page: https://soc.aegean.gr/apply
+15:24:40 [INFO] Starting scraping with playwright...
+15:24:40 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/how-to-apply
+15:24:40 [INFO] Starting scraping with playwright...
+15:24:40 [INFO] Content scraped
+15:24:40 [INFO]   Trying sub-page: https://aims.uniwa.gr/en/applications/applications
+15:24:40 [INFO] Starting scraping with playwright...
+15:24:41 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/how-to-apply: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:42 [INFO] Content scraped
+15:24:43 [INFO]   Trying sub-page: https://soc.aegean.gr/apply-now
+15:24:43 [INFO] Starting scraping with playwright...
+15:24:44 [INFO] Content scraped
+15:24:45 [INFO] Starting scraping with playwright...
+15:24:45 [INFO] Content scraped
+15:24:45 [INFO] Content scraped
+15:24:46 [INFO]   Trying sub-page: https://soc.aegean.gr/applications
+15:24:46 [INFO] Starting scraping with playwright...
+15:24:46 [INFO]   Found dates on sub-page: https://aims.uniwa.gr/en/applications/applications
+15:24:47 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/how-to-apply-for
+15:24:47 [INFO] Starting scraping with playwright...
+15:24:47 [INFO] Content scraped
+15:24:47 [INFO] [Pass1 26/34] University of Macedonia — Shipping and Sea Transports: Economics and Politics
+15:24:47 [INFO] Starting scraping with playwright...
+15:24:48 [INFO] Content scraped
+15:24:48 [INFO] Content scraped
+15:24:48 [WARNING] [attempt 1/3] Error on https://www.iamc.ciheam.org/how-to-apply-for: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": false, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:24:48 [INFO]   Trying sub-page: https://www.uom.gr/admissions
+15:24:48 [INFO] Starting scraping with playwright...
+15:24:48 [INFO] Content scraped
+15:24:49 [INFO]   Trying sub-page: https://soc.aegean.gr/application
+15:24:49 [INFO] Starting scraping with playwright...
+15:24:50 [INFO]   Trying sub-page: https://www.uom.gr/admission
+15:24:50 [INFO] Starting scraping with playwright...
+15:24:50 [INFO] Content scraped
+15:24:51 [INFO]   Trying sub-page: https://www.uom.gr/apply
+15:24:51 [INFO] Starting scraping with playwright...
+15:24:51 [INFO] Content scraped
+15:24:51 [INFO] Content scraped
+15:24:52 [INFO] Starting scraping with playwright...
+15:24:52 [INFO]   Trying sub-page: https://soc.aegean.gr/application-form
+15:24:52 [INFO] Starting scraping with playwright...
+15:24:52 [INFO]   Trying sub-page: https://www.uom.gr/apply-now
+15:24:52 [INFO] Starting scraping with playwright...
+15:24:52 [INFO] Content scraped
+15:24:52 [INFO] Content scraped
+15:24:54 [INFO]   Trying sub-page: https://www.uom.gr/applications
+15:24:54 [INFO] Starting scraping with playwright...
+15:24:54 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/apply-here
+15:24:54 [INFO] Starting scraping with playwright...
+15:24:54 [INFO] Content scraped
+15:24:54 [INFO] Content scraped
+15:24:55 [INFO] Content scraped
+15:24:55 [INFO]   Trying sub-page: https://www.uom.gr/application
+15:24:55 [INFO] Starting scraping with playwright...
+15:24:55 [INFO] Content scraped
+15:24:56 [INFO]   Trying sub-page: https://soc.aegean.gr/application-process
+15:24:56 [INFO] Starting scraping with playwright...
+15:24:56 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/prospective-students
+15:24:56 [INFO] Starting scraping with playwright...
+15:24:56 [INFO]   Trying sub-page: https://www.uom.gr/application-form
+15:24:56 [INFO] Starting scraping with playwright...
+15:24:56 [INFO] Content scraped
+15:24:56 [INFO] Content scraped
+15:24:57 [INFO]   Trying sub-page: https://www.uom.gr/application-process
+15:24:57 [INFO] Starting scraping with playwright...
+15:24:58 [INFO] Content scraped
+15:24:58 [INFO] Content scraped
+15:24:58 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/prospective
+15:24:58 [INFO] Starting scraping with playwright...
+15:24:58 [INFO] Content scraped
+15:24:59 [INFO]   Trying sub-page: https://soc.aegean.gr/application-portal
+15:24:59 [INFO] Starting scraping with playwright...
+15:24:59 [INFO]   Trying sub-page: https://www.uom.gr/application-portal
+15:24:59 [INFO] Starting scraping with playwright...
+15:24:59 [INFO]   Trying sub-page: https://www.iamc.ciheam.org/future-students
+15:24:59 [INFO] Starting scraping with playwright...
+15:24:59 [INFO] Content scraped
+15:25:00 [INFO] Content scraped
+15:25:00 [INFO] Content scraped
+15:25:00 [INFO]   Trying sub-page: https://www.uom.gr/how-to-apply
+15:25:00 [INFO] Starting scraping with playwright...
+15:25:01 [INFO] Content scraped
+15:25:01 [INFO]   Domain cap reached for https://www.iamc.ciheam.org, stopping
+15:25:01 [INFO]   Trying sub-page: https://soc.aegean.gr/how-to-apply
+15:25:01 [INFO] Starting scraping with playwright...
+15:25:02 [INFO]   Trying sub-page: https://www.uom.gr/how-to-apply-for
+15:25:02 [INFO] Starting scraping with playwright...
+15:25:02 [INFO] Content scraped
+15:25:02 [INFO] [Pass1 27/34] University of Crete — Forensic Medicine, Anthropology and Imaging
+15:25:04 [INFO] Content scraped
+15:25:04 [INFO]   Trying sub-page: https://www.uom.gr/apply-here
+15:25:04 [INFO] Starting scraping with playwright...
+15:25:04 [INFO] Content scraped
+15:25:05 [INFO]   Trying sub-page: https://soc.aegean.gr/how-to-apply-for
+15:25:05 [INFO] Starting scraping with playwright...
+15:25:05 [INFO]   Trying sub-page: https://www.uom.gr/prospective-students
+15:25:05 [INFO] Starting scraping with playwright...
+15:25:05 [INFO] Starting scraping with playwright...
+15:25:06 [INFO] Content scraped
+15:25:07 [INFO] Content scraped
+15:25:07 [INFO]   Trying sub-page: https://www.uom.gr/prospective
+15:25:07 [INFO] Starting scraping with playwright...
+15:25:07 [INFO] Content scraped
+15:25:08 [INFO]   Trying sub-page: https://soc.aegean.gr/apply-here
+15:25:08 [INFO] Starting scraping with playwright...
+15:25:08 [INFO]   Trying sub-page: https://www.uom.gr/future-students
+15:25:08 [INFO] Starting scraping with playwright...
+15:25:08 [INFO] Content scraped
+15:25:09 [INFO] Content scraped
+15:25:09 [WARNING] [attempt 1/3] Error on https://mscs.uoc.gr/forensic-med/: Invalid json output: {"content": "{"application_open_date": "October each year", "application_deadline": "NA", "intake_semester": "October each year", "apply_button_url": null, "has_dates_on_page": true, "application_status": "not_mentioned", "notes": "NA"}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:25:10 [INFO] Content scraped
+15:25:10 [INFO]   Domain cap reached for https://www.uom.gr, stopping
+15:25:11 [INFO]   Trying sub-page: https://soc.aegean.gr/prospective-students
+15:25:11 [INFO] Starting scraping with playwright...
+15:25:11 [INFO] [Pass1 28/34] University of the Peloponnese — Olympic Studies, Olympic Education, Organization and Ma
+15:25:13 [INFO] Content scraped
+15:25:13 [INFO] Starting scraping with playwright...
+15:25:14 [INFO]   Trying sub-page: https://soc.aegean.gr/prospective
+15:25:14 [INFO] Starting scraping with playwright...
+15:25:16 [INFO] Content scraped
+15:25:17 [INFO]   Trying sub-page: https://soc.aegean.gr/future-students
+15:25:17 [INFO] Starting scraping with playwright...
+15:25:18 [INFO] Content scraped
+15:25:19 [WARNING] [attempt 2/3] Error on https://mscs.uoc.gr/forensic-med/: Invalid json output: {"content": "{"application_open_date": "October each year", "application_deadline": null, "intake_semester": "October each year", "apply_button_url": null, "has_dates_on_page": true, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:25:19 [INFO] Content scraped
+15:25:20 [INFO]   Domain cap reached for https://soc.aegean.gr, stopping
+15:25:21 [WARNING] fetch_html failed for http://olympicmaster.uop.gr/: HTTPConnectionPool(host='olympicmaster.uop.gr', port=80): Read timed out. (read timeout=10)
+15:25:21 [INFO] Starting scraping with playwright...
+15:25:21 [INFO] [Pass1 29/34] National Technical University of Athens — Applied Mechanics
+15:25:22 [INFO] Starting scraping with playwright...
+15:25:22 [INFO] Content scraped
+15:25:22 [INFO]   Trying announcement: http://appliedmechanics.mechan.ntua.gr/?page_id=325
+15:25:22 [INFO] Starting scraping with playwright...
+15:25:24 [INFO] Content scraped
+15:25:25 [WARNING] fetch_html failed for http://appliedmechanics.mechan.ntua.gr/sitemap.xml: 404 Client Error: Not Found for url: http://appliedmechanics.mechan.ntua.gr/sitemap.xml
+15:25:25 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/admissions
+15:25:25 [INFO] Starting scraping with playwright...
+15:25:26 [INFO] Content scraped
+15:25:27 [INFO] Starting scraping with playwright...
+15:25:27 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/admission
+15:25:27 [INFO] Starting scraping with playwright...
+15:25:27 [INFO] Content scraped
+15:25:28 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/apply
+15:25:28 [INFO] Starting scraping with playwright...
+15:25:28 [INFO] Content scraped
+15:25:30 [INFO] Content scraped
+15:25:30 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/apply-now
+15:25:30 [INFO] Starting scraping with playwright...
+15:25:30 [INFO] Content scraped
+15:25:31 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/applications
+15:25:31 [INFO] Starting scraping with playwright...
+15:25:32 [INFO] Content scraped
+15:25:32 [INFO] [Pass1 30/34] University of Ioannina — Biological Inorganic Chemistry
+15:25:32 [INFO] Starting scraping with playwright...
+15:25:33 [INFO] Content scraped
+15:25:33 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/application
+15:25:33 [INFO] Starting scraping with playwright...
+15:25:33 [INFO] Content scraped
+15:25:33 [WARNING] fetch_html failed for https://bic.chem.uoi.gr/sitemap.xml: 404 Client Error: Not Found for url: https://bic.chem.uoi.gr/sitemap.xml
+15:25:33 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/admissions
+15:25:33 [INFO] Starting scraping with playwright...
+15:25:34 [INFO] Content scraped
+15:25:34 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/application-form
+15:25:34 [INFO] Starting scraping with playwright...
+15:25:34 [INFO] Content scraped
+15:25:35 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/admission
+15:25:35 [INFO] Starting scraping with playwright...
+15:25:35 [INFO] Content scraped
+15:25:35 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/application-process
+15:25:35 [INFO] Starting scraping with playwright...
+15:25:36 [INFO] Content scraped
+15:25:37 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/apply
+15:25:37 [INFO] Starting scraping with playwright...
+15:25:37 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/application-portal
+15:25:37 [INFO] Starting scraping with playwright...
+15:25:37 [INFO] Content scraped
+15:25:38 [INFO] Content scraped
+15:25:39 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/apply-now
+15:25:39 [INFO] Starting scraping with playwright...
+15:25:39 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/how-to-apply
+15:25:39 [INFO] Starting scraping with playwright...
+15:25:39 [INFO] Content scraped
+15:25:39 [INFO] Content scraped
+15:25:39 [ERROR] Attempt 1 failed: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/
+Call log:
+  - navigating to "http://olympicmaster.uop.gr/", waiting until "domcontentloaded"
+
+15:25:39 [WARNING] [attempt 1/3] Error on http://olympicmaster.uop.gr/: Failed to scrape after 1 attempts: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/
+Call log:
+  - navigating to "http://olympicmaster.uop.gr/", waiting until "domcontentloaded"
+
+15:25:41 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/how-to-apply-for
+15:25:41 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/applications
+15:25:41 [INFO] Starting scraping with playwright...
+15:25:41 [INFO] Starting scraping with playwright...
+15:25:41 [INFO] Content scraped
+15:25:41 [INFO] Content scraped
+15:25:41 [WARNING] [attempt 1/3] Error on http://appliedmechanics.mechan.ntua.gr/how-to-apply-for: unwrap_content returned None
+15:25:42 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/application
+15:25:42 [INFO] Starting scraping with playwright...
+15:25:43 [INFO] Content scraped
+15:25:43 [INFO] Starting scraping with playwright...
+15:25:44 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/application-form
+15:25:44 [INFO] Starting scraping with playwright...
+15:25:45 [INFO] Content scraped
+15:25:45 [INFO] Starting scraping with playwright...
+15:25:46 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/application-process
+15:25:46 [INFO] Starting scraping with playwright...
+15:25:46 [INFO] Content scraped
+15:25:46 [INFO] Content scraped
+15:25:47 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/apply-here
+15:25:47 [INFO] Starting scraping with playwright...
+15:25:47 [INFO] Content scraped
+15:25:47 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/application-portal
+15:25:47 [INFO] Starting scraping with playwright...
+15:25:48 [INFO] Content scraped
+15:25:48 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/prospective-students
+15:25:48 [INFO] Starting scraping with playwright...
+15:25:49 [INFO] Content scraped
+15:25:49 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/how-to-apply
+15:25:49 [INFO] Starting scraping with playwright...
+15:25:50 [INFO] Content scraped
+15:25:50 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/prospective
+15:25:50 [INFO] Starting scraping with playwright...
+15:25:50 [INFO] Content scraped
+15:25:51 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/how-to-apply-for
+15:25:51 [INFO] Starting scraping with playwright...
+15:25:51 [INFO] Content scraped
+15:25:51 [INFO]   Trying sub-page: http://appliedmechanics.mechan.ntua.gr/future-students
+15:25:51 [INFO] Starting scraping with playwright...
+15:25:51 [INFO] Content scraped
+15:25:53 [INFO]   Domain cap reached for http://appliedmechanics.mechan.ntua.gr, stopping
+15:25:53 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/apply-here
+15:25:53 [INFO] Starting scraping with playwright...
+15:25:53 [INFO] Content scraped
+15:25:54 [INFO] [Pass1 31/34] University of Ioannina — MSc in Digital Health
+15:25:54 [INFO]   Found 1 valid dates, building structured list
+15:25:55 [WARNING] [attempt 1/3] Error on data:text/plain,TARGET PROGRAMME: MSc in Digital Health / Ψηφιακή Ιατρική
+
+DATES FOUND:
+1. "5 Oct 2026" — context: "Expected start 5 Oct 2026" — source: https://ds4health.uoi.gr/ [KEYWORD MATCH]: Invalid json output: {"content": "{"application_open_date": null, "application_deadline": null, "intake_semester": null, "apply_button_url": null, "has_dates_on_page": true, "application_status": "not_mentioned", "notes": null}"}
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+15:25:55 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/prospective-students
+15:25:55 [INFO] Starting scraping with playwright...
+15:25:55 [INFO] Content scraped
+15:25:56 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/prospective
+15:25:56 [INFO] Starting scraping with playwright...
+15:25:57 [INFO] Content scraped
+15:25:58 [INFO]   Trying sub-page: https://bic.chem.uoi.gr/future-students
+15:25:58 [INFO] Starting scraping with playwright...
+15:25:58 [INFO] Content scraped
+15:26:00 [INFO]   Domain cap reached for https://bic.chem.uoi.gr, stopping
+15:26:01 [INFO] [Pass1 32/34] Democritus University of Thrace — Biomedical and Molecular Sciences - Diagnosis and Treat
+15:26:01 [INFO] [Pass1 33/34] University of Crete — Computer Science and Engineering
+15:26:01 [INFO] Starting scraping with playwright...
+15:26:02 [ERROR] Attempt 1 failed: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/
+Call log:
+  - navigating to "http://olympicmaster.uop.gr/", waiting until "domcontentloaded"
+
+15:26:02 [WARNING] [attempt 2/3] Error on http://olympicmaster.uop.gr/: Failed to scrape after 1 attempts: Page.goto: net::ERR_TIMED_OUT at http://olympicmaster.uop.gr/
+Call log:
+  - navigating to "http://olympicmaster.uop.gr/", waiting until "domcontentloaded"
+
+15:26:02 [INFO] Content scraped
+15:26:03 [INFO] Starting scraping with playwright...
+15:26:03 [INFO]   Trying document: http://www.csd.uoc.gr/CSD/uploaded_files/csd-a4-03nov17-web.pdf
+15:26:05 [WARNING] fetch_html failed for http://www.csd.uoc.gr/sitemap.xml: 404 Client Error:  for url: https://www.csd.uoc.gr/sitemap.xml
+15:26:05 [INFO]   Trying sub-page: http://www.csd.uoc.gr/admissions
+15:26:05 [INFO] Starting scraping with playwright...
+15:26:05 [INFO] Content scraped
+15:26:06 [INFO] Content scraped
+15:26:07 [INFO]   Trying sub-page: http://www.csd.uoc.gr/admission
+15:26:07 [INFO] Starting scraping with playwright...
+15:26:07 [INFO] Content scraped
+15:26:09 [WARNING] [attempt 1/3] Error on http://www.csd.uoc.gr/admission: unwrap_content returned None
+15:26:10 [INFO]   Trying sub-page: https://msc-biomed.edu.gr/el/postgraduate-registrations-due-date/
+15:26:10 [INFO] Starting scraping with playwright...
+15:26:10 [INFO] Starting scraping with playwright...
+15:26:11 [INFO] Content scraped
+15:26:12 [INFO]   Found dates on sub-page: https://msc-biomed.edu.gr/el/postgraduate-registrations-due-date/
+15:26:13 [INFO] Starting scraping with playwright...
+15:26:13 [INFO] [Pass1 34/34] National Technical University of Athens — Computational Mechanics
+15:26:13 [INFO] Content scraped
+15:26:13 [INFO]   Found 8 valid dates, building structured list
+15:26:14 [INFO]   Trying sub-page: http://www.csd.uoc.gr/apply
+15:26:14 [INFO] Starting scraping with playwright...
+15:26:15 [INFO] Content scraped
+15:26:16 [INFO]   Trying sub-page: http://www.csd.uoc.gr/apply-now
+15:26:16 [INFO] Starting scraping with playwright...
+15:26:16 [INFO] Content scraped
+15:26:16 [WARNING] [attempt 1/3] Error on http://www.csd.uoc.gr/apply-now: unwrap_content returned None
+15:26:20 [INFO] Starting scraping with playwright...
+15:26:21 [INFO] Content scraped
+15:26:22 [INFO]   Trying sub-page: http://www.csd.uoc.gr/applications
+15:26:22 [INFO] Starting scraping with playwright...
+15:26:23 [INFO] Content scraped
+15:26:24 [INFO]   Trying sub-page: http://www.csd.uoc.gr/application
+15:26:24 [INFO] Starting scraping with playwright...
+15:26:25 [INFO] Content scraped
+15:26:26 [INFO]   Trying sub-page: http://www.csd.uoc.gr/application-form
+15:26:26 [INFO] Starting scraping with playwright...
+15:26:26 [INFO] Content scraped
+15:26:28 [INFO]   Trying sub-page: http://www.csd.uoc.gr/application-process
+15:26:28 [INFO] Starting scraping with playwright...
+15:26:28 [INFO] Content scraped
+15:26:29 [WARNING] [attempt 1/3] Error on http://www.csd.uoc.gr/application-process: unwrap_content returned None
+15:26:33 [INFO] Starting scraping with playwright...
+15:26:33 [INFO] Content scraped
+15:26:34 [INFO]   Trying sub-page: http://www.csd.uoc.gr/application-portal
+15:26:34 [INFO] Starting scraping with playwright...
+15:26:35 [INFO] Content scraped
+15:26:36 [INFO]   Trying sub-page: http://www.csd.uoc.gr/how-to-apply
+15:26:36 [INFO] Starting scraping with playwright...
+15:26:36 [INFO] Content scraped
+15:26:37 [WARNING] [attempt 1/3] Error on http://www.csd.uoc.gr/how-to-apply: unwrap_content returned None
+15:26:40 [ERROR] Attempt 1 failed: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "http://olympicmaster.uop.gr/", waiting until "domcontentloaded"
+
+15:26:40 [WARNING] [attempt 3/3] Error on http://olympicmaster.uop.gr/: Failed to scrape after 1 attempts: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "http://olympicmaster.uop.gr/", waiting until "domcontentloaded"
+
+15:26:40 [ERROR] FAILED after 3 attempts: http://olympicmaster.uop.gr/ — Failed to scrape after 1 attempts: Page.goto: Timeout 30000ms exceeded.
+Call log:
+  - navigating to "http://olympicmaster.uop.gr/", waiting until "domcontentloaded"
+
+15:26:41 [INFO] Starting scraping with playwright...
+15:26:41 [INFO] Content scraped
+15:26:43 [INFO]   Trying sub-page: http://www.csd.uoc.gr/how-to-apply-for
+15:26:43 [INFO] Starting scraping with playwright...
+15:26:43 [INFO] Content scraped
+15:26:44 [INFO]   Trying sub-page: http://www.csd.uoc.gr/apply-here
+15:26:44 [INFO] Starting scraping with playwright...
+15:26:45 [INFO] Content scraped
+15:26:45 [WARNING] [attempt 1/3] Error on http://www.csd.uoc.gr/apply-here: unwrap_content returned None
+15:26:49 [INFO] Starting scraping with playwright...
+15:26:50 [INFO] Content scraped
+15:26:50 [WARNING] [attempt 2/3] Error on http://www.csd.uoc.gr/apply-here: unwrap_content returned None
+15:26:58 [INFO] Starting scraping with playwright...
+15:26:58 [INFO] Content scraped
+15:27:00 [INFO]   Trying sub-page: http://www.csd.uoc.gr/prospective-students
+15:27:00 [INFO] Starting scraping with playwright...
+15:27:01 [INFO] Content scraped
+15:27:02 [INFO]   Trying sub-page: http://www.csd.uoc.gr/prospective
+15:27:02 [INFO] Starting scraping with playwright...
+15:27:03 [INFO] Content scraped
+15:27:03 [WARNING] [attempt 1/3] Error on http://www.csd.uoc.gr/prospective: unwrap_content returned None
+15:27:07 [INFO] Starting scraping with playwright...
+15:27:08 [INFO] Content scraped
+15:27:09 [INFO]   Trying sub-page: http://www.csd.uoc.gr/future-students
+15:27:09 [INFO] Starting scraping with playwright...
+15:27:09 [INFO] Content scraped
+15:27:11 [INFO]   Domain cap reached for http://www.csd.uoc.gr, stopping
+15:27:12 [INFO] Saved 229 records -> results/pass1_results.json
+15:27:12 [INFO] Pass 2: following apply links for 1 programmes
+15:27:12 [WARNING] fetch_html failed for https://admission/sitemap.xml: HTTPSConnectionPool(host='admission', port=443): Max retries exceeded with url: /sitemap.xml (Caused by NameResolutionError("HTTPSConnection(host='admission', port=443): Failed to resolve 'admission' ([Errno 8] nodename nor servname provided, or not known)"))
+15:27:12 [INFO] [Pass2 1/1] https://admission/application
+15:27:12 [INFO] Starting scraping with playwright...
+15:27:12 [ERROR] Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application
+Call log:
+  - navigating to "https://admission/application", waiting until "domcontentloaded"
+
+15:27:12 [WARNING] [attempt 1/3] Error on https://admission/application: Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application
+Call log:
+  - navigating to "https://admission/application", waiting until "domcontentloaded"
+
+15:27:16 [INFO] Starting scraping with playwright...
+15:27:16 [ERROR] Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application
+Call log:
+  - navigating to "https://admission/application", waiting until "domcontentloaded"
+
+15:27:16 [WARNING] [attempt 2/3] Error on https://admission/application: Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application
+Call log:
+  - navigating to "https://admission/application", waiting until "domcontentloaded"
+
+15:27:24 [INFO] Starting scraping with playwright...
+15:27:24 [ERROR] Attempt 1 failed: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application
+Call log:
+  - navigating to "https://admission/application", waiting until "domcontentloaded"
+
+15:27:24 [WARNING] [attempt 3/3] Error on https://admission/application: Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application
+Call log:
+  - navigating to "https://admission/application", waiting until "domcontentloaded"
+
+15:27:24 [ERROR] FAILED after 3 attempts: https://admission/application — Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application
+Call log:
+  - navigating to "https://admission/application", waiting until "domcontentloaded"
+
+15:27:25 [INFO] Saved 15 records -> results/pass2_results.json
+15:27:25 [INFO] JSON -> results/results.json
+15:27:25 [INFO] CSV  -> results/results.csv
+15:27:25 [INFO] 
+=======================================================
+15:27:25 [INFO] Total   : 195
+15:27:25 [INFO] Found   : 173  (89%)
+15:27:25 [INFO] Missing : 18
+15:27:25 [INFO] Errors  : 4
+15:27:25 [INFO] =======================================================
+
+15:27:25 [INFO] Errors -> results/errors.json (11 records)
+15:36:19 [INFO] Loaded 195 programmes from programmes-api_msc-programmes.csv
+15:36:20 [INFO] Programmes : 195 | Workers : 3 | Model: openai/gpt-4.1-nano
+15:36:20 [INFO] --ids: targeting 9 specific programmes
+15:36:20 [INFO] Pass 1: 9 programmes | 3 workers
+15:36:20 [INFO] [Pass1 1/9] Hellenic Open University — Master in Business Administration (MBA)
+15:36:20 [INFO] [Pass1 2/9] Hellenic Open University — MSc in Enterprise Risk Management (ERM)
+15:36:20 [INFO] [Pass1 3/9] Hellenic Open University — Supply Chain Management
+15:36:21 [INFO]   Domain hub: https://www.eap.gr/en/tag/invitation-en/
+15:36:21 [INFO]   Domain hub: https://www.eap.gr/en/tag/invitation-en/
+15:36:21 [INFO]   Domain hub: https://www.eap.gr/en/tag/invitation-en/
+15:36:22 [INFO]   Following hub announcement: https://www.eap.gr/en/2026/04/01/prosklisi-yia-tin-ekdilosi-endiapherontos-phitisis-se-9-proptikhiaka-1-idiko-programma-kai-60-metaptikhiaka-programmata-spoudon-yia-to-akadimaiko-etos-2026-2027/
+15:36:22 [INFO]   Following hub announcement: https://www.eap.gr/en/2026/04/01/prosklisi-yia-tin-ekdilosi-endiapherontos-phitisis-se-9-proptikhiaka-1-idiko-programma-kai-60-metaptikhiaka-programmata-spoudon-yia-to-akadimaiko-etos-2026-2027/
+15:36:22 [INFO] Starting scraping with playwright...
+15:36:22 [INFO] Starting scraping with playwright...
+15:36:22 [INFO]   Following hub announcement: https://www.eap.gr/en/2026/04/01/prosklisi-yia-tin-ekdilosi-endiapherontos-phitisis-se-9-proptikhiaka-1-idiko-programma-kai-60-metaptikhiaka-programmata-spoudon-yia-to-akadimaiko-etos-2026-2027/
+15:36:22 [INFO] Starting scraping with playwright...
+15:36:24 [INFO] Content scraped
+15:36:24 [INFO] Content scraped
+15:36:24 [INFO] Content scraped
+15:36:25 [INFO] [Pass1 4/9] Hellenic Open University — Protection of Cultural Heritage and Monuments of Nature
+15:36:26 [INFO] [Pass1 5/9] Hellenic Open University — Data Science and Machine Learning
+15:36:26 [INFO] [Pass1 6/9] Hellenic Open University — MEd in Teaching of English as a Foreign Language/Intern
+15:36:27 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:36:27 [INFO] [Pass1 7/9] Hellenic Open University — Language Education for Refugees and Migrants
+15:36:27 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:36:27 [INFO] [Pass1 8/9] Hellenic Open University — MSc in Innovation Management and Entrepreneurship
+15:36:27 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:36:27 [INFO] [Pass1 9/9] Hellenic Open University — Precision Medicine and Novel Therapies (PRETH)
+15:36:28 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:36:28 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:36:28 [INFO]   Hub cache hit: https://www.eap.gr/en/tag/invitation-en/
+15:36:28 [INFO] Saved 195 records -> results/pass1_results.json
+15:36:28 [INFO] Pass 2: no candidates
+15:36:28 [INFO] Saved 15 records -> results/pass2_results.json
+15:36:28 [INFO] JSON -> results/results.json
+15:36:28 [INFO] CSV  -> results/results.csv
+15:36:28 [INFO] 
+=======================================================
+15:36:28 [INFO] Total   : 195
+15:36:28 [INFO] Found   : 173  (89%)
+15:36:28 [INFO] Missing : 18
+15:36:28 [INFO] Errors  : 4
+15:36:28 [INFO] =======================================================
+
+15:36:28 [INFO] Errors -> results/errors.json (4 records)
+16:07:52 [INFO] Loaded 195 programmes from programmes-api_msc-programmes.csv
+16:07:52 [INFO] Programmes : 195 | Workers : 3 | Model: openai/gpt-4.1-nano
+16:07:52 [INFO] --ids: targeting 1 specific programmes
+16:07:52 [INFO] Pass 1: 1 programmes | 3 workers
+16:07:52 [INFO] [Pass1 1/1] Aristotle University of Thessaloniki — Digital Media - Computational Intelligence
+16:07:53 [INFO]   Found 2 valid dates, building structured list
+16:07:56 [WARNING] [attempt 1/3] Error on data:text/plain,TARGET PROGRAMME: Digital Media - Computational Intelligence / Ψηφιακά Μέσα - Υπολογιστική Νοημοσύνη
+
+DATES FOUND:
+1. "January 30, 2026" — context: "Application for admittance into the Program of Postgraduate Studies on Digital Media – Computational Intelligence of the School of Informatics, Aristotle University of Thessaloniki, from  foreign citizens until January 30, 2026" — source: https://dmci.csd.auth.gr/en/ [KEYWORD MATCH]
+2. "06 October 2025" — context: "Please note that the courses will start on Monday 06 October 2025." — source: https://dmci.csd.auth.gr/en/ [KEYWORD MATCH]: Scraper returned None
+16:08:03 [INFO] Saved 195 records -> results/pass1_results.json
+16:08:03 [INFO] Pass 2: no candidates
+16:08:03 [INFO] Saved 15 records -> results/pass2_results.json
+16:08:03 [INFO] JSON -> results/results.json
+16:08:03 [INFO] CSV  -> results/results.csv
+16:08:03 [INFO] 
+=======================================================
+16:08:03 [INFO] Total   : 195
+16:08:03 [INFO] Found   : 173  (89%)
+16:08:03 [INFO] Missing : 18
+16:08:03 [INFO] Errors  : 4
+16:08:03 [INFO] =======================================================
+
+16:08:03 [INFO] Errors -> results/errors.json (4 records)
