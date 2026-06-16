@@ -16,6 +16,7 @@ import argparse
 import requests
 import re
 import signal
+import threading
 import pdfplumber
 import io
 from datetime import datetime, timezone
@@ -51,6 +52,7 @@ MAX_SUFFIX_ATTEMPTS = 50
 RETRY_DELAY     = 4
 REQUEST_DELAY   = 1.0
 DEFAULT_WORKERS = 3
+SCRAPE_TIMEOUT  = 90  # seconds — hard cap per scrape attempt so one stuck site can't hang the run
 
 _sitemap_cache: dict = {}
 
@@ -402,6 +404,31 @@ def clean_result(raw: dict) -> dict:
     return cleaned
 
 
+def _run_with_timeout(func, timeout, *args, **kwargs):
+    """Run func in a daemon thread and give up after `timeout` seconds.
+
+    Uses a plain daemon thread (not ThreadPoolExecutor) so a stuck call
+    doesn't block process shutdown — concurrent.futures joins its worker
+    threads on interpreter exit, daemon threads don't.
+    """
+    box = {}
+
+    def target():
+        try:
+            box["value"] = func(*args, **kwargs)
+        except Exception as e:
+            box["error"] = e
+
+    t = threading.Thread(target=target, daemon=True)
+    t.start()
+    t.join(timeout)
+    if t.is_alive():
+        raise TimeoutError(f"Timed out after {timeout}s")
+    if "error" in box:
+        raise box["error"]
+    return box.get("value")
+
+
 def scrape_url(url: str, prompt: str, graph_config: dict, SmartScraperGraph) -> dict:
     last_error = None
     for attempt in range(1, MAX_RETRIES + 1):
@@ -409,7 +436,7 @@ def scrape_url(url: str, prompt: str, graph_config: dict, SmartScraperGraph) -> 
             return {"status": "cancelled", "error": "shutdown"}
         try:
             graph = SmartScraperGraph(prompt=prompt, source=url, config=graph_config)
-            raw = graph.run()
+            raw = _run_with_timeout(graph.run, SCRAPE_TIMEOUT)
 
             if isinstance(raw, dict):
                 raw = unwrap_content(raw)
@@ -524,7 +551,13 @@ def try_subpages(base_url: str, prompt: str, graph_config: dict, SmartScraperGra
 #RAW_HTML_HELPERS
 def fetch_html(url: str) -> str | None:
     try:
-        headers = {"User-Agent": "Mozilla/5.0 (compatible; MScScraper/1.0)"}
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9,el;q=0.8",
+            "Referer": url,
+        }
         response = requests.get(url, timeout=10, headers=headers)
         response.raise_for_status()
         return response.text
@@ -613,26 +646,38 @@ def find_announcement_links(html: str, base_url: str) -> list:
     
 def extract_pdf_text(url: str) -> str | None:
     try:
-        headers = {"User-Agent": "Mozilla/5.0 (compatible; MScScraper/1.0)"}
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            "Accept": "application/pdf,*/*;q=0.8",
+            "Accept-Language": "en-US,en;q=0.9,el;q=0.8",
+            "Referer": url,
+        }
         response = requests.get(url, timeout=15, headers=headers)
         response.raise_for_status()
         with pdfplumber.open(io.BytesIO(response.content)) as pdf:
             text = "\n".join(
                 page.extract_text() or "" for page in pdf.pages
             )
-        return text[:3000] if text.strip() else None
+        return text[:8000] if text.strip() else None
     except Exception as e:
         log.warning(f"extract_pdf_text failed for {url}: {e}")
         return None
     
 def extract_docx_text(url: str) -> str | None:
     try:
-        headers = {"User-Agent": "Mozilla/5.0 (compatible; MScScraper/1.0)"}
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                          "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+            "Accept": "*/*",
+            "Accept-Language": "en-US,en;q=0.9,el;q=0.8",
+            "Referer": url,
+        }
         response = requests.get(url, timeout=15, headers=headers)
         response.raise_for_status()
         doc = Document(io.BytesIO(response.content))
         text = "\n".join(para.text for para in doc.paragraphs if para.text.strip())
-        return text[:3000] if text.strip() else None
+        return text[:8000] if text.strip() else None
     except Exception as e:
         log.warning(f"extract_docx_text failed for {url}: {e}")
         return None
@@ -807,8 +852,11 @@ def worker_pass1(args):
         log.info(f"  External portal detected: {apply_url}")
         result["external_portal"] = apply_url
 
-    # If no dates found, check document links (PDF/DOCX) on the page
-    if html and result.get("status") == "ok" and not (result.get("has_dates_on_page") is True and has_current_dates(result)):
+    # Always check document links (PDF/DOCX) on the page — the real deadline
+    # often lives only in a PDF, even when the page text already shows some
+    # other (e.g. news-post) date. Only overwrite result if the document
+    # itself yields a genuine current-year date.
+    if html and result.get("status") == "ok":
         doc_links = find_pdf_links(html, prog["url"])
         for doc_url in doc_links:
             log.info(f"  Trying document: {doc_url}")
@@ -821,7 +869,7 @@ def worker_pass1(args):
                     f"data:text/plain,{doc_text}",
                     prompt, graph_config, SmartScraperGraph
                 )
-                if doc_result.get("has_dates_on_page") is True:
+                if doc_result.get("has_dates_on_page") is True and has_current_dates(doc_result):
                     log.info(f"  Found dates in document: {doc_url}")
                     doc_result["found_in_pdf"] = doc_url
                     result = doc_result
@@ -897,7 +945,8 @@ def run_pass1(programmes, graph_config, SmartScraperGraph, workers, resume_ids):
     ]
 
     results = []
-    with ThreadPoolExecutor(max_workers=workers) as pool:
+    pool = ThreadPoolExecutor(max_workers=workers)
+    try:
         futures = {pool.submit(worker_pass1, t): t for t in tasks}
         try:
             for future in as_completed(futures):
@@ -920,7 +969,10 @@ def run_pass1(programmes, graph_config, SmartScraperGraph, workers, resume_ids):
         except KeyboardInterrupt:
             for f in futures:
                 f.cancel()
-            pool.shutdown(wait=False, cancel_futures=True)
+    finally:
+        # wait=False so a still-running worker (e.g. stuck on a slow site)
+        # can never block process exit/shutdown.
+        pool.shutdown(wait=False, cancel_futures=True)
 
     return results
 
@@ -959,7 +1011,8 @@ def run_pass2(pass1_results, prog_map, graph_config, SmartScraperGraph, workers,
     ]
 
     results = []
-    with ThreadPoolExecutor(max_workers=workers) as pool:
+    pool = ThreadPoolExecutor(max_workers=workers)
+    try:
         futures = {pool.submit(worker_pass2, t): t for t in tasks}
         try:
             for future in as_completed(futures):
@@ -975,7 +1028,8 @@ def run_pass2(pass1_results, prog_map, graph_config, SmartScraperGraph, workers,
         except KeyboardInterrupt:
             for f in futures:
                 f.cancel()
-            pool.shutdown(wait=False, cancel_futures=True)
+    finally:
+        pool.shutdown(wait=False, cancel_futures=True)
 
     return results
 

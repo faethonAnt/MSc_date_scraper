@@ -3,18 +3,6 @@
     "prog_id": "996",
     "url": "https://mahep-upatras.gr/en/",
     "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/\nCall log:\n  - navigating to \"https://mahep-upatras.gr/en/\", waiting until \"domcontentloaded\"\n",
-    "scraped_at": "2026-06-11T12:46:50.899067+00:00"
-  },
-  {
-    "prog_id": "1504",
-    "url": "http://aec.bio.uth.gr/",
-    "error": "unwrap_content returned None",
-    "scraped_at": "2026-06-11T12:51:35.725333+00:00"
-  },
-  {
-    "prog_id": "1658",
-    "url": "https://mina.physics.ntua.gr/",
-    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": \\\"Monday, September 8, 2025\\\", \"intake_semester\": null, \"apply_button_url\": \\\"https://mina.physics.ntua.gr/admissions-2/\\\", \"has_dates_on_page\": true, \"application_status\": \\\"open\\\", \"notes\": \\\"The deadline for applications is extended to Monday, September 8, 2025. It is marked as open for the current cycle.\\\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
-    "scraped_at": "2026-06-11T12:54:52.627556+00:00"
+    "scraped_at": "2026-06-16T07:48:10.666970+00:00"
   }
 ]
