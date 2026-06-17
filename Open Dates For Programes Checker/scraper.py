@@ -80,6 +80,7 @@ DATE_PATTERNS = [
     rf'\b\d{{4}}[/\-\.]\d{{1,2}}[/\-\.]\d{{1,2}}\b',           # 2025-06-15
     rf'\b\d{{1,2}}\s+{_MONTHS_EN}\s+\d{{4}}\b',                 # 15 June 2025
     rf'\b{_MONTHS_EN}\s+\d{{1,2}},?\s+\d{{4}}\b',               # June 15, 2025
+    rf'\b{_MONTHS_EN}\s+\d{{1,2}}\s*[-–—]\s*\d{{1,2}},?\s+\d{{4}}\b',  # June 8–26, 2026
     rf'\b\d{{1,2}}\s+{_MONTHS_EN_SHORT}\.?\s+\d{{4}}\b',        # 15 Jun 2025
     rf'\b\d{{1,2}}(?:st|nd|rd|th)\s+(?:of\s+)?{_MONTHS_EN}\s+\d{{4}}\b',  # 15th of June 2025
     rf'\b\d{{1,2}}\s+{_MONTHS_GR}\s+\d{{4}}\b',                 # 15 Ιουνίου 2025
@@ -259,6 +260,7 @@ Rules:
 - has_dates_on_page must be true if ANY date related to applications or deadlines appears anywhere on the page, even in prose.
 - Today is June 2026. Only extract dates that are in 2026 or later. Ignore any dates from 2025 or earlier.
 - When multiple dates exist, prioritise dates labelled as application open, deadline, closing date, or submission — NOT results announcements, events, or publication dates.
+- Ignore the article's own posted/published date (shown near the title) unless it's the only date on the page. If the body text gives its own date or date range for applications, use that instead.
 """
 
 PASS2_PROMPT = """
@@ -875,27 +877,62 @@ def worker_pass1(args):
                     result = doc_result
                     break
 
-    # If still no dates, follow announcement links on the page
-    if html and result.get("status") == "ok" and not (result.get("has_dates_on_page") is True and has_current_dates(result)):
+    # Always check announcement links on the page — the homepage's own result
+    # can satisfy has_current_dates with a hallucinated/vague date (e.g. the
+    # model inventing "2026-01-01" for a "for academic year 2026-2027"
+    # mention), which would otherwise block the real announcement/PDF from
+    # ever being checked. Only overwrite result if the announcement itself
+    # yields a genuine current-year date.
+    if html and result.get("status") == "ok":
         announcement_links = find_announcement_links(html, prog["url"])
         for ann_url in announcement_links:
             if _shutdown:
                 break
             log.info(f"  Trying announcement: {ann_url}")
             ann_result = scrape_url(ann_url, prompt, graph_config, SmartScraperGraph)
-            if ann_result.get("has_dates_on_page") is True:
+            if ann_result.get("has_dates_on_page") is True and has_current_dates(ann_result):
                 log.info(f"  Found dates in announcement: {ann_url}")
                 ann_result["found_in_announcement"] = ann_url
                 result = ann_result
                 break
+
+            # The announcement page itself may have no inline date text and
+            # only link out to a PDF/DOCX with the real call for applications
+            # (e.g. a "Call for Applications" page that's just download links).
+            ann_html = fetch_html(ann_url)
+            if ann_html:
+                ann_doc_links = find_pdf_links(ann_html, ann_url)
+                for doc_url in ann_doc_links:
+                    log.info(f"  Trying document from announcement: {doc_url}")
+                    if doc_url.lower().endswith(".docx"):
+                        doc_text = extract_docx_text(doc_url)
+                    else:
+                        doc_text = extract_pdf_text(doc_url)
+                    if doc_text:
+                        doc_result = scrape_url(
+                            f"data:text/plain,{doc_text}",
+                            prompt, graph_config, SmartScraperGraph
+                        )
+                        if doc_result.get("has_dates_on_page") is True and has_current_dates(doc_result):
+                            log.info(f"  Found dates in document from announcement: {doc_url}")
+                            doc_result["found_in_pdf"] = doc_url
+                            doc_result["found_in_announcement"] = ann_url
+                            result = doc_result
+                            break
+                if result.get("found_in_pdf"):
+                    break
             time.sleep(1.0)
 
-    # No useful date info found, check sitemap and subpages
+    # Always check sitemap/subpages when there's no apply link to fall back on —
+    # the homepage's own result can satisfy has_current_dates with a
+    # hallucinated date (e.g. mistaking the intake start month for an
+    # application open date), which would otherwise block this fallback from
+    # ever running. Only overwrite result if the subpage itself yields a
+    # genuine current-year date.
     if (result.get("status") == "ok"
-            and not (result.get("has_dates_on_page") is True and has_current_dates(result))
             and not result.get("apply_button_url")):
         sub = try_subpages(prog["url"], prompt, graph_config, SmartScraperGraph)
-        if sub.get("has_dates_on_page") is True:
+        if sub.get("has_dates_on_page") is True and has_current_dates(sub):
             result = sub
 
     result["prog_id"]    = prog["id"]
@@ -984,6 +1021,11 @@ def _needs_pass2(r: dict) -> bool:
         return True
     # Dates found but deadline is still missing — apply page may have more detail
     if not r.get("application_deadline"):
+        return True
+    # Open date is just a bare year (e.g. "2026") with no month/day — too vague
+    # to be a real extracted date, apply page likely has the actual one
+    open_date = r.get("application_open_date")
+    if open_date and not DATE_RE.search(str(open_date)):
         return True
     return False
 
