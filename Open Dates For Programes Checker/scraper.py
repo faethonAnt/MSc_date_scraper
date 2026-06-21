@@ -61,6 +61,7 @@ DOMAIN_ANNOUNCEMENT_HUBS = {
 }
 
 _hub_cache: dict = {}
+_hub_cache_lock = threading.Lock()
 
 # ---- date regex patterns ----
 
@@ -792,6 +793,17 @@ def has_current_dates(result: dict) -> bool:
             return True
     return False
 
+def _has_specific_date(result: dict) -> bool:
+    """True if the result already has a real, specific date (matches DATE_RE)
+    in deadline or open_date — not just a bare/vague year. Used to skip the
+    expensive document/announcement/subpage fallbacks once a genuine date has
+    already been found, so they only run for the vague/hallucinated cases."""
+    for field in ("application_deadline", "application_open_date"):
+        v = result.get(field)
+        if v and DATE_RE.search(str(v)):
+            return True
+    return False
+
 def worker_pass1(args):
     idx, total, prog, prompt, graph_config, SmartScraperGraph = args
     if _shutdown:
@@ -806,29 +818,35 @@ def worker_pass1(args):
     prog_domain = urlparse(prog["url"]).netloc
     hub_url = next((v for k, v in DOMAIN_ANNOUNCEMENT_HUBS.items() if k in prog_domain), None)
     if hub_url:
-        if hub_url in _hub_cache:
-            log.info(f"  Hub cache hit: {hub_url}")
-            result = _hub_cache[hub_url].copy()
-            result["prog_id"] = prog["id"]
-            result["scraped_at"] = now_utc()
-            result["found_in_announcement"] = hub_url
-            return result
-        log.info(f"  Domain hub: {hub_url}")
-        hub_html = fetch_html(hub_url)
-        hub_url_to_scrape = hub_url
-        if hub_html:
-            ann_links = find_announcement_links(hub_html, hub_url)
-            if ann_links:
-                log.info(f"  Following hub announcement: {ann_links[0]}")
-                hub_url_to_scrape = ann_links[0]
-        hub_result = scrape_url(hub_url_to_scrape, prompt, graph_config, SmartScraperGraph)
-        if hub_result.get("has_dates_on_page") is True:
-            hub_result["found_in_announcement"] = hub_url_to_scrape
-            _hub_cache[hub_url] = hub_result
-            result = hub_result.copy()
-            result["prog_id"] = prog["id"]
-            result["scraped_at"] = now_utc()
-            return result
+        # Serialize on a per-process lock so concurrent workers for the same
+        # domain hub (e.g. multiple EAP programmes finishing pass1 at nearly
+        # the same time) don't each independently re-scrape and race to
+        # populate _hub_cache — only the first thread in does the real
+        # scrape; everyone else just waits and reuses its cached result.
+        with _hub_cache_lock:
+            if hub_url in _hub_cache:
+                log.info(f"  Hub cache hit: {hub_url}")
+                result = _hub_cache[hub_url].copy()
+                result["prog_id"] = prog["id"]
+                result["scraped_at"] = now_utc()
+                result["found_in_announcement"] = hub_url
+                return result
+            log.info(f"  Domain hub: {hub_url}")
+            hub_html = fetch_html(hub_url)
+            hub_url_to_scrape = hub_url
+            if hub_html:
+                ann_links = find_announcement_links(hub_html, hub_url)
+                if ann_links:
+                    log.info(f"  Following hub announcement: {ann_links[0]}")
+                    hub_url_to_scrape = ann_links[0]
+            hub_result = scrape_url(hub_url_to_scrape, prompt, graph_config, SmartScraperGraph)
+            if hub_result.get("has_dates_on_page") is True:
+                hub_result["found_in_announcement"] = hub_url_to_scrape
+                _hub_cache[hub_url] = hub_result
+                result = hub_result.copy()
+                result["prog_id"] = prog["id"]
+                result["scraped_at"] = now_utc()
+                return result
 
     # Extract and filter dates, then send structured list to AI
     if html:
@@ -854,11 +872,13 @@ def worker_pass1(args):
         log.info(f"  External portal detected: {apply_url}")
         result["external_portal"] = apply_url
 
-    # Always check document links (PDF/DOCX) on the page — the real deadline
-    # often lives only in a PDF, even when the page text already shows some
-    # other (e.g. news-post) date. Only overwrite result if the document
-    # itself yields a genuine current-year date.
-    if html and result.get("status") == "ok":
+    # Check document links (PDF/DOCX) on the page — the real deadline often
+    # lives only in a PDF, even when the page text already shows some other
+    # (e.g. news-post) date. Skipped if we already have a genuine specific
+    # date (not just a vague/hallucinated bare year) — only run this
+    # (expensive) fallback for the vague case. Only overwrite result if the
+    # document itself yields a genuine current-year date.
+    if html and result.get("status") == "ok" and not _has_specific_date(result):
         doc_links = find_pdf_links(html, prog["url"])
         for doc_url in doc_links:
             log.info(f"  Trying document: {doc_url}")
@@ -877,13 +897,14 @@ def worker_pass1(args):
                     result = doc_result
                     break
 
-    # Always check announcement links on the page — the homepage's own result
-    # can satisfy has_current_dates with a hallucinated/vague date (e.g. the
+    # Check announcement links on the page — the homepage's own result can
+    # satisfy has_current_dates with a hallucinated/vague date (e.g. the
     # model inventing "2026-01-01" for a "for academic year 2026-2027"
     # mention), which would otherwise block the real announcement/PDF from
-    # ever being checked. Only overwrite result if the announcement itself
-    # yields a genuine current-year date.
-    if html and result.get("status") == "ok":
+    # ever being checked. Skipped if we already have a genuine specific date.
+    # Only overwrite result if the announcement itself yields a genuine
+    # current-year date.
+    if html and result.get("status") == "ok" and not _has_specific_date(result):
         announcement_links = find_announcement_links(html, prog["url"])
         for ann_url in announcement_links:
             if _shutdown:
@@ -923,14 +944,15 @@ def worker_pass1(args):
                     break
             time.sleep(1.0)
 
-    # Always check sitemap/subpages when there's no apply link to fall back on —
-    # the homepage's own result can satisfy has_current_dates with a
-    # hallucinated date (e.g. mistaking the intake start month for an
-    # application open date), which would otherwise block this fallback from
-    # ever running. Only overwrite result if the subpage itself yields a
-    # genuine current-year date.
+    # Check sitemap/subpages when there's no apply link to fall back on — the
+    # homepage's own result can satisfy has_current_dates with a hallucinated
+    # date (e.g. mistaking the intake start month for an application open
+    # date), which would otherwise block this fallback from ever running.
+    # Skipped if we already have a genuine specific date. Only overwrite
+    # result if the subpage itself yields a genuine current-year date.
     if (result.get("status") == "ok"
-            and not result.get("apply_button_url")):
+            and not result.get("apply_button_url")
+            and not _has_specific_date(result)):
         sub = try_subpages(prog["url"], prompt, graph_config, SmartScraperGraph)
         if sub.get("has_dates_on_page") is True and has_current_dates(sub):
             result = sub

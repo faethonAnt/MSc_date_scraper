@@ -1,138 +1,64 @@
 [
   {
-    "content": null,
+    "application_open_date": null,
+    "application_deadline": null,
+    "intake_semester": null,
+    "portal_name": null,
+    "requires_login": false,
+    "application_status": "not_mentioned",
+    "notes": "No specific application timeline or deadline information provided in the scraped content.",
     "status": "ok",
-    "prog_id": "1853",
-    "apply_url": "https://e-graduate.applications.aueb.gr/?lang=en_US",
-    "source_url": "https://dept.aueb.gr/en/digitaltransformation",
-    "scraped_at": "2026-06-16T13:11:53.235279+00:00"
+    "prog_id": "1808",
+    "apply_url": "https://msc-aesthcosm.uniwa.gr/department/",
+    "source_url": "https://msc-aesthcosm.uniwa.gr/",
+    "scraped_at": "2026-06-21T12:28:57.270034+00:00"
+  },
+  {
+    "application_open_date": "2026-04-16T14:47:10+00:00",
+    "application_deadline": "October 2026 (visit website in October for updates)",
+    "intake_semester": null,
+    "portal_name": "custom",
+    "requires_login": true,
+    "application_status": "closed",
+    "notes": "Application now closed; upcoming updates for 2027 intake expected in October 2026.",
+    "status": "ok",
+    "prog_id": "1077",
+    "apply_url": "https://emm-aces.org/apply/",
+    "source_url": "https://emm-aces.org/?page_id=2326",
+    "scraped_at": "2026-06-21T12:28:58.351423+00:00"
+  },
+  {
+    "application_open_date": "2026-06-01",
+    "application_deadline": "2026-07-18",
+    "intake_semester": "Summer 2026",
+    "portal_name": "custom",
+    "requires_login": true,
+    "application_status": "open",
+    "notes": "The second round of applications runs from Monday, June 1st, to Saturday, July 18th, 2026.",
+    "status": "ok",
+    "prog_id": "1122",
+    "apply_url": "https://nanomed.med.uoa.gr/admissions/",
+    "source_url": "https://nanomed.med.uoa.gr/",
+    "scraped_at": "2026-06-21T12:29:02.756027+00:00"
+  },
+  {
+    "application_open_date": "2026-06-01",
+    "application_deadline": "2026-09-10",
+    "intake_semester": "Fall 2026",
+    "portal_name": "custom",
+    "requires_login": true,
+    "application_status": "coming_soon",
+    "notes": "The application period opens on June 1, 2026 and the deadline is September 10, 2026. The program starts in October 2026.",
+    "status": "ok",
+    "prog_id": "1456",
+    "apply_url": "https://aimt.cs.duth.gr/open_enrollment.xhtml",
+    "source_url": "https://imt.cs.duth.gr/",
+    "scraped_at": "2026-06-21T12:29:05.931845+00:00"
   },
   {
     "application_open_date": null,
     "application_deadline": null,
     "intake_semester": null,
-    "portal_name": null,
-    "requires_login": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1809",
-    "apply_url": "https://resuscitation.uniwa.gr/en/secretariat/forms-applications/",
-    "source_url": "https://resuscitation.uniwa.gr/",
-    "scraped_at": "2026-06-16T13:11:53.638000+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "2026",
-    "intake_semester": null,
-    "portal_name": null,
-    "requires_login": true,
-    "application_status": "not_mentioned",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1841",
-    "apply_url": "https://matba.aegean.gr/how-to-apply/",
-    "source_url": "https://matba.aegean.gr/",
-    "scraped_at": "2026-06-16T13:11:54.152444+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "2024/01/31",
-    "intake_semester": null,
-    "portal_name": "custom",
-    "requires_login": false,
-    "application_status": "not_mentioned",
-    "notes": "No specific application timeline details available for 2026 or later; deadline listed is in January 2024.",
-    "status": "ok",
-    "prog_id": "1808",
-    "apply_url": "https://msc-aesthcosm.uniwa.gr/en/applications-and-forms/",
-    "source_url": "https://msc-aesthcosm.uniwa.gr/",
-    "scraped_at": "2026-06-16T13:11:56.306464+00:00"
-  },
-  {
-    "content": "The application period for the MSc Energy: Strategy, Law and Economics has ended, indicating the application deadline is in the past. Therefore, application_deadline is 'null'. The application open date is not explicitly mentioned, so it's 'null'. The intake semester is not specified, so 'null'. The portal name is not mentioned, so 'null'. The application status is 'closed'. The notes field is 'The application period has ended'.",
-    "status": "ok",
-    "prog_id": "1043",
-    "apply_url": "https://energy.des-unipi.gr/application-form-msc-energy-strategy-law-and-economics/",
-    "source_url": "https://energy.des-unipi.gr/en-homepage/",
-    "scraped_at": "2026-06-16T13:12:02.353567+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "29th May 2026",
-    "intake_semester": "September 2026",
-    "portal_name": "custom",
-    "requires_login": true,
-    "application_status": "coming_soon",
-    "notes": "Applications for fee waiver students close on 29th May 2026 for international candidates and 31st July 2026 for UK candidates.",
-    "status": "ok",
-    "prog_id": "1077",
-    "apply_url": "https://www.uhi.ac.uk/en/courses/msc-aquaculture-environment-and-society/",
-    "source_url": "https://emm-aces.org/?page_id=2326",
-    "scraped_at": "2026-06-16T13:12:06.745767+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Failed to scrape after 1 attempts: Page.goto: Download is starting\nCall log:\n  - navigating to \"https://weld-ndt.uowm.gr/wp-content/uploads/2026/04/%CE%A0%CE%9C%CE%A3_%CE%91%CE%99%CE%A4%CE%97%CE%A3%CE%97___WELD-NDI_2026-2027.docx\", waiting until \"domcontentloaded\"\n",
-    "prog_id": "1778",
-    "apply_url": "https://weld-ndt.uowm.gr/wp-content/uploads/2026/04/ΠΜΣ_ΑΙΤΗΣΗ___WELD-NDI_2026-2027.docx",
-    "source_url": "https://weld-ndt.uowm.gr/",
-    "scraped_at": "2026-06-16T13:12:07.742559+00:00"
-  },
-  {
-    "status": "error",
-    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://page.domain/application-forms\nCall log:\n  - navigating to \"https://page.domain/application-forms\", waiting until \"domcontentloaded\"\n",
-    "prog_id": "24",
-    "apply_url": "https://page.domain/application-forms",
-    "source_url": "http://environ.survey.ntua.gr/",
-    "scraped_at": "2026-06-16T13:12:08.081955+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "Saturday, July 18th 2026",
-    "intake_semester": "Summer 2026",
-    "portal_name": "custom",
-    "requires_login": true,
-    "application_status": "coming_soon",
-    "notes": "The second round of applications runs from June 1st to July 18th, 2026.",
-    "status": "ok",
-    "prog_id": "1122",
-    "apply_url": "https://nanomed.med.uoa.gr/admissions/",
-    "source_url": "https://nanomed.med.uoa.gr/",
-    "scraped_at": "2026-06-16T13:12:10.795987+00:00"
-  },
-  {
-    "application_open_date": "2026-08-31",
-    "application_deadline": "2026-08-31",
-    "intake_semester": null,
-    "portal_name": "custom",
-    "requires_login": true,
-    "application_status": "open",
-    "notes": "The application deadline is August 31, 2026, and the application process is currently open.",
-    "status": "ok",
-    "prog_id": "1492",
-    "apply_url": "https://europeanbusiness.law.auth.gr/applyonline/",
-    "source_url": "https://europeanbusiness.law.auth.gr/",
-    "scraped_at": "2026-06-16T13:12:12.444100+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "31 Αυγούστου 2026",
-    "intake_semester": null,
-    "portal_name": null,
-    "requires_login": false,
-    "application_status": "open",
-    "notes": "The deadline for application submission is 31 August 2026, and the application process is ongoing.",
-    "status": "ok",
-    "prog_id": "1236",
-    "apply_url": "https://hcimaster.upatras.gr/%cf%80%cf%81%ce%bf%ce%ba%ce%ae%cf%81%cf%85%ce%be%ce%b7-%cf%85%cf%80%ce%bf%ce%b2%ce%bf%ce%bb%ce%ae%cf%82-%ce%b1%ce%b9%cf%84%ce%ae%cf%83%ce%b5%cf%89%ce%bd-%ce%b3%ce%b9%ce%b1-%cf%84%ce%bf-%ce%b4%cf%80/",
-    "source_url": "http://hcimaster.upatras.gr/",
-    "scraped_at": "2026-06-16T13:12:15.695717+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "2024-2025 period",
-    "intake_semester": "2024-2025",
     "portal_name": "custom",
     "requires_login": true,
     "application_status": "closed",
@@ -141,15 +67,15 @@
     "prog_id": "1485",
     "apply_url": "https://hosmic.uth.gr/registration/",
     "source_url": "https://hosmic.uth.gr/",
-    "scraped_at": "2026-06-16T13:12:17.209263+00:00"
+    "scraped_at": "2026-06-21T12:29:08.580472+00:00"
   },
   {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1257",
-    "apply_url": "https://www.erasmusmundus-archmat.uevora.pt",
-    "source_url": "https://archmat.web.auth.gr/",
-    "scraped_at": "2026-06-16T13:12:19.137859+00:00"
+    "status": "error",
+    "error": "Failed to scrape after 1 attempts: Page.goto: Download is starting\nCall log:\n  - navigating to \"https://mscs.uoc.gr/cetvis/wp-content/uploads/2026/04/CALL-FOR-APPLICATIONS_2026-2027_DIAVGEIA.pdf\", waiting until \"domcontentloaded\"\n",
+    "prog_id": "1733",
+    "apply_url": "https://mscs.uoc.gr/cetvis/wp-content/uploads/2026/04/CALL-FOR-APPLICATIONS_2026-2027_DIAVGEIA.pdf",
+    "source_url": "https://mscs.uoc.gr/cetvis/",
+    "scraped_at": "2026-06-21T12:29:08.659046+00:00"
   },
   {
     "application_open_date": null,
@@ -158,56 +84,84 @@
     "portal_name": "custom",
     "requires_login": true,
     "application_status": "not_mentioned",
-    "notes": "No specific application timeline dates provided in the content.",
+    "notes": null,
     "status": "ok",
-    "prog_id": "1186",
+    "prog_id": "1493",
     "apply_url": "https://e-graduate.applications.aueb.gr/?lang=en_US",
-    "source_url": "https://www.dept.aueb.gr/en/marketing",
-    "scraped_at": "2026-06-16T13:12:19.658143+00:00"
+    "source_url": "https://aueb-analytics.wixsite.com/msc-stats/gr",
+    "scraped_at": "2026-06-21T12:29:11.616814+00:00"
+  },
+  {
+    "status": "error",
+    "error": "unwrap_content returned None",
+    "prog_id": "1076",
+    "apply_url": "https://msc-mcbb.ac.uoi.gr/index.php?option=com_k2&view=item&layout=item&id=20&Itemid=129",
+    "source_url": "http://msc-mcbb.ac.uoi.gr/index.php?lang=en",
+    "scraped_at": "2026-06-21T12:29:15.514152+00:00"
   },
   {
     "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "portal_name": null,
-    "requires_login": false,
-    "application_status": "not_mentioned",
-    "notes": "Applications are accepted throughout the year with no specific deadlines mentioned.",
+    "application_deadline": "31st August 2026",
+    "intake_semester": "not_mentioned",
+    "portal_name": "custom",
+    "requires_login": true,
+    "application_status": "open",
+    "notes": "Applications for the LL.M. in European Business and Economic Law are accepted until 31st August 2026, and the application process is open.",
     "status": "ok",
-    "prog_id": "1274",
-    "apply_url": "https://gradstudy.physics.uoc.gr/2/en/contact.html",
-    "source_url": "https://www.physics.uoc.gr/en/gradstudies/msc-photonics-nanoelectronics",
-    "scraped_at": "2026-06-16T13:12:19.959368+00:00"
+    "prog_id": "1492",
+    "apply_url": "https://europeanbusiness.law.auth.gr/applyonline/",
+    "source_url": "https://europeanbusiness.law.auth.gr/",
+    "scraped_at": "2026-06-21T12:29:17.301857+00:00"
   },
   {
     "content": null,
     "status": "ok",
-    "prog_id": "1187",
-    "apply_url": "https://e-graduate.applications.aueb.gr/?lang=en_US",
-    "source_url": "https://www.dept.aueb.gr/msc-fm",
-    "scraped_at": "2026-06-16T13:12:22.198161+00:00"
+    "prog_id": "1186",
+    "apply_url": "https://www.dept.aueb.gr/en/marketing/content/apply-now",
+    "source_url": "https://www.dept.aueb.gr/en/marketing",
+    "scraped_at": "2026-06-21T12:29:18.689020+00:00"
   },
   {
     "application_open_date": "June 1st 2025",
     "application_deadline": "July 2025",
     "intake_semester": "2025-2027",
     "portal_name": "custom",
-    "requires_login": true,
-    "application_status": "coming_soon",
-    "notes": "Application deadline and start date are in 2025, which is before June 2026, so no current open application timeline in 2026.",
+    "requires_login": false,
+    "application_status": "not_mentioned",
+    "notes": "The application process opens June 1st, 2025, with interviews in July and September 2025. Specific application deadline details beyond July 2025 are not provided.",
     "status": "ok",
     "prog_id": "1281",
     "apply_url": "https://advanceddesign.arch.auth.gr/apply-now/",
     "source_url": "http://advanceddesign.arch.auth.gr/",
-    "scraped_at": "2026-06-16T13:12:22.428533+00:00"
+    "scraped_at": "2026-06-21T12:29:21.609030+00:00"
   },
   {
-    "content": "The application deadlines can be found at the URL https://www.smaccs.eu/admissions/deadlines/. However, the specific dates or deadline information are not explicitly mentioned in the scraped content. Therefore, the application deadline is null.",
+    "application_open_date": null,
+    "application_deadline": "09/03/2026",
+    "intake_semester": "2026-2027",
+    "portal_name": "custom",
+    "requires_login": true,
+    "application_status": "open",
+    "notes": "The application deadline for the academic year 2026-2027 is 09 March 2026.",
     "status": "ok",
-    "prog_id": "1308",
-    "apply_url": "https://www.smaccs.eu/practical/application/",
-    "source_url": "https://www.smaccs.eu/",
-    "scraped_at": "2026-06-16T13:12:23.647182+00:00"
+    "prog_id": "1501",
+    "apply_url": "https://see.pspa.uoa.gr/",
+    "source_url": "https://see.pspa.uoa.gr/",
+    "scraped_at": "2026-06-21T12:29:21.679028+00:00"
+  },
+  {
+    "application_open_date": null,
+    "application_deadline": null,
+    "intake_semester": null,
+    "portal_name": null,
+    "requires_login": true,
+    "application_status": "not_mentioned",
+    "notes": "No specific application timeline information found in the provided content.",
+    "status": "ok",
+    "prog_id": "1271",
+    "apply_url": "https://www.physics.uoc.gr/en/masters",
+    "source_url": "https://msc-advanced-physics.physics.uoc.gr/",
+    "scraped_at": "2026-06-21T12:29:22.206924+00:00"
   },
   {
     "application_open_date": null,
@@ -218,32 +172,24 @@
     "application_status": "closed",
     "notes": "Applications deadline: 30 June 2026.",
     "status": "ok",
-    "prog_id": "1333",
+    "prog_id": "1334",
     "apply_url": "https://apply.maich.gr",
-    "source_url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/bem",
-    "scraped_at": "2026-06-16T13:12:25.380248+00:00"
-  },
-  {
-    "content": "The application opens on 16 February 2026 and the deadline is 11 September 2026. The intake semester is not explicitly mentioned. The portal name appears to be 'enrollment.auth.gr'. The application status is 'open'. There are notes mentioning that applications are collected by the Programme Secretariat and the process involves submitting an online form.",
-    "status": "ok",
-    "prog_id": "1325",
-    "apply_url": "https://media.jour.auth.gr/admissions/application/",
-    "source_url": "http://media.jour.auth.gr/",
-    "scraped_at": "2026-06-16T13:12:25.631088+00:00"
+    "source_url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/enm",
+    "scraped_at": "2026-06-21T12:29:24.776450+00:00"
   },
   {
     "application_open_date": null,
     "application_deadline": "30 June 2026",
-    "intake_semester": null,
+    "intake_semester": "Academic Year 2026-2027",
     "portal_name": "custom",
     "requires_login": true,
     "application_status": "closed",
-    "notes": null,
+    "notes": "Applications deadline: 30 June 2026",
     "status": "ok",
-    "prog_id": "1334",
+    "prog_id": "1333",
     "apply_url": "https://apply.maich.gr",
-    "source_url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/enm",
-    "scraped_at": "2026-06-16T13:12:27.108427+00:00"
+    "source_url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/bem",
+    "scraped_at": "2026-06-21T12:29:24.777261+00:00"
   },
   {
     "application_open_date": null,
@@ -257,7 +203,7 @@
     "prog_id": "1344",
     "apply_url": "https://apply.maich.gr",
     "source_url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/hob",
-    "scraped_at": "2026-06-16T13:12:28.680263+00:00"
+    "scraped_at": "2026-06-21T12:29:27.334482+00:00"
   },
   {
     "application_open_date": null,
@@ -271,49 +217,87 @@
     "prog_id": "1343",
     "apply_url": "https://apply.maich.gr",
     "source_url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/sag",
-    "scraped_at": "2026-06-16T13:12:28.700067+00:00"
+    "scraped_at": "2026-06-21T12:29:27.359281+00:00"
   },
   {
     "application_open_date": null,
     "application_deadline": "30 June 2026",
     "intake_semester": null,
-    "portal_name": null,
+    "portal_name": "custom",
     "requires_login": true,
     "application_status": "closed",
-    "notes": "Applications for the academic year 2026-2027 are due by 30 June 2026.",
+    "notes": "Applications deadline: 30 June 2026.",
     "status": "ok",
     "prog_id": "1345",
     "apply_url": "https://apply.maich.gr",
     "source_url": "https://www.iamc.ciheam.org/education/master_of_science_programmes/fqc",
-    "scraped_at": "2026-06-16T13:12:29.783177+00:00"
+    "scraped_at": "2026-06-21T12:29:29.894303+00:00"
   },
   {
     "application_open_date": "Saturday April 25, 2026",
     "application_deadline": "Monday 14/09/2026",
     "intake_semester": "Fall 2026",
     "portal_name": "custom",
-    "requires_login": true,
-    "application_status": "coming_soon",
-    "notes": "Deadline for applicants from countries outside of the EU/EEA: Monday 24/08/2026. New applications accepted starting April 25, 2026. The program begins in October 2026.",
+    "requires_login": false,
+    "application_status": "open",
+    "notes": "New applications accepted starting April 25, 2026. Deadlines are August 24, 2026, for non-EU/EEA applicants and September 14, 2026, for EU/EEA applicants. The program begins in October 2026.",
     "status": "ok",
     "prog_id": "1388",
     "apply_url": "https://www.migromedia.gr/application-form",
     "source_url": "https://migromedia.gr/",
-    "scraped_at": "2026-06-16T13:12:32.347380+00:00"
+    "scraped_at": "2026-06-21T12:29:34.100545+00:00"
   },
   {
-    "content": null,
-    "status": "ok",
-    "prog_id": "1504",
-    "apply_url": "https://aec.bio.uth.gr/application-form/",
-    "source_url": "http://aec.bio.uth.gr/",
-    "scraped_at": "2026-06-16T13:12:32.521908+00:00"
+    "status": "error",
+    "error": "Failed to scrape after 1 attempts: Page.goto: Download is starting\nCall log:\n  - navigating to \"https://mscs.uoc.gr/mbhd/wp-content/uploads/2026/05/Call-2026-2027-En.pdf\", waiting until \"domcontentloaded\"\n",
+    "prog_id": "1340",
+    "apply_url": "https://mscs.uoc.gr/mbhd/wp-content/uploads/2026/05/Call-2026-2027-En.pdf",
+    "source_url": "https://mscs.uoc.gr/mbhd/",
+    "scraped_at": "2026-06-21T12:29:41.442677+00:00"
   },
   {
     "application_open_date": null,
     "application_deadline": null,
     "intake_semester": null,
     "portal_name": "custom",
+    "requires_login": false,
+    "application_status": "not_mentioned",
+    "notes": null,
+    "status": "ok",
+    "prog_id": "1511",
+    "apply_url": "https://bme.web.auth.gr/en/forms-and-applications/",
+    "source_url": "https://bme.web.auth.gr/",
+    "scraped_at": "2026-06-21T12:29:44.344749+00:00"
+  },
+  {
+    "content": null,
+    "status": "ok",
+    "prog_id": "1520",
+    "apply_url": "https://nanomed.u-paris.fr/application/",
+    "source_url": "https://nanomed.u-paris.fr/",
+    "scraped_at": "2026-06-21T12:29:52.116448+00:00"
+  },
+  {
+    "status": "error",
+    "error": "Invalid json output: {\"content\": \"{\"application_open_date\": null, \"application_deadline\": \\\"June 5th, 2026\\\", \\\"intake_semester\\\": \\\"2026-2027\\\", \\\"portal_name\\\": \\\"custom\\\", \\\"requires_login\\\": false, \\\"application_status\\\": \\\"coming_soon\\\", \\\"notes\\\": \\\"The application deadline has been extended until June 5th, 2026. Registration for the program starts in September 2026.\\\"}\"}\nFor troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE ",
+    "prog_id": "1395",
+    "apply_url": "https://masterneuroscience.gr/call-for-application",
+    "source_url": "https://masterneuroscience.gr/",
+    "scraped_at": "2026-06-21T12:30:03.974386+00:00"
+  },
+  {
+    "status": "error",
+    "error": "Failed to scrape after 1 attempts: Page.goto: Download is starting\nCall log:\n  - navigating to \"https://mei.med.auth.gr/wp-content/uploads/sites/375/2026/05/2026_aitisi_ypopsifiotitas_%CE%9C%CE%95%CE%99.docx\", waiting until \"domcontentloaded\"\n",
+    "prog_id": "1553",
+    "apply_url": "https://mei.med.auth.gr/wp-content/uploads/sites/375/2026/05/2026_aitisi_ypopsifiotitas_ΜΕΙ.docx",
+    "source_url": "https://mei.med.auth.gr/en/archiki-eng/",
+    "scraped_at": "2026-06-21T12:30:06.240902+00:00"
+  },
+  {
+    "application_open_date": null,
+    "application_deadline": null,
+    "intake_semester": null,
+    "portal_name": null,
     "requires_login": true,
     "application_status": "not_mentioned",
     "notes": null,
@@ -321,7 +305,21 @@
     "prog_id": "1569",
     "apply_url": "https://www.mlm.edu.gr/apply-now",
     "source_url": "https://www.mlm.edu.gr/",
-    "scraped_at": "2026-06-16T13:12:40.133770+00:00"
+    "scraped_at": "2026-06-21T12:30:06.866816+00:00"
+  },
+  {
+    "application_open_date": "6 ΑΠΡΙΛΙΟΥ 2026",
+    "application_deadline": "30 ΙΟΥΝΙΟΥ 2026",
+    "intake_semester": "2026-2027",
+    "portal_name": "custom",
+    "requires_login": true,
+    "application_status": "coming_soon",
+    "notes": "Application form available from 6/4/2026 to 30/6/2026 for the academic year 2026-2027.",
+    "status": "ok",
+    "prog_id": "1575",
+    "apply_url": "https://pchenv.uniwa.gr/aitisi-ypopsifiotitas-2/",
+    "source_url": "https://pchenv.uniwa.gr/en/home/",
+    "scraped_at": "2026-06-21T12:30:09.937197+00:00"
   },
   {
     "application_open_date": "6 Απριλίου 2026",
@@ -330,20 +328,26 @@
     "portal_name": "custom",
     "requires_login": true,
     "application_status": "coming_soon",
-    "notes": "Η προθεσμία υποβολής αιτήσεων είναι από 6 Απριλίου 2026 μέχρι 30 Ιουνίου 2026. Η ημερομηνία έναρξης αιτήσεων είναι 6 Απριλίου 2026, και η καταληκτική ημερομηνία υποβολής είναι 30 Ιουνίου 2026.",
+    "notes": "Application open date is 6 April 2026 and deadline is 30 June 2026 for the academic year 2026-2027.",
     "status": "ok",
     "prog_id": "1577",
     "apply_url": "https://pchenvihealth.uniwa.gr/aitisi-eggrafis/",
     "source_url": "https://pchenvihealth.uniwa.gr/en/home/",
-    "scraped_at": "2026-06-16T13:12:43.878006+00:00"
+    "scraped_at": "2026-06-21T12:30:12.799517+00:00"
   },
   {
-    "status": "error",
-    "error": "Failed to scrape after 1 attempts: Page.goto: Download is starting\nCall log:\n  - navigating to \"https://mei.med.auth.gr/wp-content/uploads/sites/375/2026/05/2026_aitisi_ypopsifiotitas_%CE%9C%CE%95%CE%99.docx\", waiting until \"domcontentloaded\"\n",
-    "prog_id": "1553",
-    "apply_url": "https://mei.med.auth.gr/wp-content/uploads/sites/375/2026/05/2026_aitisi_ypopsifiotitas_ΜΕΙ.docx",
-    "source_url": "https://mei.med.auth.gr/en/archiki-eng/",
-    "scraped_at": "2026-06-16T13:12:44.148565+00:00"
+    "application_open_date": "2025-11-01",
+    "application_deadline": null,
+    "intake_semester": null,
+    "portal_name": null,
+    "requires_login": false,
+    "application_status": "coming_soon",
+    "notes": "Applications will open on 1 November 2025.",
+    "status": "ok",
+    "prog_id": "1583",
+    "apply_url": "https://we-team.education/apply-now/",
+    "source_url": "https://we-team.education/",
+    "scraped_at": "2026-06-21T12:30:16.281194+00:00"
   },
   {
     "status": "error",
@@ -351,57 +355,43 @@
     "prog_id": "1563",
     "apply_url": "https://dent.auth.gr/wp-content/uploads/sites/152/2022/04/Final-Regulation-of-PSP-in-Pediatric-Dentistry-07-2020-1.pdf",
     "source_url": "https://dent.auth.gr/en/lab/department-of-pediatric-dentistry/",
-    "scraped_at": "2026-06-16T13:12:46.403930+00:00"
+    "scraped_at": "2026-06-21T12:30:20.311516+00:00"
   },
   {
-    "application_open_date": "2025-11-01T00:00:00",
-    "application_deadline": "2026-11-01T23:59:59",
+    "application_open_date": null,
+    "application_deadline": "August 31, 2026",
     "intake_semester": "Fall 2026",
     "portal_name": "custom",
     "requires_login": true,
     "application_status": "open",
-    "notes": "Applications open on 1 November 2025 and will close around the same date in 2026, indicating an annual intake timeline.",
+    "notes": "Applications are now open and can be submitted until August 31, 2026.",
     "status": "ok",
-    "prog_id": "1583",
-    "apply_url": "https://we-team.education/apply-now/",
-    "source_url": "https://we-team.education/",
-    "scraped_at": "2026-06-16T13:12:48.149629+00:00"
+    "prog_id": "1670",
+    "apply_url": "https://leadership.philosophy.uoa.gr/students/apply/",
+    "source_url": "https://leadership.philosophy.uoa.gr/",
+    "scraped_at": "2026-06-21T12:30:23.756083+00:00"
+  },
+  {
+    "application_open_date": null,
+    "application_deadline": "Call for online applications for each edition of ARCHMAT are published on the dedicated website (www.erasmusmundus-archmat.uevora.pt) in October each year with deadline in January of the following year.",
+    "intake_semester": "September 2026",
+    "portal_name": null,
+    "requires_login": false,
+    "application_status": "coming_soon",
+    "notes": "The application deadline is in January of the following year (after October). The start date is scheduled in September 2026.",
+    "status": "ok",
+    "prog_id": "1257",
+    "apply_url": "https://archmat.web.auth.gr/",
+    "source_url": "https://archmat.web.auth.gr/",
+    "scraped_at": "2026-06-21T12:30:26.421421+00:00"
   },
   {
     "content": null,
     "status": "ok",
-    "prog_id": "1655",
-    "apply_url": "https://dpms-as.mech.ntua.gr/en/application-form",
-    "source_url": "https://dpms-as.mech.ntua.gr/en/",
-    "scraped_at": "2026-06-16T13:12:49.058891+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "submit by 31st August 2026",
-    "intake_semester": null,
-    "portal_name": null,
-    "requires_login": true,
-    "application_status": "open",
-    "notes": null,
-    "status": "ok",
-    "prog_id": "1659",
-    "apply_url": "https://forms.gle/fKqmruhc16gv5B5R8",
-    "source_url": "http://www.naval.ntua.gr/smt/",
-    "scraped_at": "2026-06-16T13:12:51.191611+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "5 Oct 2026",
-    "intake_semester": "Fall 2026",
-    "portal_name": "custom",
-    "requires_login": true,
-    "application_status": "open",
-    "notes": "The application deadline is 5 October 2026, and the expected start is 5 October 2026 for the intake semester Fall 2026. Applications are currently accepting.",
-    "status": "ok",
-    "prog_id": "1683",
-    "apply_url": "https://ds4health.uoi.gr/apply",
-    "source_url": "https://ds4health.uoi.gr/",
-    "scraped_at": "2026-06-16T13:12:54.747170+00:00"
+    "prog_id": "8",
+    "apply_url": "https://msc-biomed.edu.gr//application/",
+    "source_url": "https://msc-biomed.edu.gr/",
+    "scraped_at": "2026-06-21T12:30:31.029931+00:00"
   },
   {
     "status": "error",
@@ -409,64 +399,14 @@
     "prog_id": "1592",
     "apply_url": "https://en.music.uoa.gr/fileadmin/depts/music.uoa.gr/www/uploads/ANAKOINOSEIS/2025-07/MA__32_in__32_BYZANTINE__32_MUSIC_info_2025.docx",
     "source_url": "https://www.music.uoa.gr/metaptychiakes_spoydes/trechonta_programmata_metaptychiakon_spoydon/ma_byzantine_music_academic_theory_and_artistic_performance/",
-    "scraped_at": "2026-06-16T13:13:00.175774+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "August 31, 2026",
-    "intake_semester": null,
-    "portal_name": null,
-    "requires_login": true,
-    "application_status": "open",
-    "notes": "Applications are currently open until August 31, 2026.",
-    "status": "ok",
-    "prog_id": "1670",
-    "apply_url": "https://leadership.philosophy.uoa.gr/students/apply/",
-    "source_url": "https://leadership.philosophy.uoa.gr/",
-    "scraped_at": "2026-06-16T13:13:05.222218+00:00"
+    "scraped_at": "2026-06-21T12:30:32.653194+00:00"
   },
   {
     "status": "error",
-    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application\nCall log:\n  - navigating to \"https://admission/application\", waiting until \"domcontentloaded\"\n",
-    "prog_id": "1701",
-    "apply_url": "https://admission/application",
-    "source_url": "https://dh.arch.uoa.gr/",
-    "scraped_at": "2026-06-16T13:13:08.648577+00:00"
-  },
-  {
-    "content": "application_open_date: null, application_deadline: null, intake_semester: null, portal_name: null, requires_login: true, application_status: not_mentioned, notes: null",
-    "status": "ok",
-    "prog_id": "8",
-    "apply_url": "https://msc-biomed.edu.gr//application/",
-    "source_url": "https://msc-biomed.edu.gr/",
-    "scraped_at": "2026-06-16T13:13:11.175574+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": "2025-06-30",
-    "intake_semester": "2025-26",
-    "portal_name": "Applications",
-    "requires_login": true,
-    "application_status": "open",
-    "notes": "The call for applications for the academic year 2025-26 is announced, with a specified deadline at the end of June 2025. The application process involves submission of documents and may include an interview, with offers to be made based on ranking.",
-    "status": "ok",
-    "prog_id": "1494",
-    "apply_url": "https://aidl.uniwa.gr/applications/",
-    "source_url": "https://aidl.uniwa.gr/",
-    "scraped_at": "2026-06-16T13:13:15.084015+00:00"
-  },
-  {
-    "application_open_date": null,
-    "application_deadline": null,
-    "intake_semester": null,
-    "portal_name": null,
-    "requires_login": true,
-    "application_status": "not_mentioned",
-    "notes": "No specific application timeline dates or deadlines are mentioned in the scraped content.",
-    "status": "ok",
-    "prog_id": "13",
-    "apply_url": "https://mademocracyedu.theol.uoa.gr/en/application-form-2/",
-    "source_url": "https://mademocracyedu.theol.uoa.gr/en/",
-    "scraped_at": "2026-06-16T13:13:15.104177+00:00"
+    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://admission/application_procedures\nCall log:\n  - navigating to \"https://admission/application_procedures\", waiting until \"domcontentloaded\"\n",
+    "prog_id": "1700",
+    "apply_url": "https://admission/application_procedures",
+    "source_url": "http://archaeoscience.arch.uoa.gr/",
+    "scraped_at": "2026-06-21T12:30:37.637625+00:00"
   }
 ]
