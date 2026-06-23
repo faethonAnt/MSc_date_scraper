@@ -33,7 +33,7 @@ load_dotenv()
 
 # Configuration
 
-DEFAULT_CSV     = "programmes-api_msc-programmes.csv"
+DEFAULT_CSV     = "eng-prog-22-06.csv"
 DEFAULT_MODEL   = "openai/gpt-4.1-nano"
 OUTPUT_DIR      = Path("results")
 OUTPUT_DIR.mkdir(exist_ok=True)
@@ -978,7 +978,31 @@ def worker_pass2(args):
             apply_url = sitemap_hits[0]
 
     log.info(f"[Pass2 {idx}/{total}] {apply_url[:80]}")
-    result = scrape_url(apply_url, prompt, graph_config, SmartScraperGraph)
+
+    # The apply link itself is sometimes a direct PDF/DOCX download rather than
+    # a normal page (e.g. "apply here" pointing straight at a call-for-
+    # applications PDF). Playwright can't navigate to a file download — it
+    # throws "Page.goto: Download is starting" every time — so extract the
+    # text directly instead of handing the URL to scrape_url.
+    apply_lower = apply_url.lower()
+    if apply_lower.endswith(".pdf") or apply_lower.endswith(".docx"):
+        doc_text = (
+            extract_docx_text(apply_url) if apply_lower.endswith(".docx")
+            else extract_pdf_text(apply_url)
+        )
+        if doc_text:
+            result = scrape_url(f"data:text/plain,{doc_text}", prompt, graph_config, SmartScraperGraph)
+            if result.get("status") == "ok" and result.get("has_dates_on_page") is True and has_current_dates(result):
+                result["found_in_pdf"] = apply_url
+        else:
+            result = {"status": "error", "error": f"Could not extract text from document: {apply_url}"}
+    elif apply_lower.endswith((".rtf", ".doc", ".xls", ".xlsx", ".ppt", ".pptx")):
+        # Unsupported binary format — never hand this to Playwright, it
+        # will always throw "Download is starting" on every retry.
+        result = {"status": "error", "error": f"Unsupported document type, skipped: {apply_url}"}
+    else:
+        result = scrape_url(apply_url, prompt, graph_config, SmartScraperGraph)
+
     result["prog_id"]    = prog_id
     result["apply_url"]  = apply_url
     result["source_url"] = source_url
@@ -1153,10 +1177,16 @@ def merge(programmes, pass1, pass2):
         p1  = p1_map.get(pid, {})
         p2  = p2_map.get(pid, {})
 
-        # Prefer PDF-sourced dates as they are more reliable than HTML
-        if p1.get("found_in_pdf"):
-            deadline  = p1.get("application_deadline") or p2.get("application_deadline")
-            open_date = p1.get("application_open_date") or p2.get("application_open_date")
+        # Prefer PDF-sourced dates as they are more reliable than HTML.
+        # Either pass can be the one that found the PDF (pass2 now extracts
+        # apply-link PDFs/DOCX too), so check both.
+        if p1.get("found_in_pdf") or p2.get("found_in_pdf"):
+            if p1.get("found_in_pdf"):
+                deadline  = p1.get("application_deadline") or p2.get("application_deadline")
+                open_date = p1.get("application_open_date") or p2.get("application_open_date")
+            else:
+                deadline  = p2.get("application_deadline") or p1.get("application_deadline")
+                open_date = p2.get("application_open_date") or p1.get("application_open_date")
         else:
             deadline  = max(
                 [p1.get("application_deadline"), p2.get("application_deadline")],

@@ -1,8 +1,0 @@
-[
-  {
-    "prog_id": "996",
-    "url": "https://mahep-upatras.gr/en/",
-    "error": "Failed to scrape after 1 attempts: Page.goto: net::ERR_NAME_NOT_RESOLVED at https://mahep-upatras.gr/en/\nCall log:\n  - navigating to \"https://mahep-upatras.gr/en/\", waiting until \"domcontentloaded\"\n",
-    "scraped_at": "2026-06-21T12:16:04.579602+00:00"
-  }
-]
