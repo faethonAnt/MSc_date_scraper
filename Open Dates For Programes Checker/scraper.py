@@ -33,7 +33,7 @@ load_dotenv()
 
 # Configuration
 
-DEFAULT_CSV     = "eng-prog-22-06.csv"
+DEFAULT_CSV     = "programmes_final.csv"
 DEFAULT_MODEL   = "openai/gpt-4.1-nano"
 OUTPUT_DIR      = Path("results")
 OUTPUT_DIR.mkdir(exist_ok=True)
@@ -58,6 +58,11 @@ _sitemap_cache: dict = {}
 
 DOMAIN_ANNOUNCEMENT_HUBS = {
     "eap.gr": "https://www.eap.gr/en/tag/invitation-en/",
+    "bme.web.auth.gr": "https://bme.web.auth.gr/en/announcements-news/",
+    "uav.ece.auth.gr": "https://uav.ece.auth.gr/en/announcements/",
+    "msc-biomed.edu.gr": "https://msc-biomed.edu.gr/announcements/",
+    "mscie.hmu.gr": "https://mscie.hmu.gr/news/",
+    "migromedia.gr": "https://www.migromedia.gr/newsandevents"
 }
 
 _hub_cache: dict = {}
@@ -97,6 +102,12 @@ CONTEXT_KEYWORDS = [
     "until", "by", "due", "from", "start", "begin", "end",
     "εγγραφ", "registration", "admission", "call", "πρόσκλ", "προσκλ",
     "ανακοίν", "ανακοιν", "apply", "intake", "semester",
+]
+
+STRONG_DEADLINE_KEYWORDS = [
+    "deadline", "προθεσμ", "submit", "υποβολ", "close", "closing",
+    "έως", "εως", "μέχρι", "until", "due", "λήξη", "λήγει",
+    "period", "περίοδ", "περιοδ", "window",
 ]
 
 # Common admissions/application paths
@@ -176,6 +187,7 @@ PDF_KEYWORDS = [
     "παράταση προθεσμίας υποβολής αιτήσεων",
     "νέα παράταση προθεσμίας υποβολής αιτήσεων",
     "πρόσκληση εκδήλωσης ενδιαφέροντος",
+    "πρόσκληση", "προσκληση",
 
     # Greeklish
     "aitisi", "aithsh", "aithseis", "eggrafi", "eggrafes",
@@ -193,9 +205,9 @@ ANNOUNCEMENT_KEYWORDS = [
     # Greek
     "προκήρυξη", "προκηρυξη", "παράταση", "παραταση",
     "αιτήσεις", "αιτησεις", "υποβολή αίτησης", "υποβολη αιτησης",
-    "ανακοίνωση", "ανακοινωση",
+    "ανακοίνωση", "ανακοινωση", "πρόσκληση", "προσκληση",
     # Greeklish
-    "prokiriksi", "prokiryxi", "paratasi", "anakoinosi",
+    "prokiriksi", "prokiryxi", "paratasi", "anakoinosi", "prosklisi",
 ]
 
 DEADLINE_CSS_CLASSES = [
@@ -244,7 +256,7 @@ Return ONLY a valid JSON object. No markdown, no code fences, no explanation.
 
 {
   "application_open_date": "Date when applications open, any format found, or null",
-  "application_deadline": "Application deadline / closing date. Look for dates in ANY format including prose sentences like 'submit by 31st August 2026' or 'applications accepted until March 2026'. If multiple rounds, list all as one string. Or null.",
+  "application_deadline": "Application deadline / closing date. Look for dates in ANY format including prose sentences like 'submit by [day] [Month] [year]' or 'applications accepted until [Month]'. If multiple rounds, list all as one string. Or null.",
   "intake_semester": "e.g. Fall 2025, September 2025, Academic Year 2025-26, or null",
   "apply_button_url": "The full absolute URL of any Apply / Apply Now / Apply Here / Start Application / Admissions button or link. Resolve relative URLs using the page domain. Return null if none found.",
   "has_dates_on_page": true,
@@ -262,6 +274,8 @@ Rules:
 - Today is June 2026. Only extract dates that are in 2026 or later. Ignore any dates from 2025 or earlier.
 - When multiple dates exist, prioritise dates labelled as application open, deadline, closing date, or submission — NOT results announcements, events, or publication dates.
 - Ignore the article's own posted/published date (shown near the title) unless it's the only date on the page. If the body text gives its own date or date range for applications, use that instead.
+- NEVER invent or guess a year for a date. If the page states a deadline without an explicit year (e.g. "between February 1 and June 30"), only attach a year if it is given unambiguously elsewhere on the page (e.g. an academic-year heading like "2026-27" or "Academic Year 2026"). Otherwise return the date exactly as written, with no year attached.
+- Ignore any date that appears next to "ΦΕΚ" or "FEK" (Government Gazette / Official Journal citation, e.g. "ΦΕΚ 4175/τ.Β΄/31.07.2025" or "FEK 4175/B/31.07.2025"). These are legal-publication references for regulations, never admissions dates — do not extract them and never adjust their year.
 """
 
 PASS2_PROMPT = """
@@ -270,7 +284,7 @@ Return ONLY a valid JSON object. No markdown, no code fences, no explanation.
 
 {
   "application_open_date": "Date when applications open or null",
-  "application_deadline": "Application deadline. Look for dates in ANY format including prose sentences like 'submit by 31st August 2026' or 'applications accepted until March 2026'. Or null.",
+  "application_deadline": "Application deadline. Look for dates in ANY format including prose sentences like 'submit by [day] [Month] [year]' or 'applications accepted until [Month]'. Or null.",
   "intake_semester": "e.g. Fall 2025 or null",
   "portal_name": "Portal system name: Apply Texas / Slate / Embark / Common App / custom / or null",
   "requires_login": true,
@@ -285,6 +299,8 @@ Rules:
 - Extract dates even when written in plain sentences or paragraphs, not just labelled fields.
 - Today is June 2026. Only extract dates that are in 2026 or later. Ignore any dates from 2025 or earlier.
 - When multiple dates exist, prioritise dates labelled as application open, deadline, closing date, or submission — NOT results announcements, events, or publication dates.
+- NEVER invent or guess a year for a date. If the page states a deadline without an explicit year, only attach a year if it is given unambiguously elsewhere on the page (e.g. an academic-year heading like "2026-27"). Otherwise return the date exactly as written, with no year attached.
+- Ignore any date that appears next to "ΦΕΚ" or "FEK" (Government Gazette / Official Journal citation). These are legal-publication references for regulations, never admissions dates — do not extract them and never adjust their year.
 
 """
 
@@ -610,7 +626,29 @@ def fetch_sitemap_urls(base_url: str) -> list:
         log.warning(f"fetch_sitemap_urls failed for {base_url}: {e}")
         _sitemap_cache[sitemap_url] = []
         return []
-    
+
+_GREEK_LOOKALIKE_TO_LATIN = str.maketrans({
+    "Α": "A", "α": "a",
+    "Β": "B",
+    "Ε": "E",
+    "Ζ": "Z",
+    "Η": "H",
+    "Ι": "I", "ι": "i",
+    "Κ": "K",
+    "Μ": "M",
+    "Ν": "N",
+    "Ο": "O", "ο": "o",
+    "Ρ": "P",
+    "Τ": "T",
+    "Υ": "Y", "υ": "y",
+    "Χ": "X", "χ": "x",
+})
+
+
+def _delookalike(text: str) -> str:
+    return text.translate(_GREEK_LOOKALIKE_TO_LATIN)
+
+
 def find_pdf_links(html: str, base_url: str) -> list:
     keywords = PDF_KEYWORDS
     try:
@@ -622,23 +660,27 @@ def find_pdf_links(html: str, base_url: str) -> list:
                 absolute = urljoin(base_url, href)
                 link_text = a.get_text().lower()
                 href_lower = href.lower()
-                if any(k in href_lower or k in link_text for k in keywords):
+                link_text_norm = _delookalike(link_text)
+                href_norm = _delookalike(href_lower)
+                if any(k in href_lower or k in link_text or k in href_norm or k in link_text_norm
+                       for k in keywords):
                     links.append(absolute)
         return links[:5]
     except Exception as e:
         log.warning(f"find_pdf_links failed: {e}")
         return []
-    
+
 def find_announcement_links(html: str, base_url: str) -> list:
     try:
         soup = BeautifulSoup(html, "html.parser")
         links = []
         for a in soup.find_all("a", href=True):
             text = a.get_text().strip().lower()
+            text_norm = _delookalike(text)
             href = a["href"].strip()
             if not href or href.startswith("#"):
                 continue
-            if any(k in text for k in ANNOUNCEMENT_KEYWORDS):
+            if any(k in text or k in text_norm for k in ANNOUNCEMENT_KEYWORDS):
                 absolute = urljoin(base_url, href)
                 if absolute not in links:
                     links.append(absolute)
@@ -685,6 +727,13 @@ def extract_docx_text(url: str) -> str | None:
         log.warning(f"extract_docx_text failed for {url}: {e}")
         return None
 
+def _looks_like_bare_post_date_line(line: str, raw_date: str) -> bool:
+    if len(list(DATE_RE.finditer(line))) > 1:
+        return False
+    remainder = line.strip().replace(raw_date, "", 1).strip(" -–—\t")
+    return len(remainder) <= 25
+
+
 def extract_dates_with_context(text: str, source_label: str) -> list[dict]:
     results = []
     seen_dates = set()
@@ -704,6 +753,10 @@ def extract_dates_with_context(text: str, source_label: str) -> list[dict]:
 
             ctx_lower = context.lower()
             has_keyword = any(k in ctx_lower for k in CONTEXT_KEYWORDS)
+            has_strong_keyword = any(k in ctx_lower for k in STRONG_DEADLINE_KEYWORDS)
+
+            if not has_strong_keyword and _looks_like_bare_post_date_line(line, raw):
+                continue
 
             results.append({
                 "raw": raw,
@@ -794,14 +847,12 @@ def has_current_dates(result: dict) -> bool:
     return False
 
 def _has_specific_date(result: dict) -> bool:
-    """True if the result already has a real, specific date (matches DATE_RE)
-    in deadline or open_date — not just a bare/vague year. Used to skip the
-    expensive document/announcement/subpage fallbacks once a genuine date has
-    already been found, so they only run for the vague/hallucinated cases."""
     for field in ("application_deadline", "application_open_date"):
         v = result.get(field)
         if v and DATE_RE.search(str(v)):
-            return True
+            years = re.findall(r'\b(20\d{2})\b', str(v))
+            if any(int(y) >= 2026 for y in years):
+                return True
     return False
 
 def worker_pass1(args):
@@ -897,13 +948,6 @@ def worker_pass1(args):
                     result = doc_result
                     break
 
-    # Check announcement links on the page — the homepage's own result can
-    # satisfy has_current_dates with a hallucinated/vague date (e.g. the
-    # model inventing "2026-01-01" for a "for academic year 2026-2027"
-    # mention), which would otherwise block the real announcement/PDF from
-    # ever being checked. Skipped if we already have a genuine specific date.
-    # Only overwrite result if the announcement itself yields a genuine
-    # current-year date.
     if html and result.get("status") == "ok" and not _has_specific_date(result):
         announcement_links = find_announcement_links(html, prog["url"])
         for ann_url in announcement_links:
@@ -917,9 +961,7 @@ def worker_pass1(args):
                 result = ann_result
                 break
 
-            # The announcement page itself may have no inline date text and
-            # only link out to a PDF/DOCX with the real call for applications
-            # (e.g. a "Call for Applications" page that's just download links).
+
             ann_html = fetch_html(ann_url)
             if ann_html:
                 ann_doc_links = find_pdf_links(ann_html, ann_url)
@@ -944,12 +986,6 @@ def worker_pass1(args):
                     break
             time.sleep(1.0)
 
-    # Check sitemap/subpages when there's no apply link to fall back on — the
-    # homepage's own result can satisfy has_current_dates with a hallucinated
-    # date (e.g. mistaking the intake start month for an application open
-    # date), which would otherwise block this fallback from ever running.
-    # Skipped if we already have a genuine specific date. Only overwrite
-    # result if the subpage itself yields a genuine current-year date.
     if (result.get("status") == "ok"
             and not result.get("apply_button_url")
             and not _has_specific_date(result)):
@@ -979,11 +1015,6 @@ def worker_pass2(args):
 
     log.info(f"[Pass2 {idx}/{total}] {apply_url[:80]}")
 
-    # The apply link itself is sometimes a direct PDF/DOCX download rather than
-    # a normal page (e.g. "apply here" pointing straight at a call-for-
-    # applications PDF). Playwright can't navigate to a file download — it
-    # throws "Page.goto: Download is starting" every time — so extract the
-    # text directly instead of handing the URL to scrape_url.
     apply_lower = apply_url.lower()
     if apply_lower.endswith(".pdf") or apply_lower.endswith(".docx"):
         doc_text = (
